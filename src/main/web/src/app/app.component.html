@@ -8,11 +8,18 @@
   <title>Flash Cards</title>
 </head>
 <body>
-<div class="container">
-  <div *ngFor="let flashCard of flashCards | async">
-    <span>{{ flashCard.front }}</span>
-    <span>{{ flashCard.back }}</span>
+<div class="container flex flex-column">
+<!--  <div *ngFor="let flashCard of flashCards | async">-->
+<!--    <span>{{ flashCard.front }}</span>-->
+<!--    <span>{{ flashCard.back }}</span>-->
+<!--  </div>-->
+  <app-flash-card [front]="flashCards[currentFlashCardIndex].front" [back]="flashCards[currentFlashCardIndex].back">
+  </app-flash-card>
+  <div class="card-nav flex">
+    <div class="btn" (click)="previousCard()"><</div>
+    <div class="btn" (click)="nextCard()">></div>
   </div>
+
 </div>
 </body>
 </html>

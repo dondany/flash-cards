@@ -1,1 +1,10 @@
-<p>flash-card works!</p>
+<div class="card flex" (click)="flip()">
+  <div class="text">
+    <span class="card-text" *ngIf="!isFlipped">
+      {{ format(front) }}
+    </span>
+    <span class="card-text" *ngIf="isFlipped">
+      {{ format(back) }}
+    </span>
+  </div>
+</div>
