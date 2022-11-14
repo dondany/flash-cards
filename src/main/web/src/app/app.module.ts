@@ -8,13 +8,15 @@ import { PlaygroundComponent } from './playground/playground.component';
 import {RouterModule} from "@angular/router";
 import { NewFlashCardComponent } from './new-flash-card/new-flash-card.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FlashCardComponent,
     PlaygroundComponent,
-    NewFlashCardComponent
+    NewFlashCardComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
