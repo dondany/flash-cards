@@ -1,10 +1,10 @@
 <div class="card flex" (click)="flip()">
   <div class="text">
     <span class="card-text" *ngIf="!isFlipped">
-      {{ format(front) }}
+      {{ format(card.front) }}
     </span>
     <span class="card-text" *ngIf="isFlipped">
-      {{ format(back) }}
+      {{ format(card.back) }}
     </span>
   </div>
 </div>

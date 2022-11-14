@@ -1,4 +1,5 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {FlashCard} from "../flash-card";
 
 @Component({
   selector: 'app-flash-card',
@@ -6,8 +7,7 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
   styleUrls: ['./flash-card.component.css']
 })
 export class FlashCardComponent implements OnInit, OnChanges {
-  @Input() front!: string;
-  @Input() back!: string;
+  @Input() card!: FlashCard;
 
   isFlipped: boolean = true;
 

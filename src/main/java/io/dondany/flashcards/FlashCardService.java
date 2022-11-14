@@ -13,4 +13,8 @@ public class FlashCardService {
     List<FlashCard> getAllFlashCards() {
         return repository.findAll();
     }
+
+    public FlashCard addFlashCard(FlashCard flashCard) {
+        return repository.save(flashCard);
+    }
 }

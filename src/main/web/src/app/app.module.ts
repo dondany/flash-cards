@@ -4,15 +4,26 @@ import {HttpClientModule} from "@angular/common/http";
 
 import { AppComponent } from './app.component';
 import { FlashCardComponent } from './flash-card/flash-card.component';
+import { PlaygroundComponent } from './playground/playground.component';
+import {RouterModule} from "@angular/router";
+import { NewFlashCardComponent } from './new-flash-card/new-flash-card.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
-    FlashCardComponent
+    FlashCardComponent,
+    PlaygroundComponent,
+    NewFlashCardComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot([
+      { path: 'flash-cards', component: PlaygroundComponent },
+      { path: 'flash-cards/new', component: NewFlashCardComponent }
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
