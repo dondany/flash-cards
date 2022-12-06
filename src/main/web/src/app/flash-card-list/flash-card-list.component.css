@@ -22,69 +22,36 @@ table {
 th {
   text-align: left;
   padding: 10px;
-  color: #393E46;
-}
-
-td {
-  padding: 18px;
-}
-
-td:nth-child(1) {
-  width: 10px;
-}
-
-table td:first-child {
-  border-radius: 10px 0 0 10px;
-}
-
-table td:last-child {
-  border-radius: 0 10px 10px 0;
-}
-
-tr {
-  background-color: #F2F3FB;
-  border-radius: 10px;
-}
-
-tbody tr:hover {
-  background-color: #ffffff;
-}
-
-.actions {
-  width: 60px;
-}
-
-.item-btn {
-  display: inline-block;
-  width: 20px;
-  margin: 0 5px 0 5px;
-}
-
-.bi:hover {
-  transform: scale(1.2);
-  cursor: pointer;
-}
-
-.bi-trash {
-  color: #cb5656;
-}
-
-.bi-pencil {
-  color: #67b700;
-}
-
-.table-nav {
-  width: 100%;
-  justify-content: flex-end;
+  color: #5c6272;
 }
 
 .add-new-btn {
-  padding: 10px;
+  margin: 10px 0 10px 10px;
   color: #1089FF;
 }
 
 .add-new-btn svg {
   width: 30px;
   height: 30px;
+}
+
+.table-top {
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+tbody tr {
+  background-color: #F2F3FB;
+  border-radius: 10px;
+}
+
+tbody tr:hover {
+  background-color: #ffffff;
 }
 

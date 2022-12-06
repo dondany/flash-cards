@@ -10,6 +10,7 @@ import { NewFlashCardComponent } from './new-flash-card/new-flash-card.component
 import {ReactiveFormsModule} from "@angular/forms";
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FlashCardListComponent } from './flash-card-list/flash-card-list.component';
+import { FlashCardListRowComponent } from './flash-card-list-row/flash-card-list-row.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FlashCardListComponent } from './flash-card-list/flash-card-list.compon
     PlaygroundComponent,
     NewFlashCardComponent,
     NavBarComponent,
-    FlashCardListComponent
+    FlashCardListComponent,
+    FlashCardListRowComponent
   ],
   imports: [
     BrowserModule,
