@@ -9,6 +9,7 @@ import {RouterModule} from "@angular/router";
 import { NewFlashCardComponent } from './new-flash-card/new-flash-card.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { FlashCardListComponent } from './flash-card-list/flash-card-list.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     FlashCardComponent,
     PlaygroundComponent,
     NewFlashCardComponent,
-    NavBarComponent
+    NavBarComponent,
+    FlashCardListComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +26,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: 'flash-cards', component: PlaygroundComponent },
-      { path: 'flash-cards/new', component: NewFlashCardComponent }
+      { path: 'flash-cards/new', component: NewFlashCardComponent },
+      { path: 'flash-cards/list', component: FlashCardListComponent }
     ])
   ],
   providers: [],
