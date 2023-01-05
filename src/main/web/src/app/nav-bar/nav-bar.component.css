@@ -7,10 +7,13 @@
   align-items: center;
 }
 
+.navigation {
+  margin-right: 40px;
+}
+
 .avatar {
   display: flex;
   align-items: center;
-  margin-right: 20px;
   color: var(--dark-color);
 }
 
