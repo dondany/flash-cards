@@ -1,0 +1,8 @@
+<div [ngClass]="customClass || ''" class="modal" [ngStyle]="{display: show ? 'block' : 'none'}">
+  <div class="overlay" (click)="closeCallback()">
+    <div class="modal-content">
+<!--      <ng-content></ng-content>-->
+      <div class="h2"></div>
+    </div>
+  </div>
+</div>

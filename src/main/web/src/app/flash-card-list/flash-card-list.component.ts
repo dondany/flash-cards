@@ -10,12 +10,17 @@ import {FlashCardService} from "../flash-card.service";
 export class FlashCardListComponent implements OnInit {
   flashCards!: FlashCard[];
   currentAction!: number;
+  showModal: boolean = true;
 
   constructor(private flashCardService: FlashCardService) { };
 
   ngOnInit(): void {
     this.flashCardService.getFlashCards()
       .subscribe(flashCards => this.flashCards = flashCards);
+  }
+
+  toggleModal = () => {
+    return this.showModal= !this.showModal;
   }
 
 }
