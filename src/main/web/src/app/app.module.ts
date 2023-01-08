@@ -13,6 +13,7 @@ import { FlashCardListComponent } from './flash-card-list/flash-card-list.compon
 import { FlashCardListRowComponent } from './flash-card-list-row/flash-card-list-row.component';
 import { ModalComponent } from './modal/modal.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
+import { ContentPanelComponent } from './content-panel/content-panel.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SideBarComponent } from './side-bar/side-bar.component';
     FlashCardListComponent,
     FlashCardListRowComponent,
     ModalComponent,
-    SideBarComponent
+    SideBarComponent,
+    ContentPanelComponent
   ],
   imports: [
     BrowserModule,
