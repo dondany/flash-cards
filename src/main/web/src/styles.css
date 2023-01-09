@@ -1,23 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
 :root {
   --mid-color: #393B4A;
-  --dark-color: #2A2836;
   --secondary-color:  #45B0E5;
-  --light-blue-color: #57A3FD;
-  --light-gray: #E7E7EE;
+  --light-gray: #F2F3F9;
+  --mid-gray: #eaebf1;
+  --dark-gray: #9b9b9f;
   --nav-bar-color: #fff;
 }
 
 * {
-  font-family: "Lato", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 body {

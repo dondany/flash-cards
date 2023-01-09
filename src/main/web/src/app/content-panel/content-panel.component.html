@@ -8,6 +8,9 @@
     </div>
   </div>
   <div class="panel-main">
+    <div class="table-actions">
+      <button>Add new</button>
+    </div>
     <table>
       <tr class="table-header">
         <th>#</th>
@@ -15,34 +18,11 @@
         <th>Back</th>
         <th>Actions</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>być</td>
-        <td>essere</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>mieć</td>
-        <td>avere</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>jeść</td>
-        <td>mangiare</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>robić</td>
-        <td>fare</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td>spacerować</td>
-        <td>passegiare</td>
+
+      <tr *ngFor="let flashCard of flashCards; let i = index">
+        <td>{{ i+1 }}</td>
+        <td>{{ flashCard.front }}</td>
+        <td>{{ flashCard.back }}</td>
         <td></td>
       </tr>
     </table>
