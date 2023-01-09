@@ -40,6 +40,10 @@ table {
   height: fit-content;
 }
 
+table {
+  border-radius: 20px 8px 0 0;
+}
+
 tr {
   height: fit-content;
 }
@@ -50,21 +54,34 @@ th, td {
 }
 
 table, th, td {
-  border-top: 1px solid rgba(0,0,0,0.2);
-  border-bottom: 1px solid rgba(0,0,0,0.2);
   border-collapse: collapse;
-}
-
-tr:nth-child(even) {
-  background-color: var(--light-gray);
 }
 
 tr:hover {
   background-color: var(--mid-gray);
 }
 
+.table-item {
+  cursor: pointer;
+}
+
+.table-header {
+  background-color: var(--light-gray);
+  cursor: default;
+}
+
+.table-header th:first-child,
+td:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+.table-header th:last-child,
+td:last-child  {
+  border-radius: 0 8px 8px 0;
+}
+
 .table-header:hover {
-  background-color: transparent;
+  background-color: var(--light-gray);
 }
 
 th {
@@ -87,4 +104,38 @@ button {
   border: none;
   border-radius: 2px;
 }
+
+.pagination {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+}
+
+.pagination span {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.pagination button {
+  min-width: 20px;
+  min-height: 20px;
+  font-size: 0.8rem;
+  padding: 4px;
+}
+
+.btn-fill {
+  border: 1px solid transparent;
+}
+
+.btn-clear {
+  background: var(--light-gray);
+  color: black;
+}
+
+.btn-clear:hover {
+  border: 1px solid var(--secondary-color);
+}
+
 

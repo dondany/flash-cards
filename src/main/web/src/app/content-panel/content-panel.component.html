@@ -9,23 +9,30 @@
   </div>
   <div class="panel-main">
     <div class="table-actions">
-      <button>Add new</button>
+      <button>+ Add new</button>
     </div>
     <table>
       <tr class="table-header">
         <th>#</th>
         <th>Front</th>
         <th>Back</th>
-        <th>Actions</th>
       </tr>
 
-      <tr *ngFor="let flashCard of flashCards; let i = index">
+      <tr class="table-item" *ngFor="let flashCard of flashCards; let i = index">
         <td>{{ i+1 }}</td>
         <td>{{ flashCard.front }}</td>
         <td>{{ flashCard.back }}</td>
-        <td></td>
       </tr>
     </table>
+    <div class="pagination">
+      <span>< Previous</span>
+      <button class="btn-fill">1</button>
+      <button class="btn-clear">2</button>
+      <button class="btn-clear">3</button>
+      <span>...</span>
+      <button class="btn-clear">15</button>
+      <span>Next ></span>
+    </div>
 
   </div>
   <div class="panel-bottom">
