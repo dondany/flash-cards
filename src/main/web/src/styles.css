@@ -1,13 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
 :root {
-  --mid-color: #393B4A;
-  --secondary-color:  #45B0E5;
-  --light-gray: #f9f9fc;
+  --dark-color: #393B4A;
+  --secondary-color:  #ffb127;
+  --light-gray: #f4f4f4;
   --mid-gray: #eaebf1;
   --dark-gray: #9b9b9f;
+  --very-dark-gray: #717171;
   --nav-bar-color: #fff;
 }
 

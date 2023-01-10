@@ -9,6 +9,7 @@ import {FlashCardService} from "../flash-card.service";
 })
 export class ContentPanelComponent implements OnInit {
   flashCards!: FlashCard[];
+  showModal: boolean = false;
 
   constructor(private flashCardService: FlashCardService) { };
 
@@ -17,4 +18,16 @@ export class ContentPanelComponent implements OnInit {
       .subscribe(flashCards => this.flashCards = flashCards);
   }
 
+  toggleModal = () => {
+    return this.showModal= !this.showModal;
+  }
+
+  addNewFlashCard(flashCard: FlashCard) {
+    this.flashCards.push(flashCard);
+    this.showModal = false;
+  }
+
+  addNextFlashCard(flashCard: FlashCard) {
+    this.flashCards.push(flashCard);
+  }
 }

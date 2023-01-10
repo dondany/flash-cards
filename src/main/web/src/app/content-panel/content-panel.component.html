@@ -9,7 +9,7 @@
   </div>
   <div class="panel-main">
     <div class="table-actions">
-      <button>+ Add new</button>
+      <button (click)="toggleModal()">+ Add new</button>
     </div>
     <table>
       <tr class="table-header">
@@ -38,4 +38,11 @@
   <div class="panel-bottom">
 
   </div>
+  <app-modal
+    (newFlashCardEvent)="addNewFlashCard($event)"
+    (nextFlashCardEvent)="addNextFlashCard($event)"
+    [show]="showModal"
+    [customClass]="'modalClass'"
+    [closeCallback]="toggleModal">
+  </app-modal>
 </div>

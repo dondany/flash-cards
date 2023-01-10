@@ -12,13 +12,13 @@
 }
 
 .breadcrumb {
-  color: var(--dark-gray);
+  color: var(--very-dark-gray);
   font-size: 0.8rem;
   font-weight: 500;
 }
 
 .title {
-  color: var(--dark-gray);
+  color: var(--very-dark-gray);
   margin-left: 10px;
   font-size: 1.5rem;
   font-weight: 500;
@@ -46,6 +46,7 @@ table {
 
 tr {
   height: fit-content;
+  border-bottom: 1px solid var(--mid-gray);
 }
 
 th, td {
@@ -57,6 +58,10 @@ table, th, td {
   border-collapse: collapse;
 }
 
+tr:nth-child(2n+3) {
+  background: var(--light-gray);
+}
+
 tr:hover {
   background-color: var(--mid-gray);
 }
@@ -66,25 +71,24 @@ tr:hover {
 }
 
 .table-header {
-  background-color: var(--light-gray);
+  background-color: var(--dark-color);
   cursor: default;
 }
 
-.table-header th:first-child,
-td:first-child {
-  border-radius: 8px 0 0 8px;
+.table-header th:first-child {
+  border-radius: 8px 0 0 0;
 }
 
-.table-header th:last-child,
-td:last-child  {
-  border-radius: 0 8px 8px 0;
+.table-header th:last-child {
+  border-radius: 0 8px 0 0;
 }
 
 .table-header:hover {
-  background-color: var(--light-gray);
+  background-color: var(--dark-color);
 }
 
 th {
+  color: #fff;
   font-weight: 500;
 }
 
@@ -95,12 +99,11 @@ th {
 }
 
 button {
-  text-decoration: none;
   cursor: pointer;
   padding: 8px;
-
+  font-weight: 500;
   background-color: var(--secondary-color);
-  color: #fff;
+  color: black;
   border: none;
   border-radius: 2px;
 }
