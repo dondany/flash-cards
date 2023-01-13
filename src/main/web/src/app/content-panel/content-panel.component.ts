@@ -18,10 +18,6 @@ export class ContentPanelComponent implements OnInit {
       .subscribe(flashCards => this.flashCards = flashCards);
   }
 
-  toggleModal = () => {
-    return this.showModal= !this.showModal;
-  }
-
   addNewFlashCard(flashCard: FlashCard) {
     this.flashCards.push(flashCard);
     this.showModal = false;
@@ -29,5 +25,18 @@ export class ContentPanelComponent implements OnInit {
 
   addNextFlashCard(flashCard: FlashCard) {
     this.flashCards.push(flashCard);
+  }
+
+  openModal = () => {
+    return this.showModal = true;
+  }
+
+  closeModal = () => {
+    return this.showModal = false;
+  }
+
+  deleteFlashCard(id: number) {
+    this.flashCardService.deleteFlashCard(id);
+    this.flashCards = this.flashCards.filter(fc => fc.id !== id);
   }
 }

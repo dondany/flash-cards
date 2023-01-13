@@ -32,16 +32,19 @@ export class ModalComponent implements OnInit {
     if (event.submitter.name == 'add') {
       if (this.form.value.front && this.form.value.back) {
         const fc: FlashCard = {front: this.form.value.front, back: this.form.value.back};
-        this.flashCardService.addNewFlashCard(fc);
-        this.newFlashCardEvent.emit(fc);
+        this.flashCardService.addNewFlashCard(fc).subscribe(fc => this.newFlashCardEvent.emit(fc));
       }
     } else {
       const fc: FlashCard = {front: this.form.value.front, back: this.form.value.back};
-      this.flashCardService.addNewFlashCard(fc);
-      this.nextFlashCardEvent.emit(fc);
-      console.log("dsdsd");
+      this.flashCardService.addNewFlashCard(fc).subscribe(fc => this.nextFlashCardEvent.emit(fc));
     }
     this.form.reset();
   }
+
+  close() {
+    this.form.reset();
+    this.closeCallback();
+  }
+
 
 }

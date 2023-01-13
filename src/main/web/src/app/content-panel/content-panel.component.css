@@ -40,10 +40,6 @@ table {
   height: fit-content;
 }
 
-table {
-  border-radius: 20px 8px 0 0;
-}
-
 tr {
   height: fit-content;
   border-bottom: 1px solid var(--mid-gray);
@@ -76,11 +72,11 @@ tr:hover {
 }
 
 .table-header th:first-child {
-  border-radius: 8px 0 0 0;
+  border-radius: 4px 0 0 0;
 }
 
 .table-header th:last-child {
-  border-radius: 0 8px 0 0;
+  border-radius: 0 4px 0 0;
 }
 
 .table-header:hover {
@@ -96,6 +92,27 @@ th {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 20px;
+}
+
+th:last-child, td:last-child {
+  max-width: 30px;
+}
+
+.fa {
+  width: 15px;
+  height: 15px;
+  margin-right: 20px;
+  fill: var(--very-dark-gray);
+  transition: all 0.1s ease-in 0s;
+}
+
+.fa:hover {
+  fill: var(--dark-color);
+  transform: scale(1.4);
+}
+
+.fa:active {
+  transform: scale(1);
 }
 
 button {
@@ -129,7 +146,12 @@ button {
 }
 
 .btn-fill {
-  border: 1px solid transparent;
+  transition: all 0.15s ease-in 0s;
+}
+
+.btn-fill:hover {
+  color: var(--secondary-color);
+  background-color: var(--dark-color);
 }
 
 .btn-clear {
@@ -139,6 +161,10 @@ button {
 
 .btn-clear:hover {
   border: 1px solid var(--secondary-color);
+}
+
+.actions {
+  display: flex;
 }
 
 

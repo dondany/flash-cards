@@ -1,12 +1,23 @@
 <div [ngClass]="customClass || ''" class="modal" [ngStyle]="{display: show ? 'block' : 'none'}">
-  <div class="overlay" (click)="closeCallback()">
+  <div class="overlay" (click)="close()">
   </div>
   <div class="modal-content">
     <!--      <ng-content></ng-content>-->
-    <h2>New Flash Card</h2>
+    <div class="modal-top">
+      <h2>New Flash Card</h2>
+      <button  (click)="close()" class="btn-close">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+          <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+          <path
+            d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/>
+        </svg>
+      </button>
+    </div>
     <div class="fc-preview-container">
       <div class="fc-preview">
-        być
+        <span>
+          {{ form.value.front }}
+        </span>
       </div>
     </div>
     <form [formGroup]="form" class="fc-input" (ngSubmit)="onSubmit($event)">
@@ -15,8 +26,9 @@
       <label for="back">Back</label>
       <input formControlName="back" type="text" id="back">
       <div class="fc-bottom">
-        <button type="submit" name="add">Add</button>
-        <button type="submit" name="addNext">Add Next</button>
+        <button type="button" class="btn-clear" (click)="close()">Cancel</button>
+        <button type="submit" class="btn-fill" name="addNext">Add Next</button>
+        <button type="submit" class="btn-fill" name="add">Add</button>
       </div>
     </form>
   </div>

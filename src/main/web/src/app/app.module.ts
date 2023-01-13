@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { FlashCardComponent } from './flash-card/flash-card.component';
 import { PlaygroundComponent } from './playground/playground.component';
 import {RouterModule} from "@angular/router";
-import { NewFlashCardComponent } from './new-flash-card/new-flash-card.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FlashCardListComponent } from './flash-card-list/flash-card-list.component';
@@ -20,7 +19,6 @@ import { ContentPanelComponent } from './content-panel/content-panel.component';
     AppComponent,
     FlashCardComponent,
     PlaygroundComponent,
-    NewFlashCardComponent,
     NavBarComponent,
     FlashCardListComponent,
     FlashCardListRowComponent,
@@ -34,7 +32,6 @@ import { ContentPanelComponent } from './content-panel/content-panel.component';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: 'flash-cards', component: PlaygroundComponent },
-      { path: 'flash-cards/new', component: NewFlashCardComponent },
       { path: 'flash-cards/list', component: FlashCardListComponent }
     ])
   ],

@@ -27,16 +27,21 @@
   overflow: auto;
   background: #fff;
   box-sizing: border-box;
-  padding: 30px;
+  padding: 30px 25px 10px 25px;
   border-radius: 5px;
-  min-width: 400px;
+  min-width: 600px;
   min-height: 500px;
+}
+
+.modal-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 h2 {
   font-weight: 700;
-  font-size: 1.5rem;
-  margin-bottom: 14px;
+  font-size: 1.4rem;
 }
 
 .fc-preview-container {
@@ -44,11 +49,11 @@ h2 {
   min-height: 250px;
   background-color: var(--mid-gray);
   border-radius: 4px;
-  margin-bottom: 14px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 14px;
 }
 
 .fc-preview {
@@ -61,9 +66,17 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.3s ease 0s;
+  max-width: 300px;
+  max-height: 200px;
+  padding: 10px;
+}
+
+.fc-preview span {
   font-size: 1.5rem;
   font-weight: 500;
-  transition: all 0.3s ease 0s;
+  text-align: center;
+  max-width: 100%;
 }
 
 .fc-preview:hover {
@@ -75,7 +88,6 @@ h2 {
 .fc-input {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
 }
 
 .fc-input label {
@@ -103,7 +115,56 @@ button {
   font-weight: 500;
   background-color: var(--secondary-color);
   color: black;
-  border: none;
   border-radius: 2px;
+  border: none;
 }
 
+.btn-close {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: inherit;
+  transition: all 0.3s ease 0s;
+  fill: var(--very-dark-gray);
+}
+
+.btn-close:hover {
+  color: red;
+  fill: red;
+}
+
+.btn-clear {
+  background: var(--light-gray);
+  color: black;
+  border: 1px solid transparent;;
+}
+
+.btn-clear:hover {
+  border: 1px solid var(--secondary-color);
+}
+
+
+.btn-clear svg {
+  width: 20px;
+  height: 20px;
+}
+
+.btn-fill {
+  transition: all 0.15s ease-in 0s;
+}
+
+.btn-fill:hover {
+  color: var(--secondary-color);
+  background-color: var(--dark-color);
+}
+
+.btn-clear {
+  background: var(--light-gray);
+  color: black;
+}
+
+.btn-clear:hover {
+  border: 1px solid var(--secondary-color);
+}
