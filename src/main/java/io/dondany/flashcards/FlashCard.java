@@ -19,7 +19,6 @@ public class FlashCard {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-
     private String front;
     private String back;
 

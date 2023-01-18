@@ -10,13 +10,16 @@ public class DatabaseLoader {
     @Bean
     CommandLineRunner initDatabase(FlashCardRepository repository) {
         return args -> {
-          repository.save(new FlashCard("ja", "io"));
-          repository.save(new FlashCard("ty", "tu"));
-          repository.save(new FlashCard("on, ona, Pan/Pani", "lei, lui, Lei"));
-          repository.save(new FlashCard("my", "noi"));
-          repository.save(new FlashCard("wy", "voi"));
-          repository.save(new FlashCard("oni, Państwo", "loro, Loro"));
-          repository.save(new FlashCard("być", "essere|io sono|tu sei|lei,lui,Lei e'|noi siamo|voi siete|loro,Loro sono"));
+          repository.save(new FlashCard("być", "essere"));
+          repository.save(new FlashCard("mieć","avere"));
+          repository.save(new FlashCard("móc","potere"));
+          repository.save(new FlashCard("robić","fare"));
+          repository.save(new FlashCard("mówić","dire"));
+          repository.save(new FlashCard("przyjść","venire"));
+          repository.save(new FlashCard("musieć","dovere"));
+          repository.save(new FlashCard("dawać","dare"));
+          repository.save(new FlashCard("iść","andare"));
+          repository.save(new FlashCard("widzieć","vedere"));
         };
     }
 
