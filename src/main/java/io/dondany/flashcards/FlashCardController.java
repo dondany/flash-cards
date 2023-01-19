@@ -34,16 +34,7 @@ public class FlashCardController {
         Pageable pageable = PageRequest.of(page, size);
         Page<FlashCard> flashCards = flashCardService.getAllFlashCards(pageable);
 
-//        if (flashCards.getTotalPages() < page) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-
-//        return ResponseEntity
-//                .ok()
-//                .contentType(MediaType.HAL)
-//                        .body(pagedResourcesAssembler.toModel(flashCards, flashCardModelAssembler));
         return pagedResourcesAssembler.toModel(flashCards, flashCardModelAssembler);
-
     }
 
     @PostMapping()
