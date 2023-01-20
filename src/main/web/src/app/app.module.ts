@@ -4,36 +4,31 @@ import {HttpClientModule} from "@angular/common/http";
 
 import { AppComponent } from './app.component';
 import { FlashCardComponent } from './flash-card/flash-card.component';
-import { PlaygroundComponent } from './playground/playground.component';
 import {RouterModule} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { FlashCardListComponent } from './flash-card-list/flash-card-list.component';
 import { FlashCardListRowComponent } from './flash-card-list-row/flash-card-list-row.component';
 import { ModalComponent } from './modal/modal.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { ContentPanelComponent } from './content-panel/content-panel.component';
+import { PaginationNavComponent } from './pagination-nav/pagination-nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FlashCardComponent,
-    PlaygroundComponent,
     NavBarComponent,
-    FlashCardListComponent,
     FlashCardListRowComponent,
     ModalComponent,
     SideBarComponent,
-    ContentPanelComponent
+    ContentPanelComponent,
+    PaginationNavComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([
-      { path: 'flash-cards', component: PlaygroundComponent },
-      { path: 'flash-cards/list', component: FlashCardListComponent }
-    ])
+    RouterModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

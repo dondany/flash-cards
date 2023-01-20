@@ -42,13 +42,19 @@
       </tr>
     </table>
     <div class="pagination">
-      <span>< Previous</span>
-      <button class="btn-fill">1</button>
-      <button class="btn-clear">2</button>
-      <button class="btn-clear">3</button>
-      <span>...</span>
-      <button class="btn-clear">15</button>
-      <span>Next ></span>
+      <button *ngIf="prev" (click)="changePage(prev)" class="btn-pagination">< Previous</button>
+      <button *ngIf="first" (click)="changePage(first)"  [ngClass]="currentPageNumber == 1 ? 'btn-fill' : 'btn-clear'">1</button>
+      <button *ngIf="numberOfPages > 1 && currentPageNumber < 6" (click)="changePage(prev)"  [ngClass]="currentPageNumber == 2 ? 'btn-fill' : 'btn-clear'">2</button>
+      <button *ngIf="numberOfPages > 2 && currentPageNumber < 6" (click)="changePage(prev)" [ngClass]="currentPageNumber == 3 ? 'btn-fill' : 'btn-clear'">3</button>
+      <button *ngIf="numberOfPages > 3 && currentPageNumber < 6" (click)="changePage(prev)" [ngClass]="currentPageNumber == 4 ? 'btn-fill' : 'btn-clear'">4</button>
+      <button *ngIf="numberOfPages > 4 && currentPageNumber < 6" (click)="changePage(prev)" [ngClass]="currentPageNumber == 5 ? 'btn-fill' : 'btn-clear'">5</button>
+      <span *ngIf="numberOfPages > 5">...</span>
+      <button *ngIf="numberOfPages > 4 && currentPageNumber > 5 && lastPageNumber - 4 != 5" (click)="changePage(prev)" [ngClass]="currentPageNumber == lastPageNumber - 4 ? 'btn-fill' : 'btn-clear'">{{ lastPageNumber - 4 }}</button>
+      <button *ngIf="numberOfPages > 5 && currentPageNumber > 5" (click)="changePage(prev)" [ngClass]="currentPageNumber == lastPageNumber - 3 ? 'btn-fill' : 'btn-clear'">{{ lastPageNumber - 3 }}</button>
+      <button *ngIf="numberOfPages > 6 && currentPageNumber > 5" (click)="changePage(prev)" [ngClass]="currentPageNumber == lastPageNumber - 2 ? 'btn-fill' : 'btn-clear'">{{ lastPageNumber - 2 }}</button>
+      <button *ngIf="numberOfPages > 7 && currentPageNumber > 5" (click)="changePage(prev)" [ngClass]="currentPageNumber == lastPageNumber - 1 ? 'btn-fill' : 'btn-clear'">{{ lastPageNumber - 1 }}</button>
+      <button *ngIf="last && numberOfPages > 5" (click)="changePage(last)" [ngClass]="currentPageNumber == lastPageNumber ? 'btn-fill' : 'btn-clear'">{{ lastPageNumber }}</button>
+      <button *ngIf="next" (click)="changePage(next)" class="btn-pagination">Next ></button>
     </div>
 
   </div>

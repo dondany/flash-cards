@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
-import {catchError, Observable, throwError} from "rxjs";
+import {Injectable} from '@angular/core';
+import {Observable} from "rxjs";
 
-import {HttpClient, HttpErrorResponse, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {FlashCard} from "./flash-card";
+import {FlashCardListResponse, Link} from "./flash-card-response";
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,15 @@ export class FlashCardService {
 
   baseUrl: string = 'http://localhost:8080/flash-cards';
 
-  getFlashCards() {
-    return this.http.get<FlashCard[]>(this.baseUrl);
+  getFlashCards(page: number, size: number) {
+    let params = new HttpParams();
+    params = params.append('page', page);
+    params = params.append('size', size);
+    return this.http.get<FlashCardListResponse>(this.baseUrl, { params: params });
+  }
+
+  getFlashCardsByLink(link: Link) {
+    return this.http.get<FlashCardListResponse>(link.href);
   }
 
   addNewFlashCard(flashCard: FlashCard): Observable<FlashCard> {

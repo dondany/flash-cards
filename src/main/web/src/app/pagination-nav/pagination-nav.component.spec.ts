@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FlashCardListComponent } from './flash-card-list.component';
+import { PaginationNavComponent } from './pagination-nav.component';
 
-describe('FlashCardListComponent', () => {
-  let component: FlashCardListComponent;
-  let fixture: ComponentFixture<FlashCardListComponent>;
+describe('PaginationNavComponent', () => {
+  let component: PaginationNavComponent;
+  let fixture: ComponentFixture<PaginationNavComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FlashCardListComponent ]
+      declarations: [ PaginationNavComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FlashCardListComponent);
+    fixture = TestBed.createComponent(PaginationNavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

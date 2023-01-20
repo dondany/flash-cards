@@ -103,12 +103,10 @@ th:last-child, td:last-child {
   height: 15px;
   margin-right: 20px;
   fill: var(--very-dark-gray);
-  transition: all 0.1s ease-in 0s;
 }
 
 .fa:hover {
-  fill: var(--dark-color);
-  transform: scale(1.4);
+  fill: var(--secondary-color);
 }
 
 .fa:active {
@@ -145,6 +143,16 @@ button {
   padding: 4px;
 }
 
+.btn-pagination {
+  width: 80px;
+  background-color: transparent;
+}
+
+.btn-pagination:hover {
+  cursor: pointer;
+  font-weight: 700;
+}
+
 .btn-fill {
   transition: all 0.15s ease-in 0s;
 }
@@ -156,6 +164,7 @@ button {
 
 .btn-clear {
   background: var(--light-gray);
+  border: 1px solid transparent;
   color: black;
 }
 
