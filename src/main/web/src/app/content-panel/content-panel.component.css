@@ -128,12 +128,24 @@ button {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 6px;
 }
 
 .pagination span {
+  min-width: 20px;
+  min-height: 20px;
   font-size: 0.8rem;
   font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.pagination-pages {
+  width: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .pagination button {
@@ -143,14 +155,22 @@ button {
   padding: 4px;
 }
 
+.fa-pagination {
+  margin: 0;
+}
+
 .btn-pagination {
-  width: 80px;
   background-color: transparent;
 }
 
 .btn-pagination:hover {
   cursor: pointer;
   font-weight: 700;
+}
+
+.next-prev-page-wrapper {
+  min-width: 20px;
+  min-height: 20px;
 }
 
 .btn-fill {

@@ -25,7 +25,7 @@ export class ContentPanelComponent implements OnInit {
   constructor(private flashCardService: FlashCardService) { };
 
   ngOnInit(): void {
-    this.flashCardService.getFlashCards(0,  1)
+    this.flashCardService.getFlashCards(0,  2)
       .subscribe(response => this.init(response));
   }
 

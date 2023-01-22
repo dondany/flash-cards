@@ -42,19 +42,43 @@
       </tr>
     </table>
     <div class="pagination">
-      <button *ngIf="prev" (click)="changePage(prev)" class="btn-pagination">< Previous</button>
-      <button *ngIf="first" (click)="changePage(first)"  [ngClass]="currentPageNumber == 1 ? 'btn-fill' : 'btn-clear'">1</button>
-      <button *ngIf="numberOfPages > 1 && currentPageNumber < 6" (click)="changePage(prev)"  [ngClass]="currentPageNumber == 2 ? 'btn-fill' : 'btn-clear'">2</button>
-      <button *ngIf="numberOfPages > 2 && currentPageNumber < 6" (click)="changePage(prev)" [ngClass]="currentPageNumber == 3 ? 'btn-fill' : 'btn-clear'">3</button>
-      <button *ngIf="numberOfPages > 3 && currentPageNumber < 6" (click)="changePage(prev)" [ngClass]="currentPageNumber == 4 ? 'btn-fill' : 'btn-clear'">4</button>
-      <button *ngIf="numberOfPages > 4 && currentPageNumber < 6" (click)="changePage(prev)" [ngClass]="currentPageNumber == 5 ? 'btn-fill' : 'btn-clear'">5</button>
-      <span *ngIf="numberOfPages > 5">...</span>
-      <button *ngIf="numberOfPages > 4 && currentPageNumber > 5 && lastPageNumber - 4 != 5" (click)="changePage(prev)" [ngClass]="currentPageNumber == lastPageNumber - 4 ? 'btn-fill' : 'btn-clear'">{{ lastPageNumber - 4 }}</button>
-      <button *ngIf="numberOfPages > 5 && currentPageNumber > 5" (click)="changePage(prev)" [ngClass]="currentPageNumber == lastPageNumber - 3 ? 'btn-fill' : 'btn-clear'">{{ lastPageNumber - 3 }}</button>
-      <button *ngIf="numberOfPages > 6 && currentPageNumber > 5" (click)="changePage(prev)" [ngClass]="currentPageNumber == lastPageNumber - 2 ? 'btn-fill' : 'btn-clear'">{{ lastPageNumber - 2 }}</button>
-      <button *ngIf="numberOfPages > 7 && currentPageNumber > 5" (click)="changePage(prev)" [ngClass]="currentPageNumber == lastPageNumber - 1 ? 'btn-fill' : 'btn-clear'">{{ lastPageNumber - 1 }}</button>
-      <button *ngIf="last && numberOfPages > 5" (click)="changePage(last)" [ngClass]="currentPageNumber == lastPageNumber ? 'btn-fill' : 'btn-clear'">{{ lastPageNumber }}</button>
-      <button *ngIf="next" (click)="changePage(next)" class="btn-pagination">Next ></button>
+      <div class="next-prev-page-wrapper">
+        <button *ngIf="prev" (click)="changePage(prev)" class="btn-pagination">
+          <svg class="fa fa-pagination" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+            <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+            <path
+              d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="pagination-pages">
+        <button *ngIf="first && currentPageNumber > 2" (click)="changePage(first)" class="btn-clear">
+          1
+        </button>
+        <span *ngIf="currentPageNumber > 3">...</span>
+        <button *ngIf="prev" (click)="changePage(prev)" class="btn-clear">
+          {{ currentPageNumber - 1 }}
+        </button>
+        <button *ngIf="self" (click)="changePage(self)" class="btn-fill">
+          {{ currentPageNumber }}
+        </button>
+        <button *ngIf="next" (click)="changePage(next)" class="btn-clear">
+          {{ currentPageNumber + 1 }}
+        </button>
+
+        <span *ngIf="currentPageNumber < lastPageNumber - 2">...</span>
+        <button *ngIf="last && currentPageNumber < lastPageNumber - 1" (click)="changePage(last)"
+                [ngClass]="currentPageNumber == lastPageNumber ? 'btn-fill' : 'btn-clear'">{{ lastPageNumber }}</button>
+      </div>
+      <div class="next-prev-page-wrapper">
+        <button *ngIf="next" (click)="changePage(next)" class="btn-pagination">
+          <svg class="fa fa-pagination" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+            <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+            <path
+              d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/>
+          </svg>
+        </button>
+      </div>
     </div>
 
   </div>
