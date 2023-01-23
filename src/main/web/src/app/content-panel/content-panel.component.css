@@ -105,7 +105,7 @@ th:last-child, td:last-child {
   fill: var(--very-dark-gray);
 }
 
-.fa:hover {
+.fa-table-action:hover {
   fill: var(--secondary-color);
 }
 
@@ -157,6 +157,19 @@ button {
 
 .fa-pagination {
   margin: 0;
+  fill: var(--very-dark-gray);
+}
+
+.fa-pagination-inactive {
+  opacity: 0.4;
+}
+
+.fa-pagination:hover {
+  fill: var(--secondary-color);
+}
+
+.fa-pagination-inactive:hover {
+  fill: var(--very-dark-gray) !important;
 }
 
 .btn-pagination {
