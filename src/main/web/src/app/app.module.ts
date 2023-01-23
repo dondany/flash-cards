@@ -12,6 +12,7 @@ import { ModalComponent } from './modal/modal.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { ContentPanelComponent } from './content-panel/content-panel.component';
 import { PaginationNavComponent } from './pagination-nav/pagination-nav.component';
+import { CollectionsPanelComponent } from './collections-panel/collections-panel.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +23,17 @@ import { PaginationNavComponent } from './pagination-nav/pagination-nav.componen
     ModalComponent,
     SideBarComponent,
     ContentPanelComponent,
-    PaginationNavComponent
+    PaginationNavComponent,
+    CollectionsPanelComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([])
+    RouterModule.forRoot([
+      { path: '', component: ContentPanelComponent },
+      { path: 'collections', component: CollectionsPanelComponent }
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]

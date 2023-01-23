@@ -1,16 +1,19 @@
 <div class="content-panel-container">
   <div class="panel-top">
-    <div class="breadcrumb">
-      Collections
+    <div class="title-wrapper">
+      <div class="breadcrumb">
+        Collections
+      </div>
+      <div class="title">
+        Lezione 1
+      </div>
     </div>
-    <div class="title">
-      Lezione 1
-    </div>
-  </div>
-  <div class="panel-main">
     <div class="table-actions">
       <button class="btn-fill" (click)="openModal()">+ Add new</button>
     </div>
+  </div>
+
+  <div class="panel-main">
     <table>
       <tr class="table-header">
         <th>#</th>
@@ -41,9 +44,11 @@
         </td>
       </tr>
     </table>
-    <div class="pagination">
-      <div class="next-prev-page-wrapper">
-        <button (click)="changePage(prev)" class="btn-pagination" [style.pointer-events]="!prev ? 'none': 'auto'">
+  </div>
+  <div class="pagination">
+    <div class="pagination-nav">
+      <div class="prev-page-wrapper">
+        <button (click)="changePage(prev)" class="btn-pagination" [style.pointer-events]="!prev  ? 'none': 'auto'">
           <svg class="fa fa-pagination" [ngClass]="{'fa-pagination-inactive': !prev}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
             <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
             <path
@@ -70,7 +75,7 @@
         <button *ngIf="last && currentPageNumber < lastPageNumber - 1" (click)="changePage(last)"
                 [ngClass]="currentPageNumber == lastPageNumber ? 'btn-fill' : 'btn-clear'">{{ lastPageNumber }}</button>
       </div>
-      <div class="next-prev-page-wrapper">
+      <div class="next-page-wrapper">
         <button (click)="changePage(next)" class="btn-pagination" [style.pointer-events]="!next ? 'none': 'auto'">
           <svg class="fa fa-pagination" [ngClass]="{'fa-pagination-inactive': !next}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
             <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
@@ -80,14 +85,13 @@
         </button>
       </div>
     </div>
-
   </div>
   <div class="panel-bottom">
 
   </div>
   <app-modal
-    (newFlashCardEvent)="addNewFlashCard($event)"
-    (nextFlashCardEvent)="addNextFlashCard($event)"
+    (newFlashCardEvent)="addNewFlashCard()"
+    (nextFlashCardEvent)="addNextFlashCard()"
     [show]="showModal"
     [customClass]="'modalClass'"
     [closeCallback]="closeModal">

@@ -25,17 +25,17 @@ export class ContentPanelComponent implements OnInit {
   constructor(private flashCardService: FlashCardService) { };
 
   ngOnInit(): void {
-    this.flashCardService.getFlashCards(0,  10)
+    this.flashCardService.getFlashCards(0,  12)
       .subscribe(response => this.init(response));
   }
 
-  addNewFlashCard(flashCard: FlashCard) {
-    this.flashCards.push(flashCard);
+  addNewFlashCard() {
+    this.changePage(this.self);
     this.showModal = false;
   }
 
-  addNextFlashCard(flashCard: FlashCard) {
-    this.flashCards.push(flashCard);
+  addNextFlashCard() {
+    this.changePage(this.self);
   }
 
   openModal = () => {
