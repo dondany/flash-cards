@@ -1,7 +1,9 @@
 package io.dondany.flashcards;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
@@ -10,6 +12,8 @@ import org.springframework.hateoas.server.core.Relation;
 @Getter
 @Setter
 @Relation(collectionRelation = "flashcards")
+@NoArgsConstructor
+@AllArgsConstructor
 public class FlashCardModel extends RepresentationModel<FlashCardModel> {
     private Long id;
     private String front;

@@ -1,20 +1,23 @@
 package io.dondany.flashcards;
 
+import io.dondany.flashcards.collection.Collection;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
 public class FlashCard {
-
-    public FlashCard() {
-    }
-
-    public FlashCard(String front, String back) {
-        this.front = front;
-        this.back = back;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -22,27 +25,26 @@ public class FlashCard {
     private String front;
     private String back;
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "collectionId")
+    private Collection collection;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public FlashCard() {}
 
-    public String getFront() {
-        return front;
-    }
-
-    public void setFront(String front) {
+    public FlashCard(String front, String back) {
         this.front = front;
-    }
-
-    public String getBack() {
-        return back;
-    }
-
-    public void setBack(String back) {
         this.back = back;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FlashCard)) return false;
+        return id != null && id.equals(((FlashCard) o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, front, back, collection);
     }
 }

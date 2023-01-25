@@ -1,22 +1,29 @@
 package io.dondany.flashcards;
 
+import io.dondany.flashcards.collection.CollectionController;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class FlashCardModelAssembler extends RepresentationModelAssemblerSupport<FlashCard, FlashCardModel> {
 
     public FlashCardModelAssembler() {
-        super(FlashCardController.class, FlashCardModel.class);
+        super(CollectionController.class, FlashCardModel.class);
     }
 
     @Override
     public FlashCardModel toModel(FlashCard entity) {
-        return FlashCardModel.builder()
-                .id(entity.getId())
-                .front(entity.getFront())
-                .back(entity.getBack())
-                .build();
+        FlashCardModel flashCardModel = instantiateModel(entity);
+        flashCardModel.setId(entity.getId());
+        flashCardModel.setFront(entity.getFront());
+        flashCardModel.setBack(entity.getBack());
+
+        flashCardModel.add(linkTo(methodOn(CollectionController.class).getFlashCard(entity.getCollection().getId(), entity.getId())).withSelfRel());
+        return flashCardModel;
     }
+
 
 }
