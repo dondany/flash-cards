@@ -1,10 +1,10 @@
-package io.dondany.flashcards;
+package io.dondany.fc.flashcard;
 
-import io.dondany.flashcards.collection.Collection;
+import io.dondany.fc.collection.Collection;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,8 +15,7 @@ import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
+@Data
 public class FlashCard {
 
     @Id
@@ -46,5 +45,15 @@ public class FlashCard {
     @Override
     public int hashCode() {
         return Objects.hash(id, front, back, collection);
+    }
+
+    @Override
+    public String toString() {
+        return "FlashCard{" +
+                "id=" + id +
+                ", front='" + front + '\'' +
+                ", back='" + back + '\'' +
+                ", collection=" + collection.getId() +
+                '}';
     }
 }

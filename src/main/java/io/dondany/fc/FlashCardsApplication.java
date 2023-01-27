@@ -1,4 +1,4 @@
-package io.dondany.flashcards;
+package io.dondany.fc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

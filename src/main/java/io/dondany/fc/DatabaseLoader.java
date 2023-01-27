@@ -1,7 +1,11 @@
-package io.dondany.flashcards;
+package io.dondany.fc;
 
-import io.dondany.flashcards.collection.Collection;
-import io.dondany.flashcards.collection.CollectionRepository;
+import io.dondany.fc.collection.Collection;
+import io.dondany.fc.collection.CollectionRepository;
+import io.dondany.fc.flashcard.FlashCard;
+import io.dondany.fc.flashcard.FlashCardRepository;
+import io.dondany.fc.project.Project;
+import io.dondany.fc.project.ProjectRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +16,7 @@ import java.util.ArrayList;
 public class DatabaseLoader {
 
     @Bean
-    CommandLineRunner initDatabase(FlashCardRepository repository, CollectionRepository collectionRepository) {
+    CommandLineRunner initDatabase(FlashCardRepository repository, CollectionRepository collectionRepository, ProjectRepository projectRepository) {
         return args -> {
             Collection collection = Collection.builder()
                     .name("Lezione 1")
@@ -42,14 +46,20 @@ public class DatabaseLoader {
             collection.addFlashCard(new FlashCard("znać", "conoscere"));
             collection.addFlashCard(new FlashCard("kończyć", "finire"));
 
-            collectionRepository.save(collection);
-
             Collection collection2 = Collection.builder()
                     .name("Lezione 2")
                     .description("Słówka z lekcji 2.")
                     .build();
 
-            collectionRepository.save(collection2);
+            Project project = Project.builder()
+                    .name("Italiano")
+                    .description("L'italiano e' fantastico!")
+                    .collections(new ArrayList<>())
+                    .build();
+            project.addCollection(collection);
+            project.addCollection(collection2);
+
+            projectRepository.save(project);
         };
     }
 

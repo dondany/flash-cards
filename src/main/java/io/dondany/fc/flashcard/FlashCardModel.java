@@ -1,4 +1,4 @@
-package io.dondany.flashcards;
+package io.dondany.fc.flashcard;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
