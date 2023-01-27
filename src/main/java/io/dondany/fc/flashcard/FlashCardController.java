@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +28,20 @@ public class FlashCardController {
     private final FlashCardModelAssembler flashCardModelAssembler;
     private final PagedResourcesAssembler<FlashCard> pagedResourcesAssembler;
 
-    @GetMapping()
+    @GetMapping(params = {"page", "size"})
     public PagedModel<FlashCardModel> getFlashCards(@PathVariable Long projectId,
                                                     @PathVariable Long collectionId,
-                                                    @RequestParam(value="page", defaultValue = "0") int page,
-                                                    @RequestParam(value="size", defaultValue = "10") int size ) {
+                                                    @RequestParam(value="page", defaultValue = "0", required = false) Integer page,
+                                                    @RequestParam(value="size", defaultValue = "10", required = false) Integer size ) {
         Pageable pageable = PageRequest.of(page, size);
         Page<FlashCard>  flashCards = flashCardService.getAllFlashCards(collectionId, pageable);
         return pagedResourcesAssembler.toModel(flashCards, flashCardModelAssembler);
+    }
+
+    @GetMapping()
+    public CollectionModel<FlashCardModel> getAll(@PathVariable Long projectId,
+                                                  @PathVariable Long collectionId) {
+        return flashCardModelAssembler.toCollectionModel(flashCardService.getAll());
     }
 
     @GetMapping("/{id}")

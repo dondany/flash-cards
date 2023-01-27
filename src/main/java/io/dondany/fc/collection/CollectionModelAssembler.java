@@ -24,7 +24,8 @@ public class CollectionModelAssembler extends RepresentationModelAssemblerSuppor
         collectionDto.setProject(entity.getProject());
 
         collectionDto.add(linkTo(methodOn(CollectionController.class).getCollection(entity.getProject().getId(), entity.getId())).withSelfRel());
-        collectionDto.add(linkTo(methodOn(FlashCardController.class).getFlashCards(entity.getProject().getId(), entity.getId(), 0, 12)).withRel("flash-cards"));
+        collectionDto.add(linkTo(methodOn(FlashCardController.class).getFlashCards(entity.getProject().getId(), entity.getId(), 0, 12)).withRel("flash-cards-paged"));
+        collectionDto.add(linkTo(methodOn(FlashCardController.class).getAll(entity.getProject().getId(), entity.getId())).withRel("flash-cards"));
         collectionDto.add(linkTo(methodOn(CollectionController.class).getCollections(entity.getProject().getId())).withRel("collections"));
         return collectionDto;
     }

@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,6 +15,10 @@ import java.util.Optional;
 public class FlashCardService {
     private final FlashCardRepository flashCardRepository;
     private final CollectionRepository collectionRepository;
+
+    public List<FlashCard> getAll() {
+        return flashCardRepository.findAll();
+    }
 
     public Page<FlashCard> getAllFlashCards(Long id, Pageable pageable) {
         return flashCardRepository.findByCollectionId(id, pageable);
@@ -38,4 +43,5 @@ public class FlashCardService {
     public void deleteFlashCard(Long id) {
         flashCardRepository.deleteById(id);
     }
+
 }
