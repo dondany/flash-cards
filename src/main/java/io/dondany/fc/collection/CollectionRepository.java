@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CollectionRepository extends JpaRepository<Collection, Long> {
@@ -29,5 +30,7 @@ public interface CollectionRepository extends JpaRepository<Collection, Long> {
             "AND c.project.id = :projectId " +
             "GROUP BY c.id")
     CollectionDto findOne(@Param("projectId") Long projectId, @Param("id") Long id);
+
+    Optional<Collection> findByIdAndProjectId(Long id, Long projectId);
 
 }

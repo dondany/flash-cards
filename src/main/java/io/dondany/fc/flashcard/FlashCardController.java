@@ -29,19 +29,19 @@ public class FlashCardController {
     private final PagedResourcesAssembler<FlashCard> pagedResourcesAssembler;
 
     @GetMapping(params = {"page", "size"})
-    public PagedModel<FlashCardModel> getFlashCards(@PathVariable Long projectId,
-                                                    @PathVariable Long collectionId,
-                                                    @RequestParam(value="page", defaultValue = "0", required = false) Integer page,
-                                                    @RequestParam(value="size", defaultValue = "10", required = false) Integer size ) {
+    public PagedModel<FlashCardModel> getFlashCardsByCollection(@PathVariable Long projectId,
+                                                                @PathVariable Long collectionId,
+                                                                @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
+                                                                @RequestParam(value = "size", defaultValue = "10", required = false) Integer size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<FlashCard>  flashCards = flashCardService.getAllFlashCards(collectionId, pageable);
+        Page<FlashCard> flashCards = flashCardService.getAllFlashCards(collectionId, pageable);
         return pagedResourcesAssembler.toModel(flashCards, flashCardModelAssembler);
     }
 
     @GetMapping()
-    public CollectionModel<FlashCardModel> getAll(@PathVariable Long projectId,
-                                                  @PathVariable Long collectionId) {
-        return flashCardModelAssembler.toCollectionModel(flashCardService.getAll());
+    public CollectionModel<FlashCardModel> getAllByCollection(@PathVariable Long projectId,
+                                                              @PathVariable Long collectionId) {
+        return flashCardModelAssembler.toCollectionModel(flashCardService.getAllByCollectionId(collectionId));
     }
 
     @GetMapping("/{id}")
@@ -57,11 +57,11 @@ public class FlashCardController {
     public FlashCardModel addFlashCard(@PathVariable Long projectId,
                                        @PathVariable Long collectionId,
                                        @RequestBody FlashCard flashCard) {
-        return flashCardModelAssembler.toModel(flashCardService.addFlashCard(collectionId, flashCard));
+        return flashCardModelAssembler.toModel(flashCardService.addFlashCard(projectId, collectionId, flashCard));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteFlashCard(@PathVariable Long projectId, @PathVariable Long id) {
+    public void deleteFlashCard(@PathVariable Long id) {
         flashCardService.deleteFlashCard(id);
     }
 }

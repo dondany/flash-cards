@@ -16,8 +16,8 @@ public class FlashCardService {
     private final FlashCardRepository flashCardRepository;
     private final CollectionRepository collectionRepository;
 
-    public List<FlashCard> getAll() {
-        return flashCardRepository.findAll();
+    public List<FlashCard> getAllByCollectionId(Long collectionId) {
+        return flashCardRepository.findAllByCollectionId(collectionId);
     }
 
     public Page<FlashCard> getAllFlashCards(Long id, Pageable pageable) {
@@ -25,19 +25,18 @@ public class FlashCardService {
     }
 
     public Optional<FlashCard> getFlashCard(Long collectionId, Long flashCardId) {
-        return flashCardRepository.findById(flashCardId);
+        return flashCardRepository.findByIdAndCollectionId(flashCardId, collectionId);
     }
 
-    public FlashCard addFlashCard(Long collectionId, FlashCard flashCard) {
-        Optional<Collection> collectionOptional = collectionRepository.findById(collectionId);
+    public FlashCard addFlashCard(Long projectId, Long collectionId, FlashCard flashCard) {
+        Optional<Collection> collectionOptional = collectionRepository.findByIdAndProjectId(collectionId, projectId);
         if (collectionOptional.isEmpty()) {
-            throw new RuntimeException("Collection with id " + collectionId + " not found!");
+            throw new RuntimeException("Collection with id " + collectionId + " and projectId" + projectId + " not found!");
         }
 
         Collection collection = collectionOptional.get();
-        collection.addFlashCard(flashCard);
-        collectionRepository.saveAndFlush(collection);
-        return flashCard;
+        flashCard.setCollection(collection);
+        return flashCardRepository.save(flashCard);
     }
 
     public void deleteFlashCard(Long id) {
