@@ -7,13 +7,13 @@
   height: 100%;
 }
 
-.content-panel-container {
+.project-panel-container {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   padding: 30px 30px;
-  flex-grow: 1
+  flex-grow: 1;
 }
 
 .panel-top {

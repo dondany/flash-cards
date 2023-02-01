@@ -1,8 +1,5 @@
 import {FlashCard} from "./flash-card";
-
-export interface Link {
-  href: string;
-}
+import {Link} from "./link";
 
 export interface FlashCardListResponse {
   _embedded: {

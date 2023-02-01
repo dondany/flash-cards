@@ -3,7 +3,8 @@ import {Observable} from "rxjs";
 
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {FlashCard} from "./flash-card";
-import {FlashCardListResponse, Link} from "./flash-card-response";
+import {FlashCardListResponse} from "./flash-card-response";
+import {Link} from "./link";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class FlashCardService {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl: string = 'http://localhost:8080/flash-cards';
+  baseUrl: string = 'http://localhost:8080/projects/1/collections/2/flash-cards';
 
   getFlashCards(page: number, size: number) {
     let params = new HttpParams();

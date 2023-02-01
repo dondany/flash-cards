@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FlashCard} from "../flash-card";
 import {FlashCardService} from "../flash-card.service";
-import {FlashCardListResponse, Link} from "../flash-card-response";
+import {FlashCardListResponse} from "../flash-card-response";
+import {Link} from "../link";
 
 @Component({
   selector: 'app-content-panel',
@@ -25,7 +26,7 @@ export class ContentPanelComponent implements OnInit {
   constructor(private flashCardService: FlashCardService) { };
 
   ngOnInit(): void {
-    this.flashCardService.getFlashCards(0,  12)
+    this.flashCardService.getFlashCards(0,  10)
       .subscribe(response => this.init(response));
   }
 
