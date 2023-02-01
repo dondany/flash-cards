@@ -42,13 +42,27 @@ public class DatabaseLoader {
             collection.addFlashCard(new FlashCard("pić", "bere"));
             collection.addFlashCard(new FlashCard("pytać", "chiedere"));
             collection.addFlashCard(new FlashCard("zaczynać", "cominciare"));
-            collection.addFlashCard(new FlashCard("kupować", "comprare"));
-            collection.addFlashCard(new FlashCard("znać", "conoscere"));
-            collection.addFlashCard(new FlashCard("kończyć", "finire"));
 
             Collection collection2 = Collection.builder()
                     .name("Lezione 2")
                     .description("Słówka z lekcji 2.")
+                    .flashCards(new ArrayList<>())
+                    .build();
+
+            collection2.addFlashCard(new FlashCard("kupować", "comprare"));
+            collection2.addFlashCard(new FlashCard("znać", "conoscere"));
+            collection2.addFlashCard(new FlashCard("kończyć", "finire"));
+
+            Collection collection3 = Collection.builder()
+                    .name("Lezione 3")
+                    .description("Słówka z lekcji 3.")
+                    .flashCards(new ArrayList<>())
+                    .build();
+
+            Collection collection4 = Collection.builder()
+                    .name("I verbi")
+                    .description("Czasowniki")
+                    .flashCards(new ArrayList<>())
                     .build();
 
             Project project = Project.builder()
@@ -58,6 +72,8 @@ public class DatabaseLoader {
                     .build();
             project.addCollection(collection);
             project.addCollection(collection2);
+            project.addCollection(collection3);
+            project.addCollection(collection4);
 
             projectRepository.save(project);
         };
