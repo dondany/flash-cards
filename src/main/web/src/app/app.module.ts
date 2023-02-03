@@ -13,6 +13,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { ContentPanelComponent } from './content-panel/content-panel.component';
 import { PaginationNavComponent } from './pagination-nav/pagination-nav.component';
 import { ProjectPanelComponent } from './project-panel/project-panel.component';
+import { CollectionPanelComponent } from './collection-panel/collection-panel.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProjectPanelComponent } from './project-panel/project-panel.component';
     SideBarComponent,
     ContentPanelComponent,
     PaginationNavComponent,
-    ProjectPanelComponent
+    ProjectPanelComponent,
+    CollectionPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import { ProjectPanelComponent } from './project-panel/project-panel.component';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: ContentPanelComponent },
-      { path: 'collections', component: ProjectPanelComponent }
+      { path: 'project', component: ProjectPanelComponent },
+      { path: 'collection', component: CollectionPanelComponent }
     ])
   ],
   providers: [],

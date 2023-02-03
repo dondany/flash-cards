@@ -4,7 +4,7 @@ import {CollectionService} from "../collection.service";
 import {Collection} from "../collection";
 
 @Component({
-  selector: 'app-collections-panel',
+  selector: 'app-project-panel',
   templateUrl: './project-panel.component.html',
   styleUrls: ['./project-panel.component.css']
 })

@@ -7,7 +7,7 @@
         </div>
       </div>
       <div class="panel-mid">
-        <div class="project-card-wrapper">
+        <div class="project-card-wrapper panel">
           <h1>Italiano</h1>
           <h2>Nauka włoskiego. Słówka, zwroty itp.</h2>
           <div class="project-card-bottom">
@@ -22,11 +22,11 @@
           Collections
         </div>
         <div>
-          <button class="btn-fill">+ Add new</button>
+          <button class="btn-fill panel">+ Add new</button>
         </div>
       </div>
       <div class="panel-mid">
-        <div *ngFor="let collection of collections" class="collection-card-wrapper">
+        <div *ngFor="let collection of collections" class="collection-card-wrapper panel">
           <div class="card-top">
             <h1>{{ collection.name }}</h1>
             <div class="fav">

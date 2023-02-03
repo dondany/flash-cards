@@ -1,0 +1,110 @@
+<div class="colleciton-panel-container">
+  <div class="panel-main">
+    <div class="panel-left">
+      <div class="collection-panel">
+        <div class="panel-top">
+          <div class="title">
+            Collection
+          </div>
+        </div>
+        <div class="panel-mid">
+          <div class="collection-card-wrapper panel">
+            <h1>Lezione 1</h1>
+            <h2>Słówka z lekcji 1.</h2>
+          </div>
+        </div>
+      </div>
+      <div class="fc-panel">
+        <div class="panel-top">
+          <div class="title">
+            Flash Cards
+          </div>
+          <div>
+            <button class="btn-fill">+ Add new</button>
+          </div>
+        </div>
+        <div class="panel-mid">
+          <div class="panel">
+            <div class="fc-list">
+              <div class="fc-card fc-list-header">
+                <div class="front fc-side">Front</div>
+                <div class="back fc-side">Back</div>
+              </div>
+              <div class="fc-list-body">
+                <div class="fc-card" *ngFor="let flashCard of flashCards">
+                  <div class="front fc-side">{{ flashCard.front }}</div>
+                  <div class="back fc-side">{{ flashCard.back }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pagination">
+            Cards per page
+            <div class="pagination-page-size panel">
+              <div>
+                <div class="page-size">
+                  10
+                </div>
+                <button class="button btn-pagination btn-pagination-page-size">
+                  <svg class="fa fa-pagination" sxmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                    <path
+                      d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="pagination-nav panel">
+              <div class="prev-page-wrapper">
+                <button (click)="changePage(prev)" class="btn-pagination"
+                        [style.pointer-events]="!prev  ? 'none': 'auto'">
+                  <svg class="fa fa-pagination" [ngClass]="{'fa-pagination-inactive': !prev}"
+                       xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                    <path
+                      d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="pagination-pages">
+                <button *ngIf="first && currentPageNumber > 2" (click)="changePage(first)" class="btn-clear">
+                  1
+                </button>
+                <span *ngIf="currentPageNumber > 3">...</span>
+                <button *ngIf="prev" (click)="changePage(prev)" class="btn-clear">
+                  {{ currentPageNumber - 1 }}
+                </button>
+                <button *ngIf="self" (click)="changePage(self)" class="btn-fill">
+                  {{ currentPageNumber }}
+                </button>
+                <button *ngIf="next" (click)="changePage(next)" class="btn-clear">
+                  {{ currentPageNumber + 1 }}
+                </button>
+
+                <span *ngIf="currentPageNumber < lastPageNumber - 2">...</span>
+                <button *ngIf="last && currentPageNumber < lastPageNumber - 1" (click)="changePage(last)"
+                        [ngClass]="currentPageNumber == lastPageNumber ? 'btn-fill' : 'btn-clear'">{{ lastPageNumber }}</button>
+              </div>
+              <div class="next-page-wrapper">
+                <button (click)="changePage(next)" class="btn-pagination"
+                        [style.pointer-events]="!next ? 'none': 'auto'">
+                  <svg class="fa fa-pagination" [ngClass]="{'fa-pagination-inactive': !next}"
+                       xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                    <path
+                      d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="panel-right">
+
+    </div>
+  </div>
+</div>
