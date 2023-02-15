@@ -14,6 +14,7 @@ import { ContentPanelComponent } from './content-panel/content-panel.component';
 import { PaginationNavComponent } from './pagination-nav/pagination-nav.component';
 import { ProjectPanelComponent } from './project-panel/project-panel.component';
 import { CollectionPanelComponent } from './collection-panel/collection-panel.component';
+import { ProjectsListComponent } from './projects-list/projects-list.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CollectionPanelComponent } from './collection-panel/collection-panel.co
     ContentPanelComponent,
     PaginationNavComponent,
     ProjectPanelComponent,
-    CollectionPanelComponent
+    CollectionPanelComponent,
+    ProjectsListComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { CollectionPanelComponent } from './collection-panel/collection-panel.co
     RouterModule.forRoot([
       { path: '', component: ContentPanelComponent },
       { path: 'project', component: ProjectPanelComponent },
-      { path: 'collection', component: CollectionPanelComponent }
+      { path: 'collection', component: CollectionPanelComponent },
+      { path: 'projects', component: ProjectsListComponent }
     ])
   ],
   providers: [],
