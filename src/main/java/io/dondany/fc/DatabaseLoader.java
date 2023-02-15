@@ -76,6 +76,20 @@ public class DatabaseLoader {
             project.addCollection(collection4);
 
             projectRepository.save(project);
+
+            projectRepository.save(Project.builder()
+                            .name("JavaScript")
+                            .description("Mastering javascript")
+                    .build());
+            projectRepository.save(Project.builder()
+                            .name("Java")
+                            .description("Mastering Java")
+                    .build());
+            projectRepository.save(Project.builder()
+                    .name("Go")
+                    .description("Mastering GO")
+                    .build());
+
         };
     }
 
