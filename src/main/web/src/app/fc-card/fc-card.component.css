@@ -1,0 +1,106 @@
+.fc-card {
+  width: 320px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 16px 24px 16px;
+
+  background-color: #fff;
+  border-radius: 14px;
+  transition: transform 300ms ease 0s;
+}
+
+.fc-card:hover {
+  /*transform: translateY(-3px);*/
+  box-shadow: 0 5px 24px 0 rgba(66, 68, 90, 0.2);
+  cursor: pointer;
+}
+
+.fc-body {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.fc-top {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.fc-top svg {
+  height: 1.5rem;
+  fill: #635e70;
+}
+
+.fc-side {
+  height: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 500;
+}
+
+.fc-side:first-child {
+  border-right: 1px solid #d7d7d7;
+}
+
+.btn {
+  width: 24px;
+  height: 24px;
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+  background-color: transparent;
+}
+
+.btn:hover {
+  border-radius: 50%;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.selected {
+  color: #fff;
+  background-color: #86B97F;
+}
+
+.selected .btn svg {
+  fill: #fff;
+}
+
+.selected .btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.selected .btn:hover svg {
+  /*fill: #fff;*/
+}
+
+.btn-menu {
+  z-index: 1;
+}
+
+.context-btn {
+  position: relative;
+}
+
+.context-menu {
+  position: absolute;
+  left: 100%;
+  top: 0;
+}
+
+.overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}

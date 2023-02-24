@@ -1,0 +1,24 @@
+<div class="fc-card" (click)="select()" [class.selected]="isSelected">
+  <div class="fc-top">
+    <div class="context-btn">
+      <button class="btn btn-menu" (click)="toggleMenu($event)">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+          <path
+            d="M0 256a56 56 0 1 1 112 0A56 56 0 1 1 0 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"/>
+        </svg>
+      </button>
+      <div class="context-menu" *ngIf="isMenuOpened">
+        <app-fc-context-menu (editFlashCardEvent)="editFlashCard()" (deleteFlashCardEvent)="deleteFlashCard()" (closeContextMenuEvent)="closeContextMenu()"></app-fc-context-menu>
+      </div>
+    </div>
+  </div>
+  <div class="fc-body">
+    <div class="fc-side">
+      {{ card.front }}
+    </div>
+    <div class="fc-side">
+      {{ card.back }}
+    </div>
+  </div>
+</div>

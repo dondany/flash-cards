@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +38,16 @@ public class FlashCardService {
         Collection collection = collectionOptional.get();
         flashCard.setCollection(collection);
         return flashCardRepository.save(flashCard);
+    }
+
+    public FlashCard updateFlashCard(Long projectId, Long collectionId, Long id, FlashCard flashCard) {
+        FlashCard fc = flashCardRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("FlashCard with id " + id + " not found"));
+
+        fc.setFront(flashCard.getFront());
+        fc.setBack(flashCard.getBack());
+
+        return flashCardRepository.save(fc);
     }
 
     public void deleteFlashCard(Long id) {

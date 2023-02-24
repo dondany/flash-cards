@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,6 +59,14 @@ public class FlashCardController {
                                        @PathVariable Long collectionId,
                                        @RequestBody FlashCard flashCard) {
         return flashCardModelAssembler.toModel(flashCardService.addFlashCard(projectId, collectionId, flashCard));
+    }
+
+    @PutMapping("/{id}")
+    public FlashCardModel updateFlashCard(@PathVariable Long projectId,
+                                          @PathVariable Long collectionId,
+                                          @PathVariable Long id,
+                                          @RequestBody FlashCard flashCard) {
+        return flashCardModelAssembler.toModel(flashCardService.updateFlashCard(projectId, collectionId, id, flashCard));
     }
 
     @DeleteMapping("/{id}")

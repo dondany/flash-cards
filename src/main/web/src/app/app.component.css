@@ -2,20 +2,88 @@
   width: 100%;
   height: 100vh;
   display: flex;
-  flex-grow: 1;
 }
 
-.body-container {
-  width: 100%;
-  height: 100vh;
+.side-bar {
+  min-width: 100px;
+  background-color: #86B97F;
   display: flex;
   flex-direction: column;
-  color: #fff;
-  background-color: var(--light-gray);
-  flex-grow: 1;
-  overflow: auto;
+  align-items: center;
+  padding-top: 80px;
 }
 
-app-content-panel {
+.side-bar ul {
+  list-style: none;
+}
+
+.side-bar ul li svg{
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: rgba(255, 255, 255, 0.8);
+}
+
+.side-bar ul li svg:hover{
+  fill: rgba(255, 255, 255, 1);
+  cursor: pointer;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
   flex-grow: 1;
+}
+
+.fc-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  flex-grow: 1;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fc-list-container .title h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #3F3C48;
+}
+
+.fc-list-body {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.list-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: none;
+  color: #fff;
+  font-weight: 500;
+}
+
+.btn-green {
+  background-color: #86B97F;
+}
+
+.btn-red {
+  background-color: #d26767;
+}
+.btn:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.btn-inactive {
+  background-color: #dbdbdb !important;
 }

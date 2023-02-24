@@ -1,0 +1,21 @@
+.main-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-grow: 1;
+}
+
+.body-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  background-color: var(--light-gray);
+  flex-grow: 1;
+  overflow: auto;
+}
+
+app-content-panel {
+  flex-grow: 1;
+}

@@ -145,7 +145,6 @@ button {
   border: 1px solid var(--secondary-color);
 }
 
-
 .btn-clear svg {
   width: 20px;
   height: 20px;
@@ -167,4 +166,8 @@ button {
 
 .btn-clear:hover {
   border: 1px solid var(--secondary-color);
+}
+
+.fc-preview {
+
 }

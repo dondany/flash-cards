@@ -1,0 +1,37 @@
+<div class="modal" [ngStyle]="{display: show ? 'block' : 'none'}">
+  <div class="overlay" (click)="close()">
+  </div>
+  <div class="modal-content">
+    <header>
+      <h2>Edit Flash Card</h2>
+    </header>
+    <section class="fc-preview">
+      <div class="fc-card">
+        <div class="fc-card-inner" [class.flipped]="isFlipped">
+          <div class="fc-card-front">
+          <span>
+          {{form.value.front}}
+          </span>
+          </div>
+          <div class="fc-card-back">
+            <span>
+            {{form.value.back}}
+           </span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <form [formGroup]="form" class="fc-input" (ngSubmit)="onSubmit()">
+        <label for="front">Front</label>
+        <input formControlName="front" type="text" id="front" (focus)="flipFront()">
+        <label for="back">Back</label>
+        <input formControlName="back" type="text" id="back" (focus)="flipBack()">
+        <div class="fc-bottom">
+          <button type="button" class="btn btn-red" (click)="close()">Cancel</button>
+          <button type="submit" class="btn btn-green" name="add">Save</button>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
