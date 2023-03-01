@@ -11,36 +11,6 @@
     </ul>
   </div>
   <div class="content-container">
-    <div class="fc-list-container">
-      <div class="title">
-        <h2>Flash Cards</h2>
-        <div class="list-nav">
-          <button class="btn btn-red" [class.btn-inactive]="selectedCards.length === 0" (click)="deleteSelected()">
-            Delete
-          </button>
-          <button class="btn btn-green" (click)="openNewFcModal()">+ Add new</button>
-        </div>
-      </div>
-      <div class="fc-list-body">
-        <app-fc-card *ngFor="let flashcard of flashCards"
-                     [card]="flashcard"
-                     (selectEvent)="selectCard($event)"
-                     (editFlashCardEvent)="openEditFcModal($event)"
-                     (deleteFlashCardEvent)="deleteFlashCard($event)"
-        ></app-fc-card>
-      </div>
-    </div>
+    <router-outlet></router-outlet>
   </div>
-  <app-new-fc-modal
-    (newFlashCardEvent)="addNewFlashCard()"
-    (nextFlashCardEvent)="addNextFlashCard()"
-    [show]="showNewFcModal"
-    [closeCallback]="closeNewFcModal">
-  </app-new-fc-modal>
-  <app-edit-fc-modal
-    (editFlashCard)="editFlashCard($event)"
-    [inputFlashCard]="flashCardBeingEdited"
-    [show]="showEditFcModal"
-    [closeCallback]="closeEditFcModal">
-  </app-edit-fc-modal>
 </div>

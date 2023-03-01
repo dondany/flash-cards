@@ -3,7 +3,6 @@ import {Observable} from "rxjs";
 
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {FlashCard} from "./flash-card";
-import {FlashCardListResponse} from "./flash-card-response";
 import {Link} from "./link";
 
 @Injectable({
@@ -19,11 +18,12 @@ export class FlashCardService {
     let params = new HttpParams();
     params = params.append('page', page);
     params = params.append('size', size);
-    return this.http.get<FlashCardListResponse>(this.baseUrl, { params: params });
+    return this.http.get<FlashCard[]>(this.baseUrl, { params: params, observe: 'response' });
   }
 
   getFlashCardsByLink(link: Link) {
-    return this.http.get<FlashCardListResponse>(link.href);
+    console.log(link.href);
+    return this.http.get<FlashCard[]>(link.href, {observe: 'response'});
   }
 
   addNewFlashCard(flashCard: FlashCard): Observable<FlashCard> {

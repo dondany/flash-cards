@@ -30,6 +30,7 @@ body {
 .btn-red {
   background-color: #d26767;
 }
+
 .btn:hover {
   cursor: pointer;
   opacity: 0.9;
