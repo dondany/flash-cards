@@ -1,12 +1,11 @@
 package io.dondany.fc.flashcard;
 
+import io.dondany.fc.PagedResponseEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.PagedModel;
+import org.springframework.hateoas.server.mvc.BasicLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,57 +19,67 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("projects/{projectId}/collections/{collectionId}/flash-cards")
 @RequiredArgsConstructor
 public class FlashCardController {
 
     private final FlashCardService flashCardService;
-    private final FlashCardModelAssembler flashCardModelAssembler;
-    private final PagedResourcesAssembler<FlashCard> pagedResourcesAssembler;
+    private final FlashCardMapper flashCardMapper;
 
     @GetMapping(params = {"page", "size"})
-    public PagedModel<FlashCardModel> getFlashCardsByCollection(@PathVariable Long projectId,
-                                                                @PathVariable Long collectionId,
-                                                                @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
-                                                                @RequestParam(value = "size", defaultValue = "10", required = false) Integer size) {
+    public PagedResponseEntity<FlashCardModel> getFlashCardsByCollection(@PathVariable Long projectId,
+                                                                         @PathVariable Long collectionId,
+                                                                         @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
+                                                                         @RequestParam(value = "size", defaultValue = "10", required = false) Integer size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<FlashCard> flashCards = flashCardService.getAllFlashCards(collectionId, pageable);
-        return pagedResourcesAssembler.toModel(flashCards, flashCardModelAssembler);
+        Page<FlashCardModel> pagedFlashCards = flashCardService.getAllFlashCards(collectionId, pageable).map(flashCardMapper);
+
+        return PagedResponseEntity.from(pagedFlashCards, String.format("%s/projects/%s/collections/%s/flash-cards", baseUri(), projectId, collectionId));
     }
 
     @GetMapping()
-    public CollectionModel<FlashCardModel> getAllByCollection(@PathVariable Long projectId,
-                                                              @PathVariable Long collectionId) {
-        return flashCardModelAssembler.toCollectionModel(flashCardService.getAllByCollectionId(collectionId));
+    public List<FlashCardModel> getAllByCollection(@PathVariable Long projectId,
+                                                   @PathVariable Long collectionId) {
+        return flashCardService.getAllByCollectionId(collectionId)
+                .stream()
+                .map(flashCardMapper)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FlashCardModel> getFlashCard(@PathVariable Long projectId,
-                                                       @PathVariable Long collectionId,
-                                                       @PathVariable Long id) {
+    public ResponseEntity<FlashCard> getFlashCard(@PathVariable Long projectId,
+                                                  @PathVariable Long collectionId,
+                                                  @PathVariable Long id) {
         return flashCardService.getFlashCard(collectionId, id)
-                .map(fc -> new ResponseEntity<>(flashCardModelAssembler.toModel(fc), HttpStatus.OK))
+                .map(fc -> new ResponseEntity<>(fc, HttpStatus.OK))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping()
-    public FlashCardModel addFlashCard(@PathVariable Long projectId,
+    public FlashCard addFlashCard(@PathVariable Long projectId,
                                        @PathVariable Long collectionId,
                                        @RequestBody FlashCard flashCard) {
-        return flashCardModelAssembler.toModel(flashCardService.addFlashCard(projectId, collectionId, flashCard));
+        return flashCardService.addFlashCard(projectId, collectionId, flashCard);
     }
 
     @PutMapping("/{id}")
-    public FlashCardModel updateFlashCard(@PathVariable Long projectId,
+    public FlashCard updateFlashCard(@PathVariable Long projectId,
                                           @PathVariable Long collectionId,
                                           @PathVariable Long id,
                                           @RequestBody FlashCard flashCard) {
-        return flashCardModelAssembler.toModel(flashCardService.updateFlashCard(projectId, collectionId, id, flashCard));
+        return flashCardService.updateFlashCard(projectId, collectionId, id, flashCard);
     }
 
     @DeleteMapping("/{id}")
     public void deleteFlashCard(@PathVariable Long id) {
         flashCardService.deleteFlashCard(id);
+    }
+
+    private String baseUri() {
+        return BasicLinkBuilder.linkToCurrentMapping().toString();
     }
 }

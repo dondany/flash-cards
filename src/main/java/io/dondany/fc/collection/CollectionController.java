@@ -1,7 +1,6 @@
 package io.dondany.fc.collection;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,17 +17,15 @@ import java.util.List;
 public class CollectionController {
 
     private final CollectionService collectionService;
-    private final CollectionModelAssembler collectionModelAssembler;
 
     @GetMapping()
-    public CollectionModel<CollectionDto> getCollections(@PathVariable Long projectId) {
-        List<CollectionDto> collections = collectionService.getAllCollectionsByProjectId(projectId);
-        return collectionModelAssembler.toCollectionModel(collections);
+    public List<CollectionDto> getCollections(@PathVariable Long projectId) {
+        return collectionService.getAllCollectionsByProjectId(projectId);
     }
 
     @GetMapping("/{id}")
     public CollectionDto getCollection(@PathVariable Long projectId, @PathVariable Long id) {
-        return collectionModelAssembler.toModel(collectionService.getOneById(projectId, id));
+        return collectionService.getOneById(projectId, id);
     }
 
     @PostMapping()

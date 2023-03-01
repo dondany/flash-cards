@@ -10,7 +10,6 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ProjectService {
     private final ProjectRepository projectRepository;
-    private final ProjectModelAssembler projectModelAssembler;
 
     public List<Project> getAllProjects() {
         return projectRepository.findAll();
@@ -20,9 +19,8 @@ public class ProjectService {
         return projectRepository.findById(id);
     }
 
-    public ProjectDto addProject(Project project) {
-        Project newProject = projectRepository.save(project);
-        return projectModelAssembler.toModel(newProject);
+    public Project addProject(Project project) {
+        return projectRepository.save(project);
     }
 
     public void deleteProject(Long id) {

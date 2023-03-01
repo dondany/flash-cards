@@ -13,7 +13,6 @@ import java.util.Optional;
 public class CollectionService {
     private final CollectionRepository collectionRepository;
     private final ProjectRepository projectRepository;
-    private final CollectionModelAssembler collectionModelAssembler;
 
     List<CollectionDto> getAllCollectionsByProjectId(Long projectId) {
         return collectionRepository.findAllCollectionsByProjectId(projectId);
@@ -32,13 +31,13 @@ public class CollectionService {
         collection.setProject(projectOptional.get());
 
         Collection newCollection = collectionRepository.save(collection);
-        return collectionModelAssembler.toModel(CollectionDto.builder()
+        return CollectionDto.builder()
                 .id(newCollection.getId())
                 .name(newCollection.getName())
                 .description(newCollection.getDescription())
                 .project(newCollection.getProject())
                 .numberOfFlashCards(0L)
-                .build());
+                .build();
     }
 
     public void deleteCollection(Long id) {
