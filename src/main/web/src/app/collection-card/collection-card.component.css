@@ -1,0 +1,41 @@
+.collection-card-container {
+  width: 320px;
+  height: 220px;
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 24px 24px 24px 24px;
+}
+
+.collection-card-container:hover {
+  box-shadow: 0 5px 24px 0 rgba(66, 68, 90, 0.2);
+  cursor: pointer;
+}
+
+.collection-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-top h2 {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.star {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: #635e70;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+}

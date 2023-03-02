@@ -23,7 +23,9 @@ export class FcCardComponent implements OnInit {
   }
 
   select() {
-    console.log('sleece')
+    if (this.isMenuOpened) {
+      return;
+    }
     this.isSelected = !this.isSelected;
     this.selectEvent.emit(this.card);
   }

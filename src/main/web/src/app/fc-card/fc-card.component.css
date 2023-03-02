@@ -6,12 +6,11 @@
   padding: 16px 16px 24px 16px;
 
   background-color: #fff;
-  border-radius: 14px;
+  border-radius: 1rem;
   transition: transform 300ms ease 0s;
 }
 
 .fc-card:hover {
-  /*transform: translateY(-3px);*/
   box-shadow: 0 5px 24px 0 rgba(66, 68, 90, 0.2);
   cursor: pointer;
 }

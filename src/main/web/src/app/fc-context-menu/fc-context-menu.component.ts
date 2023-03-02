@@ -20,17 +20,19 @@ export class FcContextMenuComponent implements OnInit {
   }
 
   edit($event: Event) {
+    $event.stopPropagation();
     this.editFlashCardEvent.emit(this.flashCard);
     this.close($event);
   }
 
   delete($event: Event) {
+    $event.stopPropagation();
     this.deleteFlashCardEvent.emit(this.flashCard);
     this.close($event);
   }
 
   close($event: Event) {
-    $event.stopPropagation();
+    // $event.stopPropagation();
     this.closeContextMenuEvent.emit();
   }
 }

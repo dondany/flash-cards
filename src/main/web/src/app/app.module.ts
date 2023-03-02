@@ -12,6 +12,9 @@ import {EditFcModalComponent} from './edit-fc-modal/edit-fc-modal.component';
 import {ClickOutsideDirective} from './click-outside.directive';
 import {FcListComponent} from './fc-list/fc-list.component';
 import {RouterModule} from "@angular/router";
+import { FcCollectionListComponent } from './fc-collection-list/fc-collection-list.component';
+import { CollectionCardComponent } from './collection-card/collection-card.component';
+import { ProjectListComponent } from './project-list/project-list.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import {RouterModule} from "@angular/router";
     NewFcModalComponent,
     EditFcModalComponent,
     ClickOutsideDirective,
-    FcListComponent
+    FcListComponent,
+    FcCollectionListComponent,
+    CollectionCardComponent,
+    ProjectListComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +36,8 @@ import {RouterModule} from "@angular/router";
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: FcListComponent },
+      { path: 'collection', component: FcCollectionListComponent },
+      { path: 'projects', component: ProjectListComponent }
     ])
   ],
   providers: [],
