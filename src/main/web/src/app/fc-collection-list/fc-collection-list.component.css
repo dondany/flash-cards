@@ -1,13 +1,19 @@
+:host(app-fc-collection-list) {
+  width: 100%;
+  height: 100%;
+}
+
 .collection-list-container {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   flex-grow: 1;
 }
 
 .collection-list {
   display: flex;
   gap:  2rem;
+  flex-wrap: wrap;
 }
 
 .top {
@@ -20,7 +26,7 @@
 }
 
 .title h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #3F3C48;
 }

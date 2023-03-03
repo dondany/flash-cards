@@ -15,6 +15,12 @@ import {RouterModule} from "@angular/router";
 import { FcCollectionListComponent } from './fc-collection-list/fc-collection-list.component';
 import { CollectionCardComponent } from './collection-card/collection-card.component';
 import { ProjectListComponent } from './project-list/project-list.component';
+import { CollectionViewComponent } from './collection-view/collection-view.component';
+import { CollectionContextMenuComponent } from './collection-context-menu/collection-context-menu.component';
+import { EditCollectionModalComponent } from './edit-collection-modal/edit-collection-modal.component';
+import { CollectionDetailsComponent } from './collection-details/collection-details.component';
+import { ProjectViewComponent } from './project-view/project-view.component';
+import { ProjectDetailsComponent } from './project-details/project-details.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +33,13 @@ import { ProjectListComponent } from './project-list/project-list.component';
     FcListComponent,
     FcCollectionListComponent,
     CollectionCardComponent,
-    ProjectListComponent
+    ProjectListComponent,
+    CollectionViewComponent,
+    CollectionContextMenuComponent,
+    EditCollectionModalComponent,
+    CollectionDetailsComponent,
+    ProjectViewComponent,
+    ProjectDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,8 +48,10 @@ import { ProjectListComponent } from './project-list/project-list.component';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: FcListComponent },
-      { path: 'collection', component: FcCollectionListComponent },
-      { path: 'projects', component: ProjectListComponent }
+      { path: 'collections', component: FcCollectionListComponent },
+      { path: 'projects', component: ProjectListComponent },
+      { path: 'collection', component: CollectionViewComponent },
+      { path: 'project', component: ProjectViewComponent }
     ])
   ],
   providers: [],

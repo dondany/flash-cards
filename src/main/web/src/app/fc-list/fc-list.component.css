@@ -11,15 +11,15 @@
 }
 
 .title span {
+  margin-left: 10px;
   font-size: 1rem;
 }
 
 .title h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #3F3C48;
 }
-
 
 .fc-list-body {
   display: flex;

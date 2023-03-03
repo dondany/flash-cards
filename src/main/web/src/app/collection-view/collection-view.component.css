@@ -1,0 +1,12 @@
+:host(app-collection-view) {
+  width: 100%;
+  height: 100%;
+}
+
+
+.collection-view-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

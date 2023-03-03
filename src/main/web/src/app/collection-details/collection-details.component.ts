@@ -2,11 +2,11 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Collection} from "../../collection";
 
 @Component({
-  selector: 'app-collection-card',
-  templateUrl: './collection-card.component.html',
-  styleUrls: ['./collection-card.component.css']
+  selector: 'app-collection-details',
+  templateUrl: './collection-details.component.html',
+  styleUrls: ['./collection-details.component.css']
 })
-export class CollectionCardComponent implements OnInit {
+export class CollectionDetailsComponent implements OnInit {
   @Input() collection!: Collection;
 
   @Output() editCollectionMenuEvent = new EventEmitter<Collection>();
@@ -17,6 +17,11 @@ export class CollectionCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  toggleMenu(e: Event) {
+    e.stopPropagation();
+    this.isMenuOpened = !this.isMenuOpened;
   }
 
   editCollection() {
@@ -30,4 +35,5 @@ export class CollectionCardComponent implements OnInit {
   closeContextMenu() {
     this.isMenuOpened = false;
   }
+
 }

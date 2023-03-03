@@ -12,4 +12,7 @@ export class FcCollectionListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openNewCollectionModal() {
+
+  }
 }
