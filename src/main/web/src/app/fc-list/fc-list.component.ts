@@ -4,6 +4,7 @@ import {Paging} from "../../paging";
 import {Link} from "../../link";
 import {FlashCardService} from "../../flash-card.service";
 import {PagingService} from "../paging.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-flash-card-list',
@@ -11,6 +12,8 @@ import {PagingService} from "../paging.service";
   styleUrls: ['./fc-list.component.css']
 })
 export class FcListComponent implements OnInit {
+
+
   flashCards!: FlashCard[] | null;
   paging!: Paging | undefined;
   nextLink!: Link | undefined;
@@ -19,21 +22,28 @@ export class FcListComponent implements OnInit {
   showEditFcModal: boolean = false;
   flashCardBeingEdited: FlashCard = {front: '', back: ''};
 
-  constructor(private flashCardService: FlashCardService, private pagingService: PagingService) { }
+  constructor(private flashCardService: FlashCardService,
+              private pagingService: PagingService,
+              private route: ActivatedRoute) { }
+
 
   ngOnInit(): void {
     this.init();
   }
 
   private init() {
-    this.flashCardService.getFlashCards(0,  20)
-      .subscribe(response => {
-        if (response) {
-          this.flashCards = response.body;
-          this.paging = this.pagingService.extractPaging(response);
-          this.nextLink = this.paging?.next;
-        }
-      });
+    this.route.params.subscribe(params => {
+      const projectId = params['projectId'];
+      const collectionId = params['collectionId']
+      this.flashCardService.getFlashCards(projectId, collectionId,0, 20)
+        .subscribe(response => {
+          if (response) {
+            this.flashCards = response.body;
+            this.paging = this.pagingService.extractPaging(response);
+            this.nextLink = this.paging?.next;
+          }
+        })
+    });
   }
 
   selectCard(flashcard: FlashCard) {

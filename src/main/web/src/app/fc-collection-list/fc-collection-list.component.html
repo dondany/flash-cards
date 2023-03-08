@@ -8,10 +8,6 @@
     </div>
   </div>
   <div class="collection-list">
-    <app-collection-card></app-collection-card>
-    <app-collection-card></app-collection-card>
-    <app-collection-card></app-collection-card>
-    <app-collection-card></app-collection-card>
-    <app-collection-card></app-collection-card>
+    <app-collection-card *ngFor="let collection of collections" [project]="project" [collection]="collection"></app-collection-card>
   </div>
 </div>

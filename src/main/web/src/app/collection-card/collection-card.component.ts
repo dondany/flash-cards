@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Collection} from "../../collection";
+import {Project} from "../project";
 
 @Component({
   selector: 'app-collection-card',
@@ -8,6 +9,7 @@ import {Collection} from "../../collection";
 })
 export class CollectionCardComponent implements OnInit {
   @Input() collection!: Collection;
+  @Input() project!: Project;
 
   @Output() editCollectionMenuEvent = new EventEmitter<Collection>();
   @Output() deleteCollectionMenuEvent = new EventEmitter<Collection>();

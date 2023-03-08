@@ -1,12 +1,12 @@
 <div class="collection-card-container">
-  <div class="collection-card">
+  <div class="collection-card" [routerLink]="['/projects/', project.id, 'collections', collection.id]">
     <div class="card-top">
       <div>
-        <h2>Italian verbs</h2>
+        <h2> {{ collection.name }}</h2>
       </div>
     </div>
     <div class="card-body">
-      <h1>The most commonly used italian verbs.</h1>
+      <h1>{{ collection.description }}</h1>
     </div>
     <div class="card-bottom">
     </div>

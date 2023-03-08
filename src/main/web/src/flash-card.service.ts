@@ -12,13 +12,13 @@ export class FlashCardService {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl: string = 'http://localhost:8080/projects/1/collections/2/flash-cards';
+  baseUrl: string = `http://localhost:8080/projects/1/collections/2/flash-cards`;
 
-  getFlashCards(page: number, size: number) {
+  getFlashCards(projectId: number, collectionId: number, page: number, size: number) {
     let params = new HttpParams();
     params = params.append('page', page);
     params = params.append('size', size);
-    return this.http.get<FlashCard[]>(this.baseUrl, { params: params, observe: 'response' });
+    return this.http.get<FlashCard[]>(`http://localhost:8080/projects/${projectId}/collections/${collectionId}/flash-cards`, { params: params, observe: 'response' });
   }
 
   getFlashCardsByLink(link: Link) {

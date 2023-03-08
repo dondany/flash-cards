@@ -7,7 +7,7 @@ import {Collection} from "../../collection";
   styleUrls: ['./collection-details.component.css']
 })
 export class CollectionDetailsComponent implements OnInit {
-  @Input() collection!: Collection;
+  @Input() collection!: Collection | undefined;
 
   @Output() editCollectionMenuEvent = new EventEmitter<Collection>();
   @Output() deleteCollectionMenuEvent = new EventEmitter<Collection>();

@@ -21,6 +21,8 @@ import { EditCollectionModalComponent } from './edit-collection-modal/edit-colle
 import { CollectionDetailsComponent } from './collection-details/collection-details.component';
 import { ProjectViewComponent } from './project-view/project-view.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
+import { ProjectCardComponent } from './project-card/project-card.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { ProjectDetailsComponent } from './project-details/project-details.compo
     EditCollectionModalComponent,
     CollectionDetailsComponent,
     ProjectViewComponent,
-    ProjectDetailsComponent
+    ProjectDetailsComponent,
+    ProjectCardComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +55,9 @@ import { ProjectDetailsComponent } from './project-details/project-details.compo
       { path: 'collections', component: FcCollectionListComponent },
       { path: 'projects', component: ProjectListComponent },
       { path: 'collection', component: CollectionViewComponent },
-      { path: 'project', component: ProjectViewComponent }
+      { path: 'project', component: ProjectViewComponent },
+      { path: 'projects/:id', component: ProjectViewComponent},
+      { path: 'projects/:projectId/collections/:collectionId', component: CollectionViewComponent}
     ])
   ],
   providers: [],
