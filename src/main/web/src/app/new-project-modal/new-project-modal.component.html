@@ -1,0 +1,21 @@
+<div class="modal" [ngStyle]="{display: show ? 'block' : 'none'}">
+  <div class="overlay" (click)="close()">
+  </div>
+  <div class="modal-content">
+    <header>
+      <h2>New Project</h2>
+    </header>
+    <section>
+      <form [formGroup]="form" class="project-form" (ngSubmit)="onSubmit($event)">
+        <label for="name">Name</label>
+        <input formControlName="name" type="text" id="name">
+        <label for="description">Description</label>
+        <input formControlName="description" type="text" id="description">
+        <div class="bottom">
+          <button type="button" class="btn btn-red" (click)="close()">Cancel</button>
+          <button type="submit" class="btn btn-green" name="add">Add</button>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>

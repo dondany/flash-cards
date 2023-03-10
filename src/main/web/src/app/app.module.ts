@@ -23,6 +23,11 @@ import { ProjectViewComponent } from './project-view/project-view.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { ProjectCardComponent } from './project-card/project-card.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { NewProjectModalComponent } from './new-project-modal/new-project-modal.component';
+import { NewProjectViewComponent } from './new-project-view/new-project-view.component';
+import { NewCollectionViewComponent } from './new-collection-view/new-collection-view.component';
+import { ProjectSettingsViewComponent } from './project-settings-view/project-settings-view.component';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +48,12 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     ProjectViewComponent,
     ProjectDetailsComponent,
     ProjectCardComponent,
-    SidebarComponent
+    SidebarComponent,
+    NewProjectModalComponent,
+    NewProjectViewComponent,
+    NewCollectionViewComponent,
+    ProjectSettingsViewComponent,
+    ConfirmModalComponent
   ],
   imports: [
     BrowserModule,
@@ -53,11 +63,14 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     RouterModule.forRoot([
       { path: '', component: FcListComponent },
       { path: 'collections', component: FcCollectionListComponent },
+      { path: 'projects/new', component: NewProjectViewComponent},
       { path: 'projects', component: ProjectListComponent },
       { path: 'collection', component: CollectionViewComponent },
       { path: 'project', component: ProjectViewComponent },
       { path: 'projects/:id', component: ProjectViewComponent},
-      { path: 'projects/:projectId/collections/:collectionId', component: CollectionViewComponent}
+      { path: 'projects/:id/settings', component: ProjectSettingsViewComponent},
+      { path: 'projects/:projectId/collections/new', component: NewCollectionViewComponent},
+      { path: 'projects/:projectId/collections/:collectionId', component: CollectionViewComponent},
     ])
   ],
   providers: [],

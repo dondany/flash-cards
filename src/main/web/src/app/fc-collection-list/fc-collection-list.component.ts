@@ -26,8 +26,4 @@ export class FcCollectionListComponent implements OnInit, OnChanges {
         })
     }
   }
-
-  openNewCollectionModal() {
-
-  }
 }

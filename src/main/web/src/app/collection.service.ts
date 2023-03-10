@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Collection} from "./collection";
+import {Project} from "./project";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +25,9 @@ export class CollectionService {
       return;
     }
     return this.http.get<Collection>(`${this.baseUrl}/${projectId}/collections/${collectionId}`);
+  }
+
+  addCollection(projectId:number, collection: Collection):  Observable<Collection> {
+    return this.http.post<Collection>(`${this.baseUrl}/${projectId}/collections`, collection, {});
   }
 }

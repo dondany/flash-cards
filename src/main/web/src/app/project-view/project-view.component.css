@@ -16,30 +16,3 @@
   flex-direction: column;
   gap: 2rem;
 }
-
-.breadcrumb {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.breadcrumb svg {
-  width: 1rem;
-  height: 1rem;
-  opacity: 0.6;
-}
-
-.breadcrumb span {
-  font-size: 1.1rem;
-  opacity: 0.6;
-}
-
-.breadcrumb span:hover {
-  cursor: pointer;
-  opacity: 1;
-}
-
-.breadcrumb span:last-child {
-  font-weight: 500;
-  opacity: .9;
-}

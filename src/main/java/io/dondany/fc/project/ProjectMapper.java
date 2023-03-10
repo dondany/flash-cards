@@ -12,7 +12,7 @@ public class ProjectMapper implements Function<Project, ProjectDto> {
         return ProjectDto.builder()
                 .id(project.getId())
                 .name(project.getName())
-                .description(project.getName())
+                .description(project.getDescription())
                 .build();
     }
 }

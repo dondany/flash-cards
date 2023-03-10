@@ -16,8 +16,9 @@ body {
 }
 
 .btn {
-  padding: 8px 10px;
-  border-radius: 6px;
+  width: fit-content;
+  padding: .6rem 1rem;
+  border-radius: 2rem;
   border: none;
   color: #fff;
   font-weight: 500;
@@ -25,19 +26,46 @@ body {
 
 .btn-green {
   background-color: #86B97F;
+  transition: all 100ms ease-in-out 0s;
+}
+
+.btn-green:hover {
+  background-color: #5d795a;
 }
 
 .btn-clear {
   background-color: transparent;
+  color: #3F3C48;
+  border: 1px solid transparent;
+  transition: all 100ms ease-in-out 0s;
+}
+
+.btn-clear:hover {
+  border: 1px solid #3F3C48;
 }
 
 .btn-red {
   background-color: #d26767;
 }
 
+.btn-red:hover {
+  background-color: #9b5353;
+}
+
+.btn-red-border {
+  background-color: transparent;
+  border: 1px solid #d26767;
+  color: #d26767;
+}
+
+.btn-red-border:hover {
+  background-color: #d26767;
+  border: 1px solid #fff;
+  color: #fff;
+}
+
 .btn:hover {
   cursor: pointer;
-  opacity: 0.9;
 }
 
 .btn-border-dark {
@@ -56,4 +84,32 @@ body {
 .btn svg {
   width: 1rem;
   height: 1rem;
+}
+
+
+.breadcrumb {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.breadcrumb svg {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.6;
+}
+
+.breadcrumb span {
+  font-size: 1.1rem;
+  opacity: 0.6;
+}
+
+.breadcrumb span:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+.breadcrumb span:last-child {
+  font-weight: 500;
+  opacity: .9;
 }

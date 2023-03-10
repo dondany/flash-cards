@@ -9,7 +9,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./project-view.component.css']
 })
 export class ProjectViewComponent implements OnInit {
-  project!: Project;
+  project: Project = {name:'', description: ''};
 
   constructor(private projectService: ProjectService, private route: ActivatedRoute) { }
 

@@ -5,17 +5,14 @@
 }
 
 .project-card {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 24px 24px 24px 24px;
-}
-
-.project-card {
   width: 420px;
   height: 160px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 24px 24px 24px 24px;
 }
 
 .project-card:hover {

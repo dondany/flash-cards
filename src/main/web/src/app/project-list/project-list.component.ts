@@ -17,5 +17,4 @@ export class ProjectListComponent implements OnInit {
       this.projects = response;
     })
   }
-
 }

@@ -4,7 +4,7 @@
       <h2>Collections</h2>
     </div>
     <div class="list-nav">
-      <button class="btn btn-green" (click)="openNewCollectionModal()">+ Add new</button>
+      <button class="btn btn-green" [routerLink]="['/projects', project.id, 'collections', 'new']">+ Add new</button>
     </div>
   </div>
   <div class="collection-list">
