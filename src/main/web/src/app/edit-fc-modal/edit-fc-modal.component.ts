@@ -41,7 +41,7 @@ export class EditFcModalComponent implements OnInit {
   onSubmit() {
     if (this.inputFlashCard.front !== this.form.value.front || this.inputFlashCard.back !== this.form.value.back) {
       const fc: FlashCard = {id: this.inputFlashCard.id, front: this.form.value.front, back: this.form.value.back};
-      this.flashCardService.updateFlashCard(fc).subscribe(fc => this.editFlashCard.emit(fc));
+      this.editFlashCard.emit(fc);
     }
     this.close();
   }

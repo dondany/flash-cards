@@ -12,13 +12,13 @@ export class FlashCardService {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl: string = `http://localhost:8080/projects/1/collections/2/flash-cards`;
+  baseUrl: string = `http://localhost:8080/projects`;
 
   getFlashCards(projectId: number, collectionId: number, page: number, size: number) {
     let params = new HttpParams();
     params = params.append('page', page);
     params = params.append('size', size);
-    return this.http.get<FlashCard[]>(`http://localhost:8080/projects/${projectId}/collections/${collectionId}/flash-cards`, { params: params, observe: 'response' });
+    return this.http.get<FlashCard[]>(`${this.baseUrl}/${projectId}/collections/${collectionId}/flash-cards`, { params: params, observe: 'response' });
   }
 
   getFlashCardsByLink(link: Link) {
@@ -26,16 +26,16 @@ export class FlashCardService {
     return this.http.get<FlashCard[]>(link.href, {observe: 'response'});
   }
 
-  addNewFlashCard(flashCard: FlashCard): Observable<FlashCard> {
-    return this.http.post<FlashCard>(this.baseUrl, flashCard, {});
+  addNewFlashCard(flashCard: FlashCard, projectId: number | undefined, collectionId: number | undefined): Observable<FlashCard> {
+    return this.http.post<FlashCard>(`${this.baseUrl}/${projectId}/collections/${collectionId}/flash-cards`, flashCard, {});
   }
 
-  updateFlashCard(flashCard: FlashCard): Observable<FlashCard> {
-    return this.http.put<FlashCard>(this.baseUrl + `/${flashCard.id}`, flashCard, {});
+  updateFlashCard(flashCard: FlashCard, projectId: number | undefined, collectionId: number | undefined): Observable<FlashCard> {
+    return this.http.put<FlashCard>(`${this.baseUrl}/${projectId}/collections/${collectionId}/flash-cards/${flashCard.id}`, flashCard, {});
   }
 
-  deleteFlashCard(id: number | undefined): Observable<any>{
-    return this.http.delete(this.baseUrl + `/${id}`, {});
+  deleteFlashCard(id: number | undefined, projectId: number | undefined, collectionId: number | undefined): Observable<any>{
+    return this.http.delete(`${this.baseUrl}/${projectId}/collections/${collectionId}/flash-cards/${id}`, {});
   }
 
 }

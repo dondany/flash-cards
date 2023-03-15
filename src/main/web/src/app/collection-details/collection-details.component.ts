@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Collection} from "../../collection";
+import {Router} from "@angular/router";
+import {Project} from "../project";
 
 @Component({
   selector: 'app-collection-details',
@@ -8,15 +10,21 @@ import {Collection} from "../../collection";
 })
 export class CollectionDetailsComponent implements OnInit {
   @Input() collection!: Collection | undefined;
+  @Input() project!: Project | undefined;
 
   @Output() editCollectionMenuEvent = new EventEmitter<Collection>();
   @Output() deleteCollectionMenuEvent = new EventEmitter<Collection>();
 
   isMenuOpened: boolean = false;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+
+  }
+
+  url() {
+    return this.router.url;
   }
 
   toggleMenu(e: Event) {

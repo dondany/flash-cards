@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {FlashCardService} from "../../flash-card.service";
 import {FlashCard} from "../../flash-card";
+import {Project} from "../project";
+import {Collection} from "../collection";
 
 @Component({
   selector: 'app-new-fc-modal',
@@ -15,11 +16,14 @@ export class NewFcModalComponent implements OnInit {
   @Output() newFlashCardEvent = new EventEmitter<FlashCard>();
   @Output() nextFlashCardEvent = new EventEmitter<FlashCard>();
 
+  project: Project | undefined;
+  collection: Collection | undefined;
+
   form: FormGroup;
 
   isFlipped = false;
 
-  constructor(private fb: FormBuilder, private flashCardService: FlashCardService) {
+  constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       front: [''],
       back: ['']
@@ -33,11 +37,11 @@ export class NewFcModalComponent implements OnInit {
     if (event.submitter.name == 'add') {
       if (this.form.value.front && this.form.value.back) {
         const fc: FlashCard = {front: this.form.value.front, back: this.form.value.back};
-        this.flashCardService.addNewFlashCard(fc).subscribe(fc => this.newFlashCardEvent.emit(fc));
+        this.newFlashCardEvent.emit(fc);
       }
     } else {
       const fc: FlashCard = {front: this.form.value.front, back: this.form.value.back};
-      this.flashCardService.addNewFlashCard(fc).subscribe(fc => this.nextFlashCardEvent.emit(fc));
+       this.nextFlashCardEvent.emit(fc);
     }
     this.form.reset();
   }

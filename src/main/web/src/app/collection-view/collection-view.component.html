@@ -15,7 +15,7 @@
     <span routerLink="/projects/{{project?.id}}/collections/{{collection?.id}}">{{ collection?.name }}</span>
   </div>
   <div class="collection-view-body">
-    <app-collection-details [collection]="collection"></app-collection-details>
+    <app-collection-details [collection]="collection" [project]="project"></app-collection-details>
     <app-flash-card-list></app-flash-card-list>
   </div>
 </div>

@@ -23,8 +23,8 @@
     <button  class="btn" (click)="loadMore()">Load More</button>
   </div>
   <app-new-fc-modal
-    (newFlashCardEvent)="addNewFlashCard()"
-    (nextFlashCardEvent)="addNextFlashCard()"
+    (newFlashCardEvent)="addNewFlashCard($event)"
+    (nextFlashCardEvent)="addNextFlashCard($event)"
     [show]="showNewFcModal"
     [closeCallback]="closeNewFcModal">
   </app-new-fc-modal>

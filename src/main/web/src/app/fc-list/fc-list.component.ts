@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FlashCard} from "../../flash-card";
 import {Paging} from "../../paging";
 import {Link} from "../../link";
 import {FlashCardService} from "../../flash-card.service";
 import {PagingService} from "../paging.service";
 import {ActivatedRoute} from "@angular/router";
+import {Project} from "../project";
+import {Collection} from "../collection";
 
 @Component({
   selector: 'app-flash-card-list',
@@ -12,8 +14,6 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./fc-list.component.css']
 })
 export class FcListComponent implements OnInit {
-
-
   flashCards!: FlashCard[] | null;
   paging!: Paging | undefined;
   nextLink!: Link | undefined;
@@ -22,9 +22,13 @@ export class FcListComponent implements OnInit {
   showEditFcModal: boolean = false;
   flashCardBeingEdited: FlashCard = {front: '', back: ''};
 
+  projectId: number | undefined;
+  collectionId: number | undefined;
+
   constructor(private flashCardService: FlashCardService,
               private pagingService: PagingService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+  }
 
 
   ngOnInit(): void {
@@ -35,7 +39,9 @@ export class FcListComponent implements OnInit {
     this.route.params.subscribe(params => {
       const projectId = params['projectId'];
       const collectionId = params['collectionId']
-      this.flashCardService.getFlashCards(projectId, collectionId,0, 20)
+      this.projectId = +projectId;
+      this.collectionId = +collectionId;
+      this.flashCardService.getFlashCards(projectId, collectionId, 0, 20)
         .subscribe(response => {
           if (response) {
             this.flashCards = response.body;
@@ -55,7 +61,7 @@ export class FcListComponent implements OnInit {
   }
 
   deleteSelected() {
-    this.selectedCards.forEach(fc => this.flashCardService.deleteFlashCard(fc.id).subscribe(() => this.init()));
+    this.selectedCards.forEach(fc => this.flashCardService.deleteFlashCard(fc.id, this.projectId, this.collectionId).subscribe(() => this.init()));
     this.selectedCards = [];
   }
 
@@ -76,20 +82,27 @@ export class FcListComponent implements OnInit {
     return this.showEditFcModal = false;
   }
 
-  addNewFlashCard() {
-    this.showNewFcModal = false;
+  addNewFlashCard($event: FlashCard) {
+    this.flashCardService.addNewFlashCard($event, this.projectId, this.collectionId)
+      .subscribe(res => {
+        this.showNewFcModal = false;
+        this.init();
+      });
   }
 
-  addNextFlashCard() {
+  addNextFlashCard($event: FlashCard) {
+    this.flashCardService.addNewFlashCard($event, this.projectId, this.collectionId);
   }
 
   editFlashCard($event: FlashCard) {
-    this.flashCardService.updateFlashCard($event);
-    this.init();
+    this.flashCardService.updateFlashCard($event, this.projectId, this.collectionId)
+      .subscribe(res => {
+        this.init();
+      })
   }
 
   deleteFlashCard($event: FlashCard) {
-    this.flashCardService.deleteFlashCard($event.id).subscribe(() => this.init());
+    this.flashCardService.deleteFlashCard($event.id, this.projectId, this.collectionId).subscribe(() => this.init());
   }
 
   loadMore() {

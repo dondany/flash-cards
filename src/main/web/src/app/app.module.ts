@@ -28,6 +28,7 @@ import { NewProjectViewComponent } from './new-project-view/new-project-view.com
 import { NewCollectionViewComponent } from './new-collection-view/new-collection-view.component';
 import { ProjectSettingsViewComponent } from './project-settings-view/project-settings-view.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { CollectionSettingsViewComponent } from './collection-settings-view/collection-settings-view.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
     NewProjectViewComponent,
     NewCollectionViewComponent,
     ProjectSettingsViewComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    CollectionSettingsViewComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +73,7 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
       { path: 'projects/:id/settings', component: ProjectSettingsViewComponent},
       { path: 'projects/:projectId/collections/new', component: NewCollectionViewComponent},
       { path: 'projects/:projectId/collections/:collectionId', component: CollectionViewComponent},
+      { path: 'projects/:projectId/collections/:collectionId/settings', component: CollectionSettingsViewComponent},
     ])
   ],
   providers: [],
