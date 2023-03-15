@@ -31,4 +31,8 @@ export class ProjectService {
   deleteProject(projectId: number | undefined): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${projectId}`, {});
   }
+
+  updateProject(project: Project, id: number | undefined): Observable<Project> {
+    return this.http.patch<Project>(`${this.baseUrl}/${id}`, project,{});
+  }
 }

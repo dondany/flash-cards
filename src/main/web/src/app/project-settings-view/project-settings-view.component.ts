@@ -42,12 +42,15 @@ export class ProjectSettingsViewComponent implements OnInit {
   }
 
   onSubmit() {
-
+    let updateProject = ({ name: this.form.value.name, description: this.form.value.description });
+    this.projectService.updateProject(updateProject, this.project?.id).subscribe(res => {
+      this.project = res;
+      this._router.navigate(['/projects']);
+    })
   }
 
   deleteProject = () => {
     this.projectService.deleteProject(this.project?.id).subscribe(res => {
-      console.log(res);
       this._router.navigate(['/projects']);
       return true;
     })
