@@ -2,6 +2,7 @@ package io.dondany.fc.project;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,5 +26,18 @@ public class ProjectService {
 
     public void deleteProject(Long id) {
         projectRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Project updateProjectGeneralInfo(ProjectUpdateDto updateDto, Long id) {
+        Optional<Project> existing = projectRepository.findById(id);
+        if (existing.isEmpty()) {
+            throw new IllegalArgumentException("Can't find updateDto with id  " + id);
+        }
+
+        Project toUpdate = existing.get();
+        toUpdate.setName(updateDto.getName());
+        toUpdate.setDescription(updateDto.getDescription());
+        return toUpdate;
     }
 }
