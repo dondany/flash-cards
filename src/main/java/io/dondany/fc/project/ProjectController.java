@@ -1,5 +1,6 @@
 package io.dondany.fc.project;
 
+import io.dondany.fc.collection.Collection;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -45,7 +47,6 @@ public class ProjectController {
     @PatchMapping("/{id}")
     public ProjectDto updateProject(@RequestBody ProjectUpdateDto project,
                                     @PathVariable("id") Long id) {
-
         return projectMapper.apply(projectService.updateProjectGeneralInfo(project, id));
     }
 

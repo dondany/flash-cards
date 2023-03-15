@@ -2,6 +2,7 @@ package io.dondany.fc.flashcard;
 
 import io.dondany.fc.PagedResponseEntity;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -60,18 +61,20 @@ public class FlashCardController {
     }
 
     @PostMapping()
-    public FlashCard addFlashCard(@PathVariable Long projectId,
-                                       @PathVariable Long collectionId,
-                                       @RequestBody FlashCard flashCard) {
-        return flashCardService.addFlashCard(projectId, collectionId, flashCard);
+    public ResponseEntity<FlashCardModel> addFlashCard(@PathVariable Long projectId,
+                                                @PathVariable Long collectionId,
+                                                @RequestBody FlashCard flashCard) {
+        FlashCard created = flashCardService.addFlashCard(projectId, collectionId, flashCard);
+        return ResponseEntity.ok(flashCardMapper.apply(created));
     }
 
     @PutMapping("/{id}")
-    public FlashCard updateFlashCard(@PathVariable Long projectId,
-                                          @PathVariable Long collectionId,
-                                          @PathVariable Long id,
-                                          @RequestBody FlashCard flashCard) {
-        return flashCardService.updateFlashCard(projectId, collectionId, id, flashCard);
+    public ResponseEntity<FlashCardModel> updateFlashCard(@PathVariable Long projectId,
+                                                          @PathVariable Long collectionId,
+                                                          @PathVariable Long id,
+                                                          @RequestBody FlashCard flashCard) {
+        FlashCard updated = flashCardService.updateFlashCard(projectId, collectionId, id, flashCard);
+        return ResponseEntity.ok(flashCardMapper.apply(updated));
     }
 
     @DeleteMapping("/{id}")

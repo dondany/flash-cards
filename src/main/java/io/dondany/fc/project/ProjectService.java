@@ -32,7 +32,7 @@ public class ProjectService {
     public Project updateProjectGeneralInfo(ProjectUpdateDto updateDto, Long id) {
         Optional<Project> existing = projectRepository.findById(id);
         if (existing.isEmpty()) {
-            throw new IllegalArgumentException("Can't find updateDto with id  " + id);
+            throw new IllegalArgumentException("Can't find project with id  " + id);
         }
 
         Project toUpdate = existing.get();

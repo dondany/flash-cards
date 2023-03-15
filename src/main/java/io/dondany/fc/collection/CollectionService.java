@@ -2,8 +2,10 @@ package io.dondany.fc.collection;
 
 import io.dondany.fc.project.Project;
 import io.dondany.fc.project.ProjectRepository;
+import io.dondany.fc.project.ProjectUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -42,5 +44,25 @@ public class CollectionService {
 
     public void deleteCollection(Long id) {
         collectionRepository.deleteById(id);
+    }
+
+    @Transactional
+    public CollectionDto updateCollection(CollectionUpdateDto updateDto, Long projectId, Long id) {
+        Optional<Collection> existing = collectionRepository.findById(id);
+        if (existing.isEmpty()) {
+            throw new IllegalArgumentException("Can't find collection with id " + id);
+        }
+
+        Collection toUpdate = existing.get();
+        toUpdate.setName(updateDto.getName());
+        toUpdate.setDescription(updateDto.getDescription());
+
+        return CollectionDto.builder()
+                .id(toUpdate.getId())
+                .name(toUpdate.getName())
+                .description(toUpdate.getDescription())
+                .project(toUpdate.getProject())
+                .numberOfFlashCards(0L)
+                .build();
     }
 }

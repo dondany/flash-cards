@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -40,6 +41,7 @@ public class FlashCardService {
         return flashCardRepository.save(flashCard);
     }
 
+    @Transactional
     public FlashCard updateFlashCard(Long projectId, Long collectionId, Long id, FlashCard flashCard) {
         FlashCard fc = flashCardRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("FlashCard with id " + id + " not found"));
@@ -47,7 +49,7 @@ public class FlashCardService {
         fc.setFront(flashCard.getFront());
         fc.setBack(flashCard.getBack());
 
-        return flashCardRepository.save(fc);
+        return fc;
     }
 
     public void deleteFlashCard(Long id) {
