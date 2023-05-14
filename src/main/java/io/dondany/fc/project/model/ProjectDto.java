@@ -1,4 +1,4 @@
-package io.dondany.fc.project;
+package io.dondany.fc.project.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

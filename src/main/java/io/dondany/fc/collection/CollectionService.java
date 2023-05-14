@@ -2,7 +2,6 @@ package io.dondany.fc.collection;
 
 import io.dondany.fc.project.Project;
 import io.dondany.fc.project.ProjectRepository;
-import io.dondany.fc.project.ProjectUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

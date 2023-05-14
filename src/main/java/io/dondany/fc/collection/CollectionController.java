@@ -1,7 +1,5 @@
 package io.dondany.fc.collection;
 
-import io.dondany.fc.project.ProjectDto;
-import io.dondany.fc.project.ProjectUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

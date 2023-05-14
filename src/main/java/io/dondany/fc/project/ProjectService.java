@@ -29,15 +29,15 @@ public class ProjectService {
     }
 
     @Transactional
-    public Project updateProjectGeneralInfo(ProjectUpdateDto updateDto, Long id) {
+    public Project updateProjectGeneralInfo(Project project, Long id) {
         Optional<Project> existing = projectRepository.findById(id);
         if (existing.isEmpty()) {
             throw new IllegalArgumentException("Can't find project with id  " + id);
         }
 
         Project toUpdate = existing.get();
-        toUpdate.setName(updateDto.getName());
-        toUpdate.setDescription(updateDto.getDescription());
+        toUpdate.setName(project.getName());
+        toUpdate.setDescription(project.getDescription());
         return toUpdate;
     }
 }

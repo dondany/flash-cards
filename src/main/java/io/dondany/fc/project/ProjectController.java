@@ -1,6 +1,9 @@
 package io.dondany.fc.project;
 
-import io.dondany.fc.collection.Collection;
+import io.dondany.fc.project.model.CreateProjectDto;
+import io.dondany.fc.project.model.ProjectDto;
+import io.dondany.fc.project.model.ProjectMapper;
+import io.dondany.fc.project.model.UpdateProjectDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -22,32 +24,33 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProjectController {
     private final ProjectService projectService;
-    private final ProjectMapper projectMapper;
 
     @GetMapping
     public List<ProjectDto> getProjects() {
         return projectService.getAllProjects()
                 .stream()
-                .map(projectMapper)
+                .map(ProjectMapper.INSTANCE::mapProjectToProjectDto)
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public ProjectDto getProject(@PathVariable Long id) {
         return projectService.getProject(id)
-                .map(projectMapper)
+                .map(ProjectMapper.INSTANCE::mapProjectToProjectDto)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping()
-    public ProjectDto addProject(@RequestBody Project project) {
-        return projectMapper.apply(projectService.addProject(project));
+    public ProjectDto addProject(@RequestBody CreateProjectDto createProjectDto) {
+        Project project = ProjectMapper.INSTANCE.mapCreateProjectDtoToProject(createProjectDto);
+        return ProjectMapper.INSTANCE.mapProjectToProjectDto(projectService.addProject(project));
     }
 
     @PatchMapping("/{id}")
-    public ProjectDto updateProject(@RequestBody ProjectUpdateDto project,
+    public ProjectDto updateProject(@RequestBody UpdateProjectDto updateProjectDto,
                                     @PathVariable("id") Long id) {
-        return projectMapper.apply(projectService.updateProjectGeneralInfo(project, id));
+        Project project = ProjectMapper.INSTANCE.mapUpdateProjectDtoToProject(updateProjectDto);
+        return ProjectMapper.INSTANCE.mapProjectToProjectDto(projectService.updateProjectGeneralInfo(project, id));
     }
 
     @DeleteMapping("/{id}")
