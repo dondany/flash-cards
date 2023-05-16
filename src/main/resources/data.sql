@@ -1,7 +1,11 @@
+---------- USERS ------------
+
 --harry.potter@hgwrts.com/pass
 INSERT INTO "_user"
 (id, email, firstname, lastname, "password", "role")
 VALUES(1, 'harry.potter@hgwrts.com', 'harry', 'potter', '$2a$10$P6G7ztCfBQ.zN0f4SQuSLexql1DicStxH2gb/MeyX7dEVmtmbTEaO', 'USER');
+
+SELECT setval('_user_seq', (SELECT max(id) FROM _user));
 
 ---------- PROJECTS ------------
 INSERT INTO public.project (id,description,"name",user_id) VALUES
@@ -9,7 +13,7 @@ INSERT INTO public.project (id,description,"name",user_id) VALUES
                                                                (2,'Mastering javascript','JavaScript',1),
                                                                (3,'Mastering Java','Java',1),
                                                                (4,'Mastering GO','Go',1);
-
+SELECT setval('project_seq', (SELECT max(id) FROM project));
 
 ---------- Collections ------------
 INSERT INTO public.collection (id,description,"name",project_id) VALUES
@@ -17,7 +21,7 @@ INSERT INTO public.collection (id,description,"name",project_id) VALUES
                                                                      (2,'Słówka z lekcji 2.','Lezione 2',1),
                                                                      (3,'Słówka z lekcji 3.','Lezione 3',1),
                                                                      (4,'Czasowniki','I verbi',1);
-
+SELECT setval('collection_seq', (SELECT max(id) FROM collection));
 
 ---------- Flashcards ------------
 INSERT INTO public.flash_card (id,back,front,collection_id) VALUES
@@ -42,3 +46,4 @@ INSERT INTO public.flash_card (id,back,front,collection_id) VALUES
                                                                 (18,'comprare','kupować',2),
                                                                 (19,'conoscere','znać',2),
                                                                 (20,'finire','kończyć',2);
+SELECT setval('flash_card_seq', (SELECT max(id) FROM flash_card));
