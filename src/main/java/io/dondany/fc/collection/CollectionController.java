@@ -1,6 +1,8 @@
 package io.dondany.fc.collection;
 
+import io.dondany.fc.user.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -13,39 +15,43 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/projects/{projectId}/collections")
+@RequestMapping("/api/v1/projects/{projectId}/collections")
 @RequiredArgsConstructor
 public class CollectionController {
 
     private final CollectionService collectionService;
 
     @GetMapping()
-    public List<CollectionDto> getCollections(@PathVariable Long projectId) {
-        return collectionService.getAllCollectionsByProjectId(projectId);
+    public List<CollectionDto> getCollections(@PathVariable Long projectId, @AuthenticationPrincipal User user) {
+        return collectionService.getAllCollectionsByProjectId(projectId, user);
     }
 
     @GetMapping("/{id}")
-    public CollectionDto getCollection(@PathVariable Long projectId, @PathVariable Long id) {
-        return collectionService.getOneById(projectId, id);
+    public CollectionDto getCollection(@PathVariable Long projectId,
+                                       @PathVariable Long id,
+                                       @AuthenticationPrincipal User user) {
+        return collectionService.getOneById(projectId, id, user);
     }
 
     @PostMapping()
     public CollectionDto addCollection(@PathVariable Long projectId,
-                                       @RequestBody Collection collection) {
-        return collectionService.addCollection(projectId, collection);
+                                       @RequestBody Collection collection,
+                                       @AuthenticationPrincipal User user) {
+        return collectionService.addCollection(projectId, collection, user);
     }
 
     @PatchMapping("/{id}")
     public CollectionDto updateProject(@RequestBody CollectionUpdateDto project,
-                                    @PathVariable Long projectId,
-                                    @PathVariable("id") Long id) {
-//        return collectionM.apply(projectService.updateProjectGeneralInfo(project, id));
-        return collectionService.updateCollection(project, projectId, id);
+                                       @PathVariable Long projectId,
+                                       @PathVariable("id") Long id,
+                                       @AuthenticationPrincipal User user) {
+        return collectionService.updateCollection(project, projectId, id, user);
     }
 
     @DeleteMapping("/{id}")
     public void deleteCollection(@PathVariable Long projectId,
-                                 @PathVariable Long id) {
-        collectionService.deleteCollection(id);
+                                 @PathVariable Long id,
+                                 @AuthenticationPrincipal User user) {
+        collectionService.deleteCollection(projectId, id, user);
     }
 }
