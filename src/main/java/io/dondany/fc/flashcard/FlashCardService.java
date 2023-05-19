@@ -2,9 +2,6 @@ package io.dondany.fc.flashcard;
 
 import io.dondany.fc.collection.Collection;
 import io.dondany.fc.collection.CollectionRepository;
-import io.dondany.fc.project.Project;
-import io.dondany.fc.project.ProjectRepository;
-import io.dondany.fc.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,37 +17,21 @@ import java.util.List;
 public class FlashCardService {
     private final FlashCardRepository flashCardRepository;
     private final CollectionRepository collectionRepository;
-    private final ProjectRepository projectRepository;
 
     public List<FlashCard> getAllByCollectionId(Long collectionId) {
         return flashCardRepository.findAllByCollectionId(collectionId);
     }
 
-    public Page<FlashCard> getAllFlashCards(Long projectId, Long id, Pageable pageable, User user) {
-        Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        if (!user.equals(project.getUser())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
-        }
-        return flashCardRepository.findByCollectionId(id, pageable);
+    public Page<FlashCard> getAllFlashCards(Long collectionId, Pageable pageable) {
+        return flashCardRepository.findByCollectionId(collectionId, pageable);
     }
 
-    public FlashCard getFlashCard(Long projectId, Long collectionId, Long flashCardId, User user) {
-        Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        if (!user.equals(project.getUser())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
-        }
+    public FlashCard getFlashCard(Long collectionId, Long flashCardId) {
         return flashCardRepository.findByIdAndCollectionId(flashCardId, collectionId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    public FlashCard addFlashCard(Long projectId, Long collectionId, FlashCard flashCard, User user) {
-        Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        if (!user.equals(project.getUser())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
-        }
+    public FlashCard addFlashCard(Long projectId, Long collectionId, FlashCard flashCard) {
         Collection collection = collectionRepository.findByIdAndProjectId(collectionId, projectId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         flashCard.setCollection(collection);
@@ -58,12 +39,7 @@ public class FlashCardService {
     }
 
     @Transactional
-    public FlashCard updateFlashCard(Long projectId, Long collectionId, Long id, FlashCard flashCard, User user) {
-        Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        if (!user.equals(project.getUser())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
-        }
+    public FlashCard updateFlashCard(Long id, FlashCard flashCard) {
         FlashCard fc = flashCardRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
@@ -72,12 +48,7 @@ public class FlashCardService {
         return fc;
     }
 
-    public void deleteFlashCard(Long projectId, Long id, User user) {
-        Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        if (!user.equals(project.getUser())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
-        }
+    public void deleteFlashCard(Long id) {
         flashCardRepository.deleteById(id);
     }
 

@@ -6,6 +6,7 @@ import io.dondany.fc.project.model.ProjectMapper;
 import io.dondany.fc.project.model.UpdateProjectDto;
 import io.dondany.fc.user.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,8 +34,9 @@ public class ProjectController {
     }
 
     @GetMapping("/{id}")
-    public ProjectDto getProject(@PathVariable Long id, @AuthenticationPrincipal User user) {
-        return ProjectMapper.INSTANCE.mapProjectToProjectDto(projectService.getProject(id, user));
+    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#id, authentication)")
+    public ProjectDto getProject(@PathVariable Long id) {
+        return ProjectMapper.INSTANCE.mapProjectToProjectDto(projectService.getProject(id));
     }
 
     @PostMapping()
@@ -44,6 +46,7 @@ public class ProjectController {
     }
 
     @PatchMapping("/{id}")
+    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#id, authentication)")
     public ProjectDto updateProject(@RequestBody UpdateProjectDto updateProjectDto,
                                     @PathVariable("id") Long id,
                                     @AuthenticationPrincipal User user) {
@@ -52,6 +55,7 @@ public class ProjectController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#id, authentication)")
     public void deleteProject(@PathVariable Long id, @AuthenticationPrincipal User user) {
         projectService.deleteProject(id, user);
     }

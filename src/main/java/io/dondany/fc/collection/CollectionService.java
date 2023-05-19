@@ -2,7 +2,6 @@ package io.dondany.fc.collection;
 
 import io.dondany.fc.project.Project;
 import io.dondany.fc.project.ProjectRepository;
-import io.dondany.fc.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,31 +16,17 @@ public class CollectionService {
     private final CollectionRepository collectionRepository;
     private final ProjectRepository projectRepository;
 
-    List<CollectionDto> getAllCollectionsByProjectId(Long projectId, User user) {
-        Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        if (!user.equals(project.getUser())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
-        }
+    List<CollectionDto> getAllCollectionsByProjectId(Long projectId) {
         return collectionRepository.findAllCollectionsByProjectId(projectId);
     }
 
-
-    public CollectionDto getOneById(Long projectId, Long id, User user) {
-        Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        if (!user.equals(project.getUser())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
-        }
+    public CollectionDto getOneById(Long projectId, Long id) {
         return collectionRepository.findOne(projectId, id);
     }
 
-    public CollectionDto addCollection(Long projectId, Collection collection, User user) {
+    public CollectionDto addCollection(Long projectId, Collection collection) {
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        if (!user.equals(project.getUser())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
-        }
         collection.setProject(project);
 
         Collection newCollection = collectionRepository.save(collection);
@@ -54,26 +39,13 @@ public class CollectionService {
                 .build();
     }
 
-    public void deleteCollection(Long projectId, Long id,  User user) {
-        Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        if (!user.equals(project.getUser())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
-        }
+    public void deleteCollection(Long id) {
         collectionRepository.deleteById(id);
     }
 
     @Transactional
     public CollectionDto updateCollection(CollectionUpdateDto updateDto,
-                                          Long projectId,
-                                          Long id,
-                                          User user) {
-        Project project = projectRepository.findById(projectId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        if (!user.equals(project.getUser())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
-        }
-
+                                          Long id) {
         Collection collection = collectionRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         collection.setName(updateDto.getName());

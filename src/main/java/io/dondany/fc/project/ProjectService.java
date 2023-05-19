@@ -19,13 +19,9 @@ public class ProjectService {
         return projectRepository.findByUser(user);
     }
 
-    public Project getProject(Long id, User user) {
-        Project project = projectRepository.findById(id)
+    public Project getProject(Long id) {
+        return projectRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        if (!user.equals(project.getUser())) {
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
-        }
-        return project;
     }
 
     public Project addProject(Project project, User user) {

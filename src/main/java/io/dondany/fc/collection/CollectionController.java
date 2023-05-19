@@ -1,8 +1,7 @@
 package io.dondany.fc.collection;
 
-import io.dondany.fc.user.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -22,36 +21,37 @@ public class CollectionController {
     private final CollectionService collectionService;
 
     @GetMapping()
-    public List<CollectionDto> getCollections(@PathVariable Long projectId, @AuthenticationPrincipal User user) {
-        return collectionService.getAllCollectionsByProjectId(projectId, user);
+    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#projectId, authentication)")
+    public List<CollectionDto> getCollections(@PathVariable Long projectId) {
+        return collectionService.getAllCollectionsByProjectId(projectId);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#projectId, authentication)")
     public CollectionDto getCollection(@PathVariable Long projectId,
-                                       @PathVariable Long id,
-                                       @AuthenticationPrincipal User user) {
-        return collectionService.getOneById(projectId, id, user);
+                                       @PathVariable Long id) {
+        return collectionService.getOneById(projectId, id);
     }
 
     @PostMapping()
+    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#projectId, authentication)")
     public CollectionDto addCollection(@PathVariable Long projectId,
-                                       @RequestBody Collection collection,
-                                       @AuthenticationPrincipal User user) {
-        return collectionService.addCollection(projectId, collection, user);
+                                       @RequestBody Collection collection) {
+        return collectionService.addCollection(projectId, collection);
     }
 
     @PatchMapping("/{id}")
-    public CollectionDto updateProject(@RequestBody CollectionUpdateDto project,
+    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#projectId, authentication)")
+    public CollectionDto updateProject(@RequestBody CollectionUpdateDto collectionUpdateDto,
                                        @PathVariable Long projectId,
-                                       @PathVariable("id") Long id,
-                                       @AuthenticationPrincipal User user) {
-        return collectionService.updateCollection(project, projectId, id, user);
+                                       @PathVariable("id") Long id) {
+        return collectionService.updateCollection(collectionUpdateDto, id);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#projectId, authentication)")
     public void deleteCollection(@PathVariable Long projectId,
-                                 @PathVariable Long id,
-                                 @AuthenticationPrincipal User user) {
-        collectionService.deleteCollection(projectId, id, user);
+                                 @PathVariable Long id) {
+        collectionService.deleteCollection(id);
     }
 }
