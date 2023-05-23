@@ -1,8 +1,10 @@
 package io.dondany.fc.project;
 
 import io.dondany.fc.project.model.CreateProjectDto;
+import io.dondany.fc.project.model.CreateProjectShareDto;
 import io.dondany.fc.project.model.ProjectDto;
 import io.dondany.fc.project.model.ProjectMapper;
+import io.dondany.fc.project.model.SharedProjectDto;
 import io.dondany.fc.project.model.UpdateProjectDto;
 import io.dondany.fc.user.User;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -56,7 +59,31 @@ public class ProjectController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("@projectOwnerExpression.isProjectOwner(#id, authentication)")
-    public void deleteProject(@PathVariable Long id, @AuthenticationPrincipal User user) {
-        projectService.deleteProject(id, user);
+    public void deleteProject(@PathVariable Long id) {
+        projectService.deleteProject(id);
     }
+
+    @PostMapping("/{id}/share")
+    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#id, authentication)")
+    public void shareProject(@PathVariable Long id,
+                             @RequestBody CreateProjectShareDto createProjectShareDto) {
+        projectService.shareProject(id, createProjectShareDto);
+    }
+
+    @DeleteMapping("/{projectId}/share/{id}")
+    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#projectId, authentication)")
+    public void deleteProject(@PathVariable Long projectId,
+                              @PathVariable Long id) {
+        projectService.deleteShare(projectId, id);
+    }
+
+    @GetMapping(params = { "shared" })
+    public List<SharedProjectDto> getSharedProjects(@RequestParam("shared") boolean shared,
+            @AuthenticationPrincipal User user) {
+        return projectService.getSharedProjects(user)
+                .stream()
+                .map(ProjectMapper.INSTANCE::mapProjectToSharedProjectDto)
+                .toList();
+    }
+
 }

@@ -2,6 +2,7 @@ package io.dondany.fc.project;
 
 import io.dondany.fc.collection.Collection;
 
+import io.dondany.fc.project.share.ProjectShare;
 import io.dondany.fc.user.User;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -29,8 +30,12 @@ public class Project {
     private List<Collection> collections = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
+    @JoinColumn(name="owner_id")
+    private User owner;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProjectShare> shares;
+
 
     public void addCollection(Collection collection) {
         collections.add(collection);
@@ -40,6 +45,16 @@ public class Project {
     public void removeCollection(Collection collection) {
         collections.remove(collection);
         collection.setProject(null);
+    }
+
+    public void addShare(ProjectShare share) {
+        shares.add(share);
+        share.setProject(this);
+    }
+
+    public void removeShare(ProjectShare share) {
+        shares.remove(share);
+        share.setProject(null);
     }
 
     public Long getId() {
@@ -74,11 +89,19 @@ public class Project {
         this.collections = collections;
     }
 
-    public User getUser() {
-        return user;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setOwner(User user) {
+        this.owner = user;
+    }
+
+    public List<ProjectShare> getShares() {
+        return shares;
+    }
+
+    public void setShares(List<ProjectShare> shares) {
+        this.shares = shares;
     }
 }

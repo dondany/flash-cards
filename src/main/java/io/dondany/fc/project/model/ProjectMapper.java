@@ -2,6 +2,7 @@ package io.dondany.fc.project.model;
 
 import io.dondany.fc.project.Project;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
@@ -17,4 +18,6 @@ public interface ProjectMapper {
 
     UpdateProjectDto mapProjectToUpdateProjectDto(Project source);
     Project mapUpdateProjectDtoToProject(UpdateProjectDto source);
+
+    SharedProjectDto mapProjectToSharedProjectDto(Project source);
 }

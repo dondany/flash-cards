@@ -17,6 +17,6 @@ public class ProjectOwnerExpression {
     public boolean isProjectOwner(Long projectId, Authentication authentication) {
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        return authentication.getName().equals(project.getUser().getEmail());
+        return authentication.getName().equals(project.getOwner().getEmail());
     }
 }
