@@ -37,7 +37,8 @@ public class ProjectController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#id, authentication)")
+    @PreAuthorize("@projectAuthorizationHelper.isProjectOwner(#id, authentication) " +
+            "|| @projectAuthorizationHelper.hasAccessToSharedProject(#id, authentication)")
     public ProjectDto getProject(@PathVariable Long id) {
         return ProjectMapper.INSTANCE.mapProjectToProjectDto(projectService.getProject(id));
     }
@@ -49,7 +50,7 @@ public class ProjectController {
     }
 
     @PatchMapping("/{id}")
-    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#id, authentication)")
+    @PreAuthorize("@projectAuthorizationHelper.isProjectOwner(#id, authentication)")
     public ProjectDto updateProject(@RequestBody UpdateProjectDto updateProjectDto,
                                     @PathVariable("id") Long id,
                                     @AuthenticationPrincipal User user) {
@@ -58,20 +59,20 @@ public class ProjectController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#id, authentication)")
+    @PreAuthorize("@projectAuthorizationHelper.isProjectOwner(#id, authentication)")
     public void deleteProject(@PathVariable Long id) {
         projectService.deleteProject(id);
     }
 
     @PostMapping("/{id}/share")
-    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#id, authentication)")
+    @PreAuthorize("@projectAuthorizationHelper.isProjectOwner(#id, authentication)")
     public void shareProject(@PathVariable Long id,
                              @RequestBody CreateProjectShareDto createProjectShareDto) {
         projectService.shareProject(id, createProjectShareDto);
     }
 
     @DeleteMapping("/{projectId}/share/{id}")
-    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#projectId, authentication)")
+    @PreAuthorize("@projectAuthorizationHelper.isProjectOwner(#projectId, authentication)")
     public void deleteProject(@PathVariable Long projectId,
                               @PathVariable Long id) {
         projectService.deleteShare(projectId, id);

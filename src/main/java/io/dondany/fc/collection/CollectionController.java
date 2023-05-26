@@ -21,35 +21,37 @@ public class CollectionController {
     private final CollectionService collectionService;
 
     @GetMapping()
-    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#projectId, authentication)")
+    @PreAuthorize("@projectAuthorizationHelper.isProjectOwner(#projectId, authentication) " +
+            "|| @projectAuthorizationHelper.hasAccessToSharedProject(#projectId, authentication)")
     public List<CollectionDto> getCollections(@PathVariable Long projectId) {
         return collectionService.getAllCollectionsByProjectId(projectId);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#projectId, authentication)")
+    @PreAuthorize("@projectAuthorizationHelper.isProjectOwner(#projectId, authentication) " +
+            "|| @projectAuthorizationHelper.hasAccessToSharedProject(#projectId, authentication)")
     public CollectionDto getCollection(@PathVariable Long projectId,
                                        @PathVariable Long id) {
         return collectionService.getOneById(projectId, id);
     }
 
     @PostMapping()
-    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#projectId, authentication)")
+    @PreAuthorize("@projectAuthorizationHelper.isProjectOwner(#projectId, authentication)")
     public CollectionDto addCollection(@PathVariable Long projectId,
                                        @RequestBody Collection collection) {
         return collectionService.addCollection(projectId, collection);
     }
 
     @PatchMapping("/{id}")
-    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#projectId, authentication)")
-    public CollectionDto updateProject(@RequestBody CollectionUpdateDto collectionUpdateDto,
-                                       @PathVariable Long projectId,
-                                       @PathVariable("id") Long id) {
+    @PreAuthorize("@projectAuthorizationHelper.isProjectOwner(#projectId, authentication)")
+    public CollectionDto updateCollection(@RequestBody CollectionUpdateDto collectionUpdateDto,
+                                          @PathVariable Long projectId,
+                                          @PathVariable("id") Long id) {
         return collectionService.updateCollection(collectionUpdateDto, id);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("@projectOwnerExpression.isProjectOwner(#projectId, authentication)")
+    @PreAuthorize("@projectAuthorizationHelper.isProjectOwner(#projectId, authentication)")
     public void deleteCollection(@PathVariable Long projectId,
                                  @PathVariable Long id) {
         collectionService.deleteCollection(id);
