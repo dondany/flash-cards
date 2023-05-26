@@ -1,5 +1,6 @@
 package io.dondany.fc.project;
 
+import io.dondany.fc.notification.NotificationService;
 import io.dondany.fc.project.model.CreateProjectShareDto;
 import io.dondany.fc.project.share.ProjectShare;
 import io.dondany.fc.project.share.ProjectShareRepository;
@@ -20,6 +21,8 @@ public class ProjectService {
     private final ProjectRepository projectRepository;
     private final ProjectShareRepository projectShareRepository;
     private final UserRepository userRepository;
+
+    private final NotificationService notificationService;
 
     public List<Project> getAllProjects(User user) {
         return projectRepository.findByOwner(user);
@@ -51,6 +54,7 @@ public class ProjectService {
         return toUpdate;
     }
 
+    @Transactional
     public void shareProject(Long projectId, CreateProjectShareDto createProjectShareDto) {
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -63,6 +67,7 @@ public class ProjectService {
         projectShare.setPermission(createProjectShareDto.getPermission());
 
         projectShareRepository.save(projectShare);
+        createShareNotification(project, user);
     }
 
     public void deleteShare(Long projectId, Long id) {
@@ -80,5 +85,13 @@ public class ProjectService {
         return projectShareRepository.findByUserId(user.getId()).stream()
                 .map(ProjectShare::getProject)
                 .toList();
+    }
+
+    private void createShareNotification(Project project, User user) {
+        String senderName = project.getOwner().getFirstname();
+        notificationService.createNotification(
+                user,
+                String.format("User %s shared the project %s with You!", senderName, project.getName())
+        );
     }
 }
