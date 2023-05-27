@@ -80,7 +80,6 @@ public class ProjectService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         project.removeShare(projectShare);
-
         projectRepository.save(project);
     }
 
