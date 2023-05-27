@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -24,8 +23,12 @@ public class ProjectService {
 
     private final NotificationService notificationService;
 
-    public List<Project> getAllProjects(User user) {
-        return projectRepository.findByOwner(user);
+    public List<Project> getAllProjectsByOwner(User user) {
+        return projectRepository.findAllByOwner(user);
+    }
+
+    public List<Project> getAllPublicProjects() {
+        return projectRepository.findAllByIsPublicTrue();
     }
 
     public Project getProject(Long id) {

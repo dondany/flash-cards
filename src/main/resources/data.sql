@@ -8,11 +8,11 @@ VALUES(1, 'harry.potter@hgwrts.com', 'harry', 'potter', '$2a$10$P6G7ztCfBQ.zN0f4
 SELECT setval('_user_seq', (SELECT max(id) FROM _user));
 
 ---------- PROJECTS ------------
-INSERT INTO public.project (id,description,"name",owner_id) VALUES
-                                                               (1,'L''italiano e'' fantastico!','Italiano',1),
-                                                               (2,'Mastering javascript','JavaScript',1),
-                                                               (3,'Mastering Java','Java',1),
-                                                               (4,'Mastering GO','Go',1);
+INSERT INTO public.project (id,description,"name",owner_id,is_public) VALUES
+                                                               (1,'L''italiano e'' fantastico!','Italiano',1, false),
+                                                               (2,'Mastering javascript','JavaScript',1, false),
+                                                               (3,'Mastering Java','Java',1, false),
+                                                               (4,'Mastering GO','Go',1, true);
 SELECT setval('project_seq', (SELECT max(id) FROM project));
 
 ---------- Collections ------------

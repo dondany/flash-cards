@@ -15,4 +15,5 @@ public class ProjectDto {
     private Long id;
     private String name;
     private String description;
+    private String owner;
 }

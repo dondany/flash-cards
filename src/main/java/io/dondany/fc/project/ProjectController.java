@@ -1,6 +1,5 @@
 package io.dondany.fc.project;
 
-import io.dondany.fc.notification.NotificationService;
 import io.dondany.fc.project.model.CreateProjectDto;
 import io.dondany.fc.project.model.CreateProjectShareDto;
 import io.dondany.fc.project.model.ProjectDto;
@@ -31,7 +30,15 @@ public class ProjectController {
 
     @GetMapping
     public List<ProjectDto> getProjects(@AuthenticationPrincipal User user) {
-        return projectService.getAllProjects(user)
+        return projectService.getAllProjectsByOwner(user)
+                .stream()
+                .map(ProjectMapper.INSTANCE::mapProjectToProjectDto)
+                .toList();
+    }
+
+    @GetMapping(params = { "isPublic=true" })
+    public List<ProjectDto> getPublicProjects(@RequestParam boolean isPublic) {
+        return projectService.getAllPublicProjects()
                 .stream()
                 .map(ProjectMapper.INSTANCE::mapProjectToProjectDto)
                 .toList();

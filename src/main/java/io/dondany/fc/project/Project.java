@@ -25,6 +25,7 @@ public class Project {
     private Long id;
     private String name;
     private String description;
+    private boolean isPublic;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Collection> collections = new ArrayList<>();
@@ -79,6 +80,14 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
     }
 
     public List<Collection> getCollections() {

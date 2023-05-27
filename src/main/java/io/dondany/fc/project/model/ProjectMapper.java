@@ -13,7 +13,9 @@ public interface ProjectMapper {
     CreateProjectDto mapProjectToCreateProjectDto(Project source);
     Project mapCreateProjectDtoToProject(CreateProjectDto source);
 
+    @Mapping(target="owner", source="owner.username")
     ProjectDto mapProjectToProjectDto(Project source);
+    @Mapping(target="owner", ignore = true)
     Project mapProjectDtoToProject(ProjectDto source);
 
     UpdateProjectDto mapProjectToUpdateProjectDto(Project source);
