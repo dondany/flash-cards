@@ -6,6 +6,8 @@ import io.dondany.fc.project.ProjectRepository;
 import io.dondany.fc.project.model.ProjectDto;
 import io.dondany.fc.project.model.ProjectMapper;
 import io.dondany.fc.user.User;
+import io.dondany.fc.user.model.UserDto;
+import io.dondany.fc.user.model.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,5 +57,12 @@ public class ProjectStarService {
                 recipient,
                 String.format("User %s starred your project %s!", senderName, project.getName())
         );
+    }
+
+    public List<UserDto> getStarmakers(Long projectId) {
+        return projectStarRepository.findAllStarMakers(projectId)
+                .stream()
+                .map(UserMapper.INSTANCE::map)
+                .toList();
     }
 }

@@ -1,7 +1,5 @@
-package io.dondany.fc.auth;
+package io.dondany.fc.project;
 
-import io.dondany.fc.project.Project;
-import io.dondany.fc.project.ProjectRepository;
 import io.dondany.fc.project.share.ProjectShareRepository;
 import io.dondany.fc.user.User;
 import lombok.RequiredArgsConstructor;
@@ -27,5 +25,9 @@ public class ProjectAuthorizationHelper {
         User user = (User) authentication.getPrincipal();
         return projectShareRepository.findByUserIdAndProjectId(user.getId(), projectId)
                 .isPresent();
+    }
+
+    public boolean isProjectPublic(Long projectId) {
+        return projectRepository.existsByIsPublicTrueAndId(projectId);
     }
 }

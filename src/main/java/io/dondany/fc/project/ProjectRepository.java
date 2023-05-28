@@ -10,4 +10,5 @@ import java.util.List;
 public interface ProjectRepository extends JpaRepository<Project, Long> {
     List<Project> findAllByOwner(User user);
     List<Project> findAllByIsPublicTrue();
+    boolean existsByIsPublicTrueAndId(Long projectId);
 }
