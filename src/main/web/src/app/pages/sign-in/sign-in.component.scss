@@ -1,0 +1,13 @@
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .form-wrap {
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
