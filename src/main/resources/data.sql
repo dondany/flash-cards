@@ -3,16 +3,17 @@
 --harry.potter@hgwrts.com/pass
 INSERT INTO "_user"
 (id, email, firstname, lastname, "password", "role")
-VALUES(1, 'harry.potter@hgwrts.com', 'harry', 'potter', '$2a$10$P6G7ztCfBQ.zN0f4SQuSLexql1DicStxH2gb/MeyX7dEVmtmbTEaO', 'USER');
+VALUES(1, 'harry', 'harry', 'potter', '$2a$10$P6G7ztCfBQ.zN0f4SQuSLexql1DicStxH2gb/MeyX7dEVmtmbTEaO', 'USER');
+-- VALUES(1, 'harry.potter@hgwrts.com', 'harry', 'potter', '$2a$10$P6G7ztCfBQ.zN0f4SQuSLexql1DicStxH2gb/MeyX7dEVmtmbTEaO', 'USER');
 
 SELECT setval('_user_seq', (SELECT max(id) FROM _user));
 
 ---------- PROJECTS ------------
-INSERT INTO public.project (id,description,"name",owner_id,is_public) VALUES
-                                                               (1,'L''italiano e'' fantastico!','Italiano',1, false),
-                                                               (2,'Mastering javascript','JavaScript',1, false),
-                                                               (3,'Mastering Java','Java',1, false),
-                                                               (4,'Mastering GO','Go',1, true);
+INSERT INTO public.project (id,description,"name",owner_id,visibility) VALUES
+                                                               (1,'L''italiano e'' fantastico!','Italiano',1, 'PRIVATE'),
+                                                               (2,'Mastering javascript','JavaScript',1, 'PRIVATE'),
+                                                               (3,'Mastering Java','Java',1, 'PRIVATE'),
+                                                               (4,'Mastering GO','Go',1, 'PUBLIC');
 SELECT setval('project_seq', (SELECT max(id) FROM project));
 
 ---------- Collections ------------

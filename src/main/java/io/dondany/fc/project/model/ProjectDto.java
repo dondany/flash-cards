@@ -16,4 +16,5 @@ public class ProjectDto {
     private String name;
     private String description;
     private String owner;
+    private Visibility visibility;
 }

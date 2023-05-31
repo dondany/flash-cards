@@ -2,6 +2,7 @@ package io.dondany.fc.project;
 
 import io.dondany.fc.notification.NotificationService;
 import io.dondany.fc.project.model.CreateProjectShareDto;
+import io.dondany.fc.project.model.Visibility;
 import io.dondany.fc.project.share.ProjectShare;
 import io.dondany.fc.project.share.ProjectShareRepository;
 import io.dondany.fc.user.User;
@@ -28,7 +29,7 @@ public class ProjectService {
     }
 
     public List<Project> getAllPublicProjects() {
-        return projectRepository.findAllByIsPublicTrue();
+        return projectRepository.findAllByVisibility(Visibility.PUBLIC);
     }
 
     public Project getProject(Long id) {

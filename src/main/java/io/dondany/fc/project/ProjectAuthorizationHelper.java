@@ -1,5 +1,6 @@
 package io.dondany.fc.project;
 
+import io.dondany.fc.project.model.Visibility;
 import io.dondany.fc.project.share.ProjectShareRepository;
 import io.dondany.fc.user.User;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,6 @@ public class ProjectAuthorizationHelper {
     }
 
     public boolean isProjectPublic(Long projectId) {
-        return projectRepository.existsByIsPublicTrueAndId(projectId);
+        return projectRepository.existsByIdAndVisibility(projectId, Visibility.PUBLIC);
     }
 }
