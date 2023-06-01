@@ -1,10 +1,32 @@
+
 <div class="container">
-  <mat-card class="card" *ngFor="let project of projects">
-    <mat-card-header>
-      <mat-card-title>{{ project.name }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      {{ project.description}}
-    </mat-card-content>
-  </mat-card>
+  <div class="container-label">
+    My Projects
+  </div>
+  <p-dataView #dv [value]="projects" layout="grid">
+    <ng-template let-project pTemplate="gridItem">
+      <div class="p-col-12 md:col-3">
+        <div class="project-item card">
+          <div class="project-item-top">
+            <span class="project-name">{{ project.name }}</span>
+            <div class="project-visibility">
+              <i class="pi pi-lock"></i>
+              <span>Private</span>
+            </div>
+          </div>
+          <div class="project-item-content">
+            {{ project.description }}
+          </div>
+          <div class="project-item-bottom">
+            <div class="project-item-owner">
+              <i class="pi pi-user"></i>
+              <span>{{ project.owner }}</span>
+            </div>
+            <p-button icon="pi pi-arrow-right" styleClass="p-button-rounded p-button-secondary"></p-button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataView>
 </div>
+

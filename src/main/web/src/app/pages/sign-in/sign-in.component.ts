@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {SignInFormControlType} from "./types/sign-in-form-group.type";
 import {FormBuilder, Validators} from "@angular/forms";
 import {AuthenticationService} from "./services/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'fc-sign-in',
@@ -14,12 +15,16 @@ export class SignInComponent {
     password: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
   })
 
-  constructor(private authenticationService: AuthenticationService, private formBuilder: FormBuilder) {
+  constructor(private authenticationService: AuthenticationService,
+              private formBuilder: FormBuilder,
+              private router: Router) {
   }
 
   handleOnSubmit() {
     const value = this.formGroup.value;
-    this.authenticationService.authenticate(value);
+    this.authenticationService.authenticate(value, () => {
+      this.router.navigate(['projects']);
+    });
   }
 
   get email() {

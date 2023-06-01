@@ -1,11 +1,11 @@
-<nav class="mat-elevation-z6">
-  <mat-toolbar color="primary">
-    <a routerLink="home" class="home">flash-cards</a>
+<nav>
+  <div class="nav-start">
+    <a routerLink="home">flash-cards</a>
+  </div>
+  <div class="nav-end">
     <div class="actions">
-      <a mat-raised-button color="accent" routerLink="/signin">
-        Sign In
-      </a>
+      <p-button label="Sign In" routerLink="/signin" styleClass="p-button-secondary p-button-sm"></p-button>
     </div>
-  </mat-toolbar>
+  </div>
 </nav>
 <router-outlet></router-outlet>

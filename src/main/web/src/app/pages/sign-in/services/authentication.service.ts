@@ -10,11 +10,12 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
-  authenticate(signIn: SignInFormValueType) {
+  authenticate(signIn: SignInFormValueType, callback: Function) {
     this.http.post<TokenResponseType>('http://localhost:8080/api/v1/auth/authenticate', signIn)
       .subscribe(response => {
         const token = response.token;
         localStorage.setItem('jwtToken', token);
+        callback();
       })
   }
 

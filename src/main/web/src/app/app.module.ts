@@ -4,10 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatButtonModule} from "@angular/material/button";
 import {HttpClientModule} from "@angular/common/http";
+import {ToolbarModule} from "primeng/toolbar";
+import {ButtonModule} from "primeng/button";
 
 @NgModule({
   declarations: [
@@ -17,10 +16,9 @@ import {HttpClientModule} from "@angular/common/http";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSlideToggleModule,
-    MatToolbarModule,
-    MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    ToolbarModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

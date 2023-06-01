@@ -4,8 +4,8 @@ import {CommonModule} from '@angular/common';
 import {SignInRoutingModule} from './sign-in-routing.module';
 import {SignInComponent} from './sign-in.component';
 import {ReactiveFormsModule} from "@angular/forms";
-import {MatButtonModule} from "@angular/material/button";
-import {MatInputModule} from "@angular/material/input";
+import {InputTextModule} from "primeng/inputtext";
+import {ButtonModule} from "primeng/button";
 
 
 @NgModule({
@@ -16,8 +16,8 @@ import {MatInputModule} from "@angular/material/input";
     CommonModule,
     SignInRoutingModule,
     ReactiveFormsModule,
-    MatButtonModule,
-    MatInputModule
+    InputTextModule,
+    ButtonModule,
   ]
 })
 export class SignInModule {

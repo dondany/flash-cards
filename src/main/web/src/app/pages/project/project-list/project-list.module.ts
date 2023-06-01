@@ -3,17 +3,20 @@ import { CommonModule } from '@angular/common';
 
 import { ProjectListRoutingModule } from './project-list-routing.module';
 import { ProjectListComponent } from './project-list.component';
-import {MatCardModule} from "@angular/material/card";
+import {DataViewModule} from "primeng/dataview";
+import {ButtonModule} from "primeng/button";
+
 
 
 @NgModule({
   declarations: [
     ProjectListComponent
   ],
-    imports: [
-        CommonModule,
-        ProjectListRoutingModule,
-        MatCardModule
-    ]
+  imports: [
+    CommonModule,
+    ProjectListRoutingModule,
+    DataViewModule,
+    ButtonModule,
+  ]
 })
 export class ProjectListModule { }

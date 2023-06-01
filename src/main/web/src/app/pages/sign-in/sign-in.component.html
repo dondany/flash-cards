@@ -1,16 +1,21 @@
 <div class="container">
   <div class="form-wrap">
-      <form [formGroup]="formGroup" (ngSubmit)="handleOnSubmit()" autocomplete="off" novalidate>
-        <mat-form-field>
-          <mat-label>email</mat-label>
-          <input matInput [formControl]="email">
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>password</mat-label>
-          <input matInput [formControl]="password">
-        </mat-form-field>
-        <button mat-raised-button color="accent">Sign In</button>
-      </form>
+    <form [formGroup]="formGroup" (ngSubmit)="handleOnSubmit()" autocomplete="off" novalidate>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+          <i class="pi pi-user"></i>
+        </span>
+        <input pInputText [formControl]="email" placeholder="email">
+      </div>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+          <i class="pi pi-lock"></i>
+        </span>
+        <input pInputText id="pass" [formControl]="password" placeholder="password" type="password">
+      </div>
+      <button pButton type="button" label="Sing In" type="submit">
+      </button>
+    </form>
   </div>
 </div>
 
