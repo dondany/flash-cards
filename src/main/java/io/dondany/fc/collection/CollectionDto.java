@@ -20,4 +20,5 @@ public class CollectionDto{
     private Long numberOfFlashCards;
     @JsonIgnore
     private Project project;
+    private String projectName;
 }
