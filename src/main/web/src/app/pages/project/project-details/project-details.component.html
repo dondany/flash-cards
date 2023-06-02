@@ -1,0 +1,61 @@
+<div class="container">
+  <p-breadcrumb [model]="breadCrumbItems" [home]="homeItem" styleClass="border-none p-0 m-0 text-sm surface-200"></p-breadcrumb>
+  <section class="mt-3">
+    <span class="font-semibold text-lg mb-3">Project</span>
+    <p-card styleClass="col-12 md:col-12 lg:col-6 xl:col-6">
+      <ng-template pTemplate="title">
+        <div class="flex justify-content-between">
+          <span>{{ project.name }}</span>
+          <div class="flex gap-1 text-sm font-normal">
+            <i class="pi pi-lock"></i>
+            <span>{{ project.visibility | titlecase }}</span>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="subtitle">
+        {{ project.description }}
+      </ng-template>
+      <ng-template pTemplate="footer">
+        <div class="flex justify-content-between">
+          <div>
+            <p-avatar icon="pi pi-user" styleClass="mr-2" shape="circle"></p-avatar>
+            <span>{{ project.owner }}</span>
+          </div>
+          <div>
+            <p-button icon="pi pi-cog" label="Settings"
+                      styleClass="p-button-outlined p-button-sm p-button-secondary"></p-button>
+          </div>
+        </div>
+      </ng-template>
+    </p-card>
+  </section>
+  <section class="mt-3 flex flex-column">
+    <span class="font-semibold text-lg">Collections</span>
+    <p-dataView #dv [value]="collections" layout="grid">
+      <ng-template let-collection pTemplate="gridItem">
+        <div class="col-12 md:col-6 lg:col-3 xl:col-3">
+          <p-card styleClass="mr-2 mb-2">
+            <ng-template pTemplate="title">
+              {{ collection?.name }}
+            </ng-template>
+            <ng-template pTemplate="subtitle">
+              {{ collection?.description}}
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <div class="flex justify-content-between">
+                <div class="flex align-items-center">
+                  <i class="pi pi-credit-card mr-2"></i>
+                  <span>{{collection?.numberOfFlashCards}}</span>
+                </div>
+                <p-button icon="pi pi-arrow-right" styleClass="p-button-rounded p-button-secondary"
+                          [routerLink]="['collections', collection.id]"></p-button>
+              </div>
+            </ng-template>
+          </p-card>
+        </div>
+      </ng-template>
+    </p-dataView>
+  </section>
+</div>
+
+

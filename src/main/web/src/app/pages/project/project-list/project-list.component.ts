@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ProjectService} from "../project-service";
 import {ProjectType} from "../types/project-type";
+import {Router} from "@angular/router";
+import {MenuItem} from "primeng/api";
 
 @Component({
   selector: 'fc-project-list',
@@ -9,8 +11,10 @@ import {ProjectType} from "../types/project-type";
 })
 export class ProjectListComponent implements OnInit {
   projects?: ProjectType[];
+  breadCrumbItems?: MenuItem[];
+  homeItem?: MenuItem;
 
-  constructor(private projectService: ProjectService) {
+  constructor(private projectService: ProjectService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -18,6 +22,8 @@ export class ProjectListComponent implements OnInit {
       .subscribe(projects => {
         this.projects = projects;
       });
-  }
 
+    this.breadCrumbItems = [{ label: 'Projects', routerLink: '/projects'}];
+    this.homeItem = { icon: 'pi pi-home', routerLink: '/../'}
+  }
 }

@@ -1,30 +1,35 @@
-
 <div class="container">
-  <div class="container-label">
-    My Projects
-  </div>
+  <p-breadcrumb [model]="breadCrumbItems" [home]="homeItem"
+                styleClass="border-none p-0 m-0 text-sm surface-200"></p-breadcrumb>
   <p-dataView #dv [value]="projects" layout="grid">
     <ng-template let-project pTemplate="gridItem">
-      <div class="p-col-12 md:col-3">
-        <div class="project-item card">
-          <div class="project-item-top">
-            <span class="project-name">{{ project.name }}</span>
-            <div class="project-visibility">
-              <i class="pi pi-lock"></i>
-              <span>Private</span>
+      <div class="col-12 md:col-6 lg:col-3 xl:col-3">
+        <p-card styleClass="mb-2 mr-2">
+          <ng-template pTemplate="title">
+            <div class="flex justify-content-between">
+              <span>{{ project.name }}</span>
+              <div class="flex gap-1 text-sm font-normal">
+                <i class="pi pi-lock"></i>
+                <span>{{ project.visibility | titlecase }}</span>
+              </div>
             </div>
-          </div>
-          <div class="project-item-content">
+          </ng-template>
+          <ng-template pTemplate="subtitle">
             {{ project.description }}
-          </div>
-          <div class="project-item-bottom">
-            <div class="project-item-owner">
-              <i class="pi pi-user"></i>
-              <span>{{ project.owner }}</span>
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <div class="flex justify-content-between">
+              <div>
+                <p-avatar icon="pi pi-user" styleClass="mr-2" shape="circle"></p-avatar>
+                <span>{{ project.owner }}</span>
+              </div>
+              <div>
+                <p-button icon="pi pi-arrow-right" styleClass="p-button-rounded p-button-secondary"
+                          [routerLink]="[project.id]"></p-button>
+              </div>
             </div>
-            <p-button icon="pi pi-arrow-right" styleClass="p-button-rounded p-button-secondary"></p-button>
-          </div>
-        </div>
+          </ng-template>
+        </p-card>
       </div>
     </ng-template>
   </p-dataView>

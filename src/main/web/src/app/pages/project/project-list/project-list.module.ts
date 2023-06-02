@@ -5,6 +5,9 @@ import { ProjectListRoutingModule } from './project-list-routing.module';
 import { ProjectListComponent } from './project-list.component';
 import {DataViewModule} from "primeng/dataview";
 import {ButtonModule} from "primeng/button";
+import {AvatarModule} from "primeng/avatar";
+import {BreadcrumbModule} from "primeng/breadcrumb";
+import {CardModule} from "primeng/card";
 
 
 
@@ -17,6 +20,9 @@ import {ButtonModule} from "primeng/button";
     ProjectListRoutingModule,
     DataViewModule,
     ButtonModule,
+    AvatarModule,
+    BreadcrumbModule,
+    CardModule,
   ]
 })
 export class ProjectListModule { }

@@ -1,63 +1,15 @@
+:host {
+  width: 100%;
+}
+
+:host ::ng-deep .p-dataview-content {
+  background: transparent;
+}
+
 .container {
   display: flex;
   flex-direction: column;
-  margin: 30px;
-
-  .container-label {
-    font-size: 1.2rem;
-    font-weight: 600;
-  }
-
+  padding: 30px;
 }
 
-.card {
-  border: 1px solid #dee2e6;
-  padding: 1rem;
-  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
-  margin-bottom: 2rem;
-  transition: all 200ms ease-in-out 0s;
-}
 
-.project-item {
-  min-width: fit-content;
-  min-height: 160px;
-  margin: .5rem;
-  display: flex;
-  flex-direction: column;
-
-  .project-item-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .project-name {
-      font-size: 1.5rem;
-      font-weight: 700;
-    }
-
-    .project-visibility {
-      display: flex;
-      align-items: center;
-      gap: .5em;
-      font-size: .8rem;
-
-      i {
-        font-size: .8rem;
-      }
-    }
-  }
-
-  .project-item-bottom {
-    display: flex;
-    margin-top: auto;
-    justify-content: space-between;
-    align-items: flex-end;
-
-    .project-item-owner {
-      display: flex;
-      align-items: flex-start;
-      gap: .5rem;
-    }
-  }
-}
