@@ -2,9 +2,9 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject, switchMap, takeUntil, tap} from "rxjs";
 import {ProjectService} from "../../project-service";
 import {ActivatedRoute} from "@angular/router";
-import {ProjectType} from "../../types/project-type";
 import {MenuItem} from "primeng/api";
 import {CollectionType} from "../../types/collection-type";
+import {FlashCardType} from "../../types/flash-card-type";
 
 @Component({
   selector: 'fc-collection',
@@ -14,6 +14,7 @@ import {CollectionType} from "../../types/collection-type";
 export class CollectionComponent implements OnInit, OnDestroy {
   private destroy = new Subject<void>();
   collection!: CollectionType;
+  flashCards!: FlashCardType[];
   breadCrumbItems!: MenuItem[];
   homeItem!: MenuItem;
 
@@ -33,9 +34,9 @@ export class CollectionComponent implements OnInit, OnDestroy {
           ];
           this.homeItem = {icon: 'pi pi-home', routerLink: '/../'};
         }),
-        switchMap(() => this.projectService.getCollections(projectId)),
-        tap((collections) => {
-          //load flashcards here
+        switchMap(() => this.projectService.getFlashCards(projectId, this.collection.id)),
+        tap((flashCards) => {
+          this.flashCards = flashCards;
         })
       )
       .subscribe();

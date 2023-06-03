@@ -21,3 +21,21 @@
       </ng-template>
     </p-card>
   </section>
+  <section class="mt-3 flex flex-column">
+    <span class="font-semibold text-lg">Flash Cards</span>
+    <p-dataView #dv [value]="flashCards" layout="grid">
+      <ng-template let-fc pTemplate="gridItem">
+        <div class="col-12 md:col-3 lg:col-2 xl:col-2">
+          <p-card styleClass="mr-2 mb-2">
+            <ng-template pTemplate="title">
+              {{ fc?.front }}
+            </ng-template>
+            <ng-template pTemplate="subtitle">
+              {{ fc?.back}}
+            </ng-template>
+          </p-card>
+        </div>
+      </ng-template>
+    </p-dataView>
+  </section>
+</div>

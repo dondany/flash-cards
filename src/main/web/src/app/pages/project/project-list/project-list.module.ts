@@ -8,6 +8,7 @@ import {ButtonModule} from "primeng/button";
 import {AvatarModule} from "primeng/avatar";
 import {BreadcrumbModule} from "primeng/breadcrumb";
 import {CardModule} from "primeng/card";
+import {ToolbarModule} from "primeng/toolbar";
 
 
 
@@ -15,14 +16,15 @@ import {CardModule} from "primeng/card";
   declarations: [
     ProjectListComponent
   ],
-  imports: [
-    CommonModule,
-    ProjectListRoutingModule,
-    DataViewModule,
-    ButtonModule,
-    AvatarModule,
-    BreadcrumbModule,
-    CardModule,
-  ]
+    imports: [
+        CommonModule,
+        ProjectListRoutingModule,
+        DataViewModule,
+        ButtonModule,
+        AvatarModule,
+        BreadcrumbModule,
+        CardModule,
+        ToolbarModule,
+    ]
 })
 export class ProjectListModule { }
