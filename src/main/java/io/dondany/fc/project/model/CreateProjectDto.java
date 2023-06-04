@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class CreateProjectDto {
     String name;
     String description;
+    Visibility visibility;
 }
