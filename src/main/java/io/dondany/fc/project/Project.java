@@ -2,10 +2,13 @@ package io.dondany.fc.project;
 
 import io.dondany.fc.collection.Collection;
 
+import io.dondany.fc.project.model.Visibility;
 import io.dondany.fc.project.share.ProjectShare;
 import io.dondany.fc.user.User;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,7 +28,9 @@ public class Project {
     private Long id;
     private String name;
     private String description;
-    private boolean isPublic;
+
+    @Enumerated(EnumType.STRING)
+    private Visibility visibility;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Collection> collections = new ArrayList<>();
@@ -82,12 +87,12 @@ public class Project {
         this.description = description;
     }
 
-    public boolean isPublic() {
-        return isPublic;
+    public Visibility getVisibility() {
+        return visibility;
     }
 
-    public void setPublic(boolean aPublic) {
-        isPublic = aPublic;
+    public void setVisibility(Visibility visibility) {
+        this.visibility = visibility;
     }
 
     public List<Collection> getCollections() {

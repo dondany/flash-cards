@@ -1,0 +1,5 @@
+<div class="flex gap-1 text-sm font-normal p-text-secondary flex align-items-center">
+  <i *ngIf="visibility === 'PRIVATE'" class="pi pi-lock"></i>
+  <i *ngIf="visibility === 'PUBLIC'" class="pi pi-lock-open"></i>
+  <span>{{ visibility | titlecase }}</span>
+</div>

@@ -1,6 +1,14 @@
-<div class="main-container">
-  <app-sidebar></app-sidebar>
-  <div class="content-container">
-    <router-outlet></router-outlet>
+<nav>
+  <div class="nav-start">
+    <a routerLink="home">flash-cards</a>
   </div>
+  <div class="nav-end">
+    <div class="actions">
+      <p-button label="Sign In" routerLink="/signin" styleClass="p-button-secondary p-button-sm"></p-button>
+    </div>
+  </div>
+</nav>
+<p-toast></p-toast>
+<div class="body-content">
+  <router-outlet></router-outlet>
 </div>

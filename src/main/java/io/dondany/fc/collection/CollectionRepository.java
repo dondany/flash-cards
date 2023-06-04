@@ -14,7 +14,7 @@ public interface CollectionRepository extends JpaRepository<Collection, Long> {
 //    @Query("SELECT new io.dondany.fc.collection.CollectionDto(c.id, c.name, c.description, COUNT(fc)) FROM Collection c LEFT JOIN c.flashCards fc GROUP BY c.id")
 //    List<CollectionDto> findAllCollections();
 
-    @Query("SELECT new io.dondany.fc.collection.CollectionDto(c.id, c.name, c.description, COUNT(fc), c.project) " +
+    @Query("SELECT new io.dondany.fc.collection.CollectionDto(c.id, c.name, c.description, COUNT(fc), c.project, p.name) " +
             "FROM Collection c " +
             "LEFT JOIN c.flashCards fc " +
             "LEFT JOIN c.project p " +
@@ -22,13 +22,13 @@ public interface CollectionRepository extends JpaRepository<Collection, Long> {
             "GROUP BY c.id, p")
     List<CollectionDto> findAllCollectionsByProjectId(@Param("projectId") Long projectId);
 
-    @Query("SELECT new io.dondany.fc.collection.CollectionDto(c.id, c.name, c.description, COUNT(fc), c.project) " +
+    @Query("SELECT new io.dondany.fc.collection.CollectionDto(c.id, c.name, c.description, COUNT(fc), c.project, p.name) " +
             "FROM Collection c " +
             "LEFT JOIN c.flashCards fc " +
-            "LEFT JOIN c.project " +
+            "LEFT JOIN c.project p " +
             "where c.id = :id " +
             "AND c.project.id = :projectId " +
-            "GROUP BY c.id")
+            "GROUP BY c.id, p")
     CollectionDto findOne(@Param("projectId") Long projectId, @Param("id") Long id);
 
     Optional<Collection> findByIdAndProjectId(Long id, Long projectId);
