@@ -6,10 +6,7 @@
       <ng-template pTemplate="title">
         <div class="flex justify-content-between">
           <span>{{ project.name }}</span>
-          <div class="flex gap-1 text-sm font-normal">
-            <i class="pi pi-lock"></i>
-            <span>{{ project.visibility | titlecase }}</span>
-          </div>
+          <fc-visibility [visibility]="project.visibility"></fc-visibility>
         </div>
       </ng-template>
       <ng-template pTemplate="subtitle">

@@ -8,20 +8,22 @@ import {CardModule} from "primeng/card";
 import {AvatarModule} from "primeng/avatar";
 import {ButtonModule} from "primeng/button";
 import {DataViewModule} from "primeng/dataview";
+import {VisibilityModule} from "@fc/components/visibility";
 
 
 @NgModule({
   declarations: [
     ProjectDetailsComponent
   ],
-  imports: [
-    CommonModule,
-    ProjectDetailsRoutingModule,
-    BreadcrumbModule,
-    CardModule,
-    AvatarModule,
-    ButtonModule,
-    DataViewModule
-  ]
+    imports: [
+        CommonModule,
+        ProjectDetailsRoutingModule,
+        BreadcrumbModule,
+        CardModule,
+        AvatarModule,
+        ButtonModule,
+        DataViewModule,
+        VisibilityModule
+    ]
 })
 export class ProjectDetailsModule { }

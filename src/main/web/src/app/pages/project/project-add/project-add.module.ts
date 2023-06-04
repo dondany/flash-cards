@@ -8,6 +8,8 @@ import {BreadcrumbModule} from "primeng/breadcrumb";
 import {ReactiveFormsModule} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
+import {ToastModule} from "primeng/toast";
+import {RadioButtonModule} from "primeng/radiobutton";
 
 
 @NgModule({
@@ -21,7 +23,10 @@ import {ButtonModule} from "primeng/button";
     BreadcrumbModule,
     ReactiveFormsModule,
     InputTextModule,
-    ButtonModule
-  ]
+    ButtonModule,
+    ToastModule,
+    RadioButtonModule
+  ],
+  providers: []
 })
 export class ProjectAddModule { }

@@ -28,6 +28,7 @@ export class ProjectService {
   createProject(project: AddProjectFormValueType): Observable<ProjectType> {
     const token = this.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    console.log(project);
     return this.http.post<ProjectType>(`/api/projects`, project,{headers});
   }
 

@@ -4,16 +4,16 @@
     <span class="font-semibold text-lg mb-6">Collection</span>
     <p-card styleClass="col-12 md:col-12 lg:col-6 xl:col-6">
       <ng-template pTemplate="title">
-        {{ collection?.name }}
+        {{ collection.name }}
       </ng-template>
       <ng-template pTemplate="subtitle">
-        {{ collection?.description}}
+        {{ collection.description}}
       </ng-template>
       <ng-template pTemplate="footer">
         <div class="flex justify-content-between">
           <div class="flex align-items-center">
             <i class="pi pi-credit-card mr-2"></i>
-            <span>{{collection?.numberOfFlashCards}}</span>
+            <span>{{collection.numberOfFlashCards}}</span>
           </div>
           <p-button icon="pi pi-cog" label="Settings"
                     styleClass="p-button-outlined p-button-sm p-button-secondary"></p-button>

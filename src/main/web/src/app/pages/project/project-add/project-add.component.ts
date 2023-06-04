@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MenuItem} from "primeng/api";
+import {MenuItem, MessageService} from "primeng/api";
 import {FormBuilder, Validators} from "@angular/forms";
 import {ProjectService} from "../project-service";
 import {AddProjectFormControlType} from "./types/add-project-form-group-type";
@@ -14,6 +14,7 @@ export class ProjectAddComponent implements OnInit{
   protected formGroup = this.formBuilder.group<AddProjectFormControlType>({
     name: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
     description: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
+    visibility: this.formBuilder.control('PRIVATE', { validators: [Validators.required], nonNullable: true})
   })
 
   breadCrumbItems!: MenuItem[];
@@ -21,7 +22,8 @@ export class ProjectAddComponent implements OnInit{
 
   constructor(private formBuilder: FormBuilder,
               private projectService: ProjectService,
-              private router: Router) {
+              private router: Router,
+              private messageService: MessageService) {
   }
 
   ngOnInit(): void {
@@ -36,6 +38,11 @@ export class ProjectAddComponent implements OnInit{
     const value = this.formGroup.value;
     this.projectService.createProject(value)
       .subscribe(project => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Confirmed',
+          detail: `Project ${project.name} has been created!`,
+        });
         this.router.navigate(['projects']);
       });
   }
