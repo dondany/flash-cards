@@ -8,10 +8,16 @@
         Project
       </ng-template>
       <ng-template pTemplate="content">
-        <form [formGroup]="formGroup" (ngSubmit)="handleOnSubmit()" autocomplete="off" novalidate
+        <form [formGroup]="formGroup" (ngSubmit)="handleOnSubmit()" autocomplete="off"
               class="flex flex-column gap-3">
-          <input pInputText formControlName="name" placeholder="name">
-          <input pInputText formControlName="description" placeholder="description">
+          <span class="p-float-label">
+          <input pInputText formControlName="name">
+            <label htmlFor="name">Name</label>
+          </span>
+          <span class="p-float-label">
+          <input pInputText formControlName="description">
+           <label htmlFor="description">Description</label>
+          </span>
           <div class="flex gap-3">
             <div>
               <p-radioButton name="visibility" value="PRIVATE" inputId="visibilityPrivate"
