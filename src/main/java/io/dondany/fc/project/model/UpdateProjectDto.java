@@ -8,4 +8,5 @@ import lombok.Data;
 public class UpdateProjectDto {
     private String name;
     private String description;
+    private Visibility visibility;
 }

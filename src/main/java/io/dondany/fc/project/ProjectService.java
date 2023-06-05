@@ -55,6 +55,7 @@ public class ProjectService {
         }
         toUpdate.setName(project.getName());
         toUpdate.setDescription(project.getDescription());
+        toUpdate.setVisibility(project.getVisibility());
         return toUpdate;
     }
 
