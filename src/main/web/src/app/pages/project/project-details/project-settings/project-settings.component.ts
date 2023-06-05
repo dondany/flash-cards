@@ -40,8 +40,7 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy),
         tap((project) => {
           this.project = project;
-          // this.formGroup.controls.name.setValue(project.name);
-          this.formGroup.controls.name.patchValue(project.name);
+          this.formGroup.controls.name.setValue(project.name);
           this.formGroup.controls.description.setValue(project.description);
           this.formGroup.controls.visibility.setValue(project.visibility);
           this.breadCrumbItems = [
@@ -62,7 +61,6 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
           summary: 'Confirmed',
           detail: `Settings for project ${project.name} have been saved!`,
         });
-        this.router.navigate(['projects', project.id]);
       });
   }
 
