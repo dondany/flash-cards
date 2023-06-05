@@ -10,12 +10,13 @@
       <ng-template pTemplate="content">
         <form [formGroup]="formGroup" (ngSubmit)="handleOnSubmit()" autocomplete="off"
               class="flex flex-column gap-3">
+
           <span class="p-float-label">
-          <input pInputText formControlName="name">
+          <input pInputText formControlName="name" class="col-12">
             <label htmlFor="name">Name</label>
           </span>
           <span class="p-float-label">
-          <input pInputText formControlName="description">
+          <input pInputText formControlName="description" class="col-12">
            <label htmlFor="description">Description</label>
           </span>
           <div class="flex gap-3">
