@@ -7,19 +7,25 @@ import {BreadcrumbModule} from "primeng/breadcrumb";
 import {CardModule} from "primeng/card";
 import {ButtonModule} from "primeng/button";
 import {DataViewModule} from "primeng/dataview";
+import {DialogModule} from "primeng/dialog";
+import {InputTextModule} from "primeng/inputtext";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [
     CollectionComponent
   ],
-    imports: [
-        CommonModule,
-        CollectionRoutingModule,
-        BreadcrumbModule,
-        CardModule,
-        ButtonModule,
-        DataViewModule
-    ]
+  imports: [
+    CommonModule,
+    CollectionRoutingModule,
+    BreadcrumbModule,
+    CardModule,
+    ButtonModule,
+    DataViewModule,
+    DialogModule,
+    InputTextModule,
+    ReactiveFormsModule
+  ]
 })
 export class CollectionModule { }

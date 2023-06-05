@@ -7,6 +7,7 @@ import {FlashCardType} from "./types/flash-card-type";
 import {AddProjectType} from "./project-add/types/add-project-type";
 import {AddProjectFormValueType} from "./project-add/types/add-project-form-group-type";
 import {ProjectSettingsValueType} from "./project-details/project-settings/types/project-settings-form-group-type";
+import {FlashCardNewValueType} from "./project-details/collection/types/flash-card-new-form-group-type";
 
 @Injectable({
   providedIn: 'root',
@@ -61,6 +62,12 @@ export class ProjectService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     const params = new HttpParams().set('page', 0).set('size', 30)
     return this.http.get<FlashCardType[]>(`/api/projects/${projectId}/collections/${collectionId}/flash-cards`,{params, headers});
+  }
+
+  createFlashCard(projectId: number, collectionId: number, fc: FlashCardNewValueType): Observable<FlashCardType> {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<FlashCardType>(`/api/projects/${projectId}/collections/${collectionId}/flash-cards`, fc,{ headers });
   }
 
   private getToken(): string | null {

@@ -1,10 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject, switchMap, takeUntil, tap} from "rxjs";
 import {ProjectService} from "../../project-service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MenuItem} from "primeng/api";
 import {CollectionType} from "../../types/collection-type";
 import {FlashCardType} from "../../types/flash-card-type";
+import {FormBuilder, Validators} from "@angular/forms";
+import {FlashCardNewFormControlType} from "./types/flash-card-new-form-group-type";
 
 @Component({
   selector: 'fc-collection',
@@ -18,11 +20,21 @@ export class CollectionComponent implements OnInit, OnDestroy {
   breadCrumbItems!: MenuItem[];
   homeItem!: MenuItem;
 
-  constructor(private projectService: ProjectService, private activatedRoute: ActivatedRoute) {}
+  showNewFcModal: boolean = false;
+  flashCard?: FlashCardType;
+  protected formGroup = this.formBuilder.group<FlashCardNewFormControlType>({
+    front: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
+    back: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
+  });
+
+  constructor(private projectService: ProjectService,
+              private activatedRoute: ActivatedRoute,
+              private formBuilder: FormBuilder,
+              private router: Router) {}
 
   ngOnInit(): void {
     const projectId = this.activatedRoute.snapshot.params['id'];
-    const collectionId = this.activatedRoute.snapshot.params['id'];
+    const collectionId = this.activatedRoute.snapshot.params['collectionId'];
     this.projectService.getCollection(projectId, collectionId)
       .pipe(takeUntil(this.destroy),
         tap((collection) => {
@@ -34,7 +46,7 @@ export class CollectionComponent implements OnInit, OnDestroy {
           ];
           this.homeItem = {icon: 'pi pi-home', routerLink: '/../'};
         }),
-        switchMap(() => this.projectService.getFlashCards(projectId, this.collection.id)),
+        switchMap(() => this.projectService.getFlashCards(projectId, collectionId)),
         tap((flashCards) => {
           this.flashCards = flashCards;
         })
@@ -48,4 +60,22 @@ export class CollectionComponent implements OnInit, OnDestroy {
     this.destroy.complete();
   }
 
+  showNewFlashCardModal() {
+    this.showNewFcModal = true;
+  }
+
+  handleOnSubmit() {
+    const projectId = this.activatedRoute.snapshot.params['id'];
+    const collectionId = this.activatedRoute.snapshot.params['id'];
+    const value = this.formGroup.value;
+    this.projectService.createFlashCard(projectId, collectionId, value)
+      .subscribe((fc) => {
+        this.showNewFcModal = false;
+        this.formGroup.reset();
+        this.projectService.getFlashCards(projectId, this.collection.id)
+          .subscribe((flashCards) => {
+            this.flashCards = flashCards;
+          })
+      })
+  }
 }

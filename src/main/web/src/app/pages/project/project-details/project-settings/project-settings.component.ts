@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AddProjectFormControlType} from "../../project-add/types/add-project-form-group-type";
 import {FormBuilder, Validators} from "@angular/forms";
-import {ConfirmationService, ConfirmEventType, MenuItem, MessageService} from "primeng/api";
+import {ConfirmationService, MenuItem, MessageService} from "primeng/api";
 import {ProjectService} from "../../project-service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subject, takeUntil, tap} from "rxjs";
