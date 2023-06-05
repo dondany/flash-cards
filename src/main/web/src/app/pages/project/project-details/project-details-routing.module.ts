@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'collections/:collectionId',
     loadChildren: () => import('./collection/collection.module').then((m) => m.CollectionModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./project-settings/project-settings.module').then((m) => m.ProjectSettingsModule)
   }
 ];
 
