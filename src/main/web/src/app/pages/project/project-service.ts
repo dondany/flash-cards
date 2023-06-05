@@ -6,6 +6,7 @@ import {CollectionType} from "./types/collection-type";
 import {FlashCardType} from "./types/flash-card-type";
 import {AddProjectType} from "./project-add/types/add-project-type";
 import {AddProjectFormValueType} from "./project-add/types/add-project-form-group-type";
+import {ProjectSettingsValueType} from "./project-details/project-settings/types/project-settings-form-group-type";
 
 @Injectable({
   providedIn: 'root',
@@ -28,8 +29,19 @@ export class ProjectService {
   createProject(project: AddProjectFormValueType): Observable<ProjectType> {
     const token = this.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
-    console.log(project);
     return this.http.post<ProjectType>(`/api/projects`, project,{headers});
+  }
+
+  updateProject(id:number, projectSettings: ProjectSettingsValueType): Observable<ProjectType> {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    return this.http.patch<ProjectType>(`/api/projects/${id}`, projectSettings,{headers});
+  }
+
+  deleteProject(id: number) {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    return this.http.delete(`/api/projects/${id}`, { headers });
   }
 
   getCollections(id: number): Observable<CollectionType[]> {
@@ -54,6 +66,4 @@ export class ProjectService {
   private getToken(): string | null {
     return localStorage.getItem("jwtToken");
   }
-
-
 }

@@ -8,7 +8,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {ToolbarModule} from "primeng/toolbar";
 import {ButtonModule} from "primeng/button";
 import {ToastModule} from "primeng/toast";
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import {MessageService} from "primeng/api";
     ButtonModule,
     ToastModule
   ],
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
