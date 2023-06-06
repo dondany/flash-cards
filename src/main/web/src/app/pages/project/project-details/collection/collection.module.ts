@@ -7,6 +7,10 @@ import {BreadcrumbModule} from "primeng/breadcrumb";
 import {CardModule} from "primeng/card";
 import {ButtonModule} from "primeng/button";
 import {DataViewModule} from "primeng/dataview";
+import {DialogModule} from "primeng/dialog";
+import {InputTextModule} from "primeng/inputtext";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MenuModule} from "primeng/menu";
 
 
 @NgModule({
@@ -19,7 +23,11 @@ import {DataViewModule} from "primeng/dataview";
         BreadcrumbModule,
         CardModule,
         ButtonModule,
-        DataViewModule
+        DataViewModule,
+        DialogModule,
+        InputTextModule,
+        ReactiveFormsModule,
+        MenuModule
     ]
 })
 export class CollectionModule { }
