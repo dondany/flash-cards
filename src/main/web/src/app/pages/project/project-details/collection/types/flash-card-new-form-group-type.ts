@@ -1,9 +1,9 @@
 import {FormControl, FormGroup} from "@angular/forms";
-import {FlashCardNewTypes} from "./flash-card-new-types";
+import {FlashCardNewType} from "./flash-card-new-type";
 
 type FlashCardNewFormGroupType = FormGroup<{
-  front: FormControl<FlashCardNewTypes['front']>,
-  back: FormControl<FlashCardNewTypes['back']>,
+  front: FormControl<FlashCardNewType['front']>,
+  back: FormControl<FlashCardNewType['back']>,
 }>;
 
 export type FlashCardNewFormControlType = FlashCardNewFormGroupType['controls'];

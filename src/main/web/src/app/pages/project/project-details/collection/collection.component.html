@@ -52,22 +52,42 @@
     </p-dataView>
   </section>
 </div>
-<p-dialog header="Header" [(visible)]="showNewFcModal" [modal]="true" [style]="{ width: '400px' }" [draggable]="false"
+<p-dialog [(visible)]="showNewFcModal" [modal]="true" [style]="{ width: '400px' }" [draggable]="false"
           [resizable]="false">
   <ng-template pTemplate="header">
     <span class="text-xl font-bold">New Flash Card</span>
   </ng-template>
   <section>
-    <form [formGroup]="formGroup" (ngSubmit)="handleOnSubmit()" autocomplete="off" class="flex flex-column gap-3">
+    <form [formGroup]="addFormGroup" (ngSubmit)="handleAddOnSubmit()" autocomplete="off" class="flex flex-column gap-3">
       <span class="p-float-label mt-3">
-          <input pInputText formControlName="front" class="col-12">
+          <input pInputText formControlName="front" class="col-12 p-inputtext-lg">
             <label htmlFor="front">Front</label>
           </span>
       <span class="p-float-label">
-          <input pInputText formControlName="back" class="col-12">
+          <input pInputText formControlName="back" class="col-12 p-inputtext-lg">
            <label htmlFor="back">Back</label>
           </span>
       <button pButton type="button" label="Add Flash Card" type="submit" class="ml-auto mt-3"
+              icon="pi pi-save"></button>
+    </form>
+  </section>
+</p-dialog>
+<p-dialog [(visible)]="showUpdateFcModal" [modal]="true" [style]="{ width: '400px' }" [draggable]="false"
+          [resizable]="false">
+  <ng-template pTemplate="header">
+    <span class="text-xl font-bold">Update Flash Card</span>
+  </ng-template>
+  <section>
+    <form [formGroup]="updateFormGroup" (ngSubmit)="handleUpdateOnSubmit()" autocomplete="off" class="flex flex-column gap-3">
+      <span class="p-float-label mt-3">
+          <input pInputText formControlName="front" class="col-12 p-inputtext-lg">
+            <label htmlFor="front">Front</label>
+          </span>
+      <span class="p-float-label">
+          <input pInputText formControlName="back" class="col-12 p-inputtext-lg">
+           <label htmlFor="back">Back</label>
+          </span>
+      <button pButton type="button" label="Save" type="submit" class="ml-auto mt-3"
               icon="pi pi-save"></button>
     </form>
   </section>

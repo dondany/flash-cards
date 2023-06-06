@@ -7,6 +7,7 @@ import {CollectionType} from "../../types/collection-type";
 import {FlashCardType} from "../../types/flash-card-type";
 import {FormBuilder, Validators} from "@angular/forms";
 import {FlashCardNewFormControlType} from "./types/flash-card-new-form-group-type";
+import {FlashCardUpdateFormControlType} from "./types/flash-card-update-form-group-type";
 
 @Component({
   selector: 'fc-collection',
@@ -22,12 +23,18 @@ export class CollectionComponent implements OnInit, OnDestroy {
 
   showNewFcModal: boolean = false;
   flashCard?: FlashCardType;
-  protected formGroup = this.formBuilder.group<FlashCardNewFormControlType>({
+  protected addFormGroup = this.formBuilder.group<FlashCardNewFormControlType>({
     front: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
     back: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
   });
   items!: MenuItem[];
   flashCardInFocus?: FlashCardType;
+
+  showUpdateFcModal: boolean = false;
+  protected updateFormGroup = this.formBuilder.group<FlashCardUpdateFormControlType>({
+    front: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
+    back: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
+  });
 
   constructor(private projectService: ProjectService,
               private activatedRoute: ActivatedRoute,
@@ -74,7 +81,6 @@ export class CollectionComponent implements OnInit, OnDestroy {
     ]
   }
 
-
   ngOnDestroy(): void {
     this.destroy.next();
     this.destroy.complete();
@@ -84,14 +90,29 @@ export class CollectionComponent implements OnInit, OnDestroy {
     this.showNewFcModal = true;
   }
 
-  handleOnSubmit() {
+  handleAddOnSubmit() {
     const projectId = this.activatedRoute.snapshot.params['id'];
     const collectionId = this.activatedRoute.snapshot.params['collectionId'];
-    const value = this.formGroup.value;
+    const value = this.addFormGroup.value;
     this.projectService.createFlashCard(projectId, collectionId, value)
       .subscribe((fc) => {
         this.showNewFcModal = false;
-        this.formGroup.reset();
+        this.addFormGroup.reset();
+        this.projectService.getFlashCards(projectId, this.collection.id)
+          .subscribe((flashCards) => {
+            this.flashCards = flashCards;
+          })
+      })
+  }
+
+  handleUpdateOnSubmit() {
+    const projectId = this.activatedRoute.snapshot.params['id'];
+    const collectionId = this.activatedRoute.snapshot.params['collectionId'];
+    const value = this.updateFormGroup.value;
+    this.projectService.updateFlashCard(projectId, collectionId, this.flashCardInFocus!.id, value)
+      .subscribe((fc) => {
+        this.showUpdateFcModal = false;
+        this.updateFormGroup.reset();
         this.projectService.getFlashCards(projectId, this.collection.id)
           .subscribe((flashCards) => {
             this.flashCards = flashCards;
@@ -104,7 +125,9 @@ export class CollectionComponent implements OnInit, OnDestroy {
   }
 
   updateFc() {
-
+    this.showUpdateFcModal = true;
+    this.updateFormGroup.controls.front.setValue(this.flashCardInFocus!.front);
+    this.updateFormGroup.controls.back.setValue(this.flashCardInFocus!.back);
   }
 
   deleteFc() {
