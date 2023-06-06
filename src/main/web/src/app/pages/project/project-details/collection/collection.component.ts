@@ -26,11 +26,14 @@ export class CollectionComponent implements OnInit, OnDestroy {
     front: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
     back: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
   });
+  items!: MenuItem[];
+  flashCardInFocus?: FlashCardType;
 
   constructor(private projectService: ProjectService,
               private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder,
-              private router: Router) {}
+              private router: Router) {
+  }
 
   ngOnInit(): void {
     const projectId = this.activatedRoute.snapshot.params['id'];
@@ -42,7 +45,7 @@ export class CollectionComponent implements OnInit, OnDestroy {
           this.breadCrumbItems = [
             {label: 'Projects', routerLink: '/projects'},
             {label: collection.projectName, routerLink: `/projects/${projectId}`},
-            {label: collection.name, routerLink: `/projects/${projectId}/collections/${collectionId}` }
+            {label: collection.name, routerLink: `/projects/${projectId}/collections/${collectionId}`}
           ];
           this.homeItem = {icon: 'pi pi-home', routerLink: '/../'};
         }),
@@ -52,6 +55,23 @@ export class CollectionComponent implements OnInit, OnDestroy {
         })
       )
       .subscribe();
+
+    this.items = [
+      {
+        label: 'Update',
+        icon: 'pi pi-pencil',
+        command: () => {
+          this.updateFc();
+        }
+      },
+      {
+        label: 'Delete',
+        icon: 'pi pi-trash',
+        command: () => {
+          this.deleteFc();
+        }
+      }
+    ]
   }
 
 
@@ -66,7 +86,7 @@ export class CollectionComponent implements OnInit, OnDestroy {
 
   handleOnSubmit() {
     const projectId = this.activatedRoute.snapshot.params['id'];
-    const collectionId = this.activatedRoute.snapshot.params['id'];
+    const collectionId = this.activatedRoute.snapshot.params['collectionId'];
     const value = this.formGroup.value;
     this.projectService.createFlashCard(projectId, collectionId, value)
       .subscribe((fc) => {
@@ -78,4 +98,28 @@ export class CollectionComponent implements OnInit, OnDestroy {
           })
       })
   }
+
+  onMenuClick(fc: FlashCardType) {
+    this.flashCardInFocus = fc;
+  }
+
+  updateFc() {
+
+  }
+
+  deleteFc() {
+    const projectId = this.activatedRoute.snapshot.params['id'];
+    const collectionId = this.activatedRoute.snapshot.params['collectionId'];
+    this.projectService.deleteFlashCard(projectId, collectionId, this.flashCardInFocus!.id)
+      .subscribe(() => {
+        this.projectService.getFlashCards(projectId, this.collection.id)
+          .subscribe((flashCards) => {
+            this.flashCards = flashCards;
+          })
+      })
+  }
 }
+
+
+
+

@@ -10,22 +10,24 @@ import {DataViewModule} from "primeng/dataview";
 import {DialogModule} from "primeng/dialog";
 import {InputTextModule} from "primeng/inputtext";
 import {ReactiveFormsModule} from "@angular/forms";
+import {MenuModule} from "primeng/menu";
 
 
 @NgModule({
   declarations: [
     CollectionComponent
   ],
-  imports: [
-    CommonModule,
-    CollectionRoutingModule,
-    BreadcrumbModule,
-    CardModule,
-    ButtonModule,
-    DataViewModule,
-    DialogModule,
-    InputTextModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        CollectionRoutingModule,
+        BreadcrumbModule,
+        CardModule,
+        ButtonModule,
+        DataViewModule,
+        DialogModule,
+        InputTextModule,
+        ReactiveFormsModule,
+        MenuModule
+    ]
 })
 export class CollectionModule { }

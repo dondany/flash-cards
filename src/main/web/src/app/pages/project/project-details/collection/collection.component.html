@@ -33,7 +33,15 @@
         <div class="col-12 md:col-3 lg:col-2 xl:col-2">
           <p-card styleClass="mr-2 mb-2">
             <ng-template pTemplate="title">
-              {{ fc?.front }}
+              <div class="flex align-items-center justify-content-between">
+                {{ fc?.front }}
+                <div class="">
+                  <p-menu #menu [model]="items" [popup]="true" appendTo="body"></p-menu>
+                  <p-button (click)="menu.toggle($event);onMenuClick(fc)" icon="pi pi-ellipsis-v"
+                            styleClass="p-button-rounded p-button-secondary p-button-text"></p-button>
+                </div>
+
+              </div>
             </ng-template>
             <ng-template pTemplate="subtitle">
               {{ fc?.back}}

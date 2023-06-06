@@ -67,7 +67,13 @@ export class ProjectService {
   createFlashCard(projectId: number, collectionId: number, fc: FlashCardNewValueType): Observable<FlashCardType> {
     const token = this.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post<FlashCardType>(`/api/projects/${projectId}/collections/${collectionId}/flash-cards`, fc,{ headers });
+    return this.http.post<FlashCardType>(`/api/projects/${projectId}/collections/${collectionId}/flash-cards`, fc, {headers});
+  }
+
+  deleteFlashCard(projectId: number, collectionId: number, id: number) {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    return this.http.delete(`/api/projects/${projectId}/collections/${collectionId}/flash-cards/${id}`, { headers });
   }
 
   private getToken(): string | null {
