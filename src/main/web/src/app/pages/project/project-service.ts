@@ -10,6 +10,9 @@ import {ProjectSettingsValueType} from "./project-details/project-settings/types
 import {FlashCardNewValueType} from "./project-details/collection/types/flash-card-new-form-group-type";
 import {FlashCardUpdateValueType} from "./project-details/collection/types/flash-card-update-form-group-type";
 import {CollectionAddFormValueType} from "./project-details/collection-add/types/collection-add-form-group-type";
+import {
+  CollectionSettingsValueType
+} from "./project-details/collection/collection-settings/types/collection-settings-form-group-type";
 
 @Injectable({
   providedIn: 'root',
@@ -64,6 +67,18 @@ export class ProjectService {
     const token = this.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
     return this.http.post<CollectionType>(`/api/projects/${projectId}/collections`, collection,{headers});
+  }
+
+  updateCollection(projectId: any, collectionId: any, collection: CollectionSettingsValueType) : Observable<CollectionType> {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    return this.http.patch<CollectionType>(`/api/projects/${projectId}/collections/${collectionId}`, collection,{headers});
+  }
+
+  deleteCollection(projectId: number, collectionId: number) {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    return this.http.delete(`/api/projects/${projectId}/collections/${collectionId}`, {headers});
   }
 
   getFlashCards(projectId: number, collectionId: number): Observable<FlashCardType[]> {

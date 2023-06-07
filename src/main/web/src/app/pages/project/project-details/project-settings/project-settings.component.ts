@@ -46,7 +46,7 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
           this.breadCrumbItems = [
             {label: 'Projects', routerLink: '/projects'},
             {label: project.name, routerLink: `/projects/${project.id}`},
-            {label: 'Settings', routerLink: `/projects/add`}
+            {label: 'Settings', routerLink: `/projects/settings`}
           ];
           this.homeItem = {icon: 'pi pi-home', routerLink: '/../'};
         })).subscribe();
