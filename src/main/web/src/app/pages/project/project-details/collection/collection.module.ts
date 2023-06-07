@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { CollectionRoutingModule } from './collection-routing.module';
-import { CollectionComponent } from './collection.component';
+import {CollectionRoutingModule} from './collection-routing.module';
+import {CollectionComponent} from './collection.component';
 import {BreadcrumbModule} from "primeng/breadcrumb";
 import {CardModule} from "primeng/card";
 import {ButtonModule} from "primeng/button";
@@ -17,17 +17,18 @@ import {MenuModule} from "primeng/menu";
   declarations: [
     CollectionComponent
   ],
-    imports: [
-        CommonModule,
-        CollectionRoutingModule,
-        BreadcrumbModule,
-        CardModule,
-        ButtonModule,
-        DataViewModule,
-        DialogModule,
-        InputTextModule,
-        ReactiveFormsModule,
-        MenuModule
-    ]
+  imports: [
+    CommonModule,
+    CollectionRoutingModule,
+    BreadcrumbModule,
+    CardModule,
+    ButtonModule,
+    DataViewModule,
+    DialogModule,
+    InputTextModule,
+    ReactiveFormsModule,
+    MenuModule
+  ]
 })
-export class CollectionModule { }
+export class CollectionModule {
+}
