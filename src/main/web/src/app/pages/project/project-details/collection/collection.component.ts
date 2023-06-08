@@ -141,6 +141,22 @@ export class CollectionComponent implements OnInit, OnDestroy {
           })
       })
   }
+
+  get frontCreate() {
+    return this.addFormGroup.controls.front;
+  }
+
+  get backCreate() {
+    return this.addFormGroup.controls.back;
+  }
+
+  get frontUpdate() {
+    return this.updateFormGroup.controls.front;
+  }
+
+  get backUpdate() {
+    return this.updateFormGroup.controls.back;
+  }
 }
 
 
