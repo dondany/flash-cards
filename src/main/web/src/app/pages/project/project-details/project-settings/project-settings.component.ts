@@ -6,6 +6,7 @@ import {ProjectService} from "../../project-service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subject, takeUntil, tap} from "rxjs";
 import {ProjectType} from "../../types/project-type";
+import {ProjectSettingsFormControlType} from "./types/project-settings-form-group-type";
 
 @Component({
   selector: 'fc-project-settings',
@@ -15,7 +16,7 @@ import {ProjectType} from "../../types/project-type";
 export class ProjectSettingsComponent implements OnInit, OnDestroy {
   private destroy = new Subject<void>();
 
-  protected formGroup = this.formBuilder.group<AddProjectFormControlType>({
+  protected formGroup = this.formBuilder.group<ProjectSettingsFormControlType>({
     name: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
     description: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
     visibility: this.formBuilder.control('PRIVATE', {validators: [Validators.required], nonNullable: true})

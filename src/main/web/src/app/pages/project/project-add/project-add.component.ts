@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 })
 export class ProjectAddComponent implements OnInit{
   protected formGroup = this.formBuilder.group<AddProjectFormControlType>({
-    name: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
+    name: this.formBuilder.control('', {validators: Validators.required, nonNullable: true}),
     description: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
     visibility: this.formBuilder.control('PRIVATE', { validators: [Validators.required], nonNullable: true})
   })
