@@ -10,23 +10,25 @@ import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import {ToastModule} from "primeng/toast";
 import {RadioButtonModule} from "primeng/radiobutton";
+import {MessageModule} from "primeng/message";
 
 
 @NgModule({
   declarations: [
     ProjectAddComponent
   ],
-  imports: [
-    CommonModule,
-    ProjectAddRoutingModule,
-    CardModule,
-    BreadcrumbModule,
-    ReactiveFormsModule,
-    InputTextModule,
-    ButtonModule,
-    ToastModule,
-    RadioButtonModule
-  ],
+    imports: [
+        CommonModule,
+        ProjectAddRoutingModule,
+        CardModule,
+        BreadcrumbModule,
+        ReactiveFormsModule,
+        InputTextModule,
+        ButtonModule,
+        ToastModule,
+        RadioButtonModule,
+        MessageModule
+    ],
   providers: []
 })
 export class ProjectAddModule { }

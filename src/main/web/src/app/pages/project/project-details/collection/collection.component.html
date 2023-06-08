@@ -17,7 +17,8 @@
             <span>{{collection.numberOfFlashCards}}</span>
           </div>
           <p-button icon="pi pi-cog" label="Settings"
-                    styleClass="p-button-outlined p-button-sm p-button-secondary" [routerLink]="['settings']"></p-button>
+                    styleClass="p-button-outlined p-button-sm p-button-secondary"
+                    [routerLink]="['settings']"></p-button>
         </div>
       </ng-template>
     </p-card>
@@ -63,12 +64,15 @@
           <input pInputText formControlName="front" class="col-12 p-inputtext-lg">
             <label htmlFor="front">Front</label>
           </span>
+      <small *ngIf="frontCreate.errors?.['required'] && !frontCreate.pristine" class="p-error">Front is
+        required.</small>
       <span class="p-float-label">
           <input pInputText formControlName="back" class="col-12 p-inputtext-lg">
            <label htmlFor="back">Back</label>
           </span>
+      <small *ngIf="backCreate.errors?.['required'] && !backCreate.pristine" class="p-error">Back is required.</small>
       <button pButton type="button" label="Add Flash Card" type="submit" class="ml-auto mt-3"
-              icon="pi pi-save"></button>
+              icon="pi pi-save" [disabled]="!addFormGroup.valid"></button>
     </form>
   </section>
 </p-dialog>
@@ -78,17 +82,21 @@
     <span class="text-xl font-bold">Update Flash Card</span>
   </ng-template>
   <section>
-    <form [formGroup]="updateFormGroup" (ngSubmit)="handleUpdateOnSubmit()" autocomplete="off" class="flex flex-column gap-3">
+    <form [formGroup]="updateFormGroup" (ngSubmit)="handleUpdateOnSubmit()" autocomplete="off"
+          class="flex flex-column gap-3">
       <span class="p-float-label mt-3">
           <input pInputText formControlName="front" class="col-12 p-inputtext-lg">
             <label htmlFor="front">Front</label>
           </span>
+      <small *ngIf="frontUpdate.errors?.['required'] && !frontUpdate.pristine" class="p-error">Front is
+        required.</small>
       <span class="p-float-label">
           <input pInputText formControlName="back" class="col-12 p-inputtext-lg">
            <label htmlFor="back">Back</label>
           </span>
+      <small *ngIf="backUpdate.errors?.['required'] && !backUpdate.pristine" class="p-error">Front is required.</small>
       <button pButton type="button" label="Save" type="submit" class="ml-auto mt-3"
-              icon="pi pi-save"></button>
+              icon="pi pi-save" [disabled]="!updateFormGroup.valid"></button>
     </form>
   </section>
 </p-dialog>
