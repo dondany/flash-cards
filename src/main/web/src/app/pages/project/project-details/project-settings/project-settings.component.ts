@@ -62,6 +62,7 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
           summary: 'Confirmed',
           detail: `Settings for project ${project.name} have been saved!`,
         });
+        this.formGroup.markAsPristine();
       });
   }
 
@@ -87,5 +88,13 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
           })
       }
     });
+  }
+
+  get name() {
+    return this.formGroup.controls.name;
+  }
+
+  get description() {
+    return this.formGroup.controls.description;
   }
 }

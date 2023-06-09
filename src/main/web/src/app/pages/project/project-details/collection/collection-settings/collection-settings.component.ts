@@ -63,6 +63,7 @@ export class CollectionSettingsComponent implements OnInit, OnDestroy  {
           summary: 'Confirmed',
           detail: `Settings for collection ${collection.name} have been saved!`,
         });
+        this.formGroup.markAsPristine();
       });
   }
 
@@ -90,5 +91,12 @@ export class CollectionSettingsComponent implements OnInit, OnDestroy  {
     this.destroy.complete();
   }
 
+  get name() {
+    return this.formGroup.controls.name;
+  }
+
+  get description() {
+    return this.formGroup.controls.description;
+  }
 
 }
