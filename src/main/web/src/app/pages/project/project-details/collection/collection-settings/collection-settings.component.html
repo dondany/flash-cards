@@ -15,12 +15,18 @@
           <input pInputText formControlName="name" class="col-12 p-inputtext-lg">
             <label htmlFor="name">Name</label>
           </span>
+          <small *ngIf="description.errors?.['required'] && !description.pristine" class="p-error">Description is
+            required.</small>
+
           <span class="p-float-label">
           <input pInputText formControlName="description" class="col-12 p-inputtext-lg">
            <label htmlFor="description">Description</label>
           </span>
+          <small *ngIf="description.errors?.['required'] && !description.pristine" class="p-error">Description is
+            required.</small>
+
           <button pButton type="button" label="Save Settings" type="submit" class="ml-auto"
-                  icon="pi pi-save"></button>
+                  icon="pi pi-save" [disabled]="!formGroup.valid || formGroup.pristine"></button>
         </form>
         <p-divider></p-divider>
         <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
