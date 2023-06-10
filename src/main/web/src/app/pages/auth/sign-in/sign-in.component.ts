@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {SignInFormControlType} from "./types/sign-in-form-group.type";
+import {SignInFormControlType} from "../types/sign-in-form-group.type";
 import {FormBuilder, Validators} from "@angular/forms";
-import {AuthenticationService} from "./services/authentication.service";
+import {AuthenticationService} from "../services/authentication.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent {
-  protected formGroup = this.formBuilder.group<SignInFormControlType>({
+  protected singInFormGroup = this.formBuilder.group<SignInFormControlType>({
     email: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
     password: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
   })
@@ -21,18 +21,18 @@ export class SignInComponent {
   }
 
   handleOnSubmit() {
-    const value = this.formGroup.value;
+    const value = this.singInFormGroup.value;
     this.authenticationService.authenticate(value, () => {
       this.router.navigate(['projects']);
     });
   }
 
   get email() {
-    return this.formGroup.controls.email;
+    return this.singInFormGroup.controls.email;
   }
 
   get password() {
-    return this.formGroup.controls.password;
+    return this.singInFormGroup.controls.password;
   }
 
 }

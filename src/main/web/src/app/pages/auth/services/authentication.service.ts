@@ -2,16 +2,19 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {TokenResponseType} from "../types/token-response.type";
 import {SignInFormValueType} from "../types/sign-in-form-group.type";
+import {SignUpType} from "../types/sign-up.type";
+import {SignUpFormValueType} from "../types/sign-up-form-group.type";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   authenticate(signIn: SignInFormValueType, callback: Function) {
-    this.http.post<TokenResponseType>('http://localhost:8080/api/v1/auth/authenticate', signIn)
+    this.http.post<TokenResponseType>('/api/auth/authenticate', signIn)
       .subscribe(response => {
         const token = response.token;
         localStorage.setItem('jwtToken', token);
@@ -19,11 +22,12 @@ export class AuthenticationService {
       })
   }
 
-  // register(signUp: SignUpType) {
-  //   this.http.post<TokenResponseType>('', signUp)
-  //     .subscribe(response => {
-  //       const token = response.token;
-  //       localStorage.setItem('jtwToken', token);
-  //     })
-  // }
+  register(signUp: SignUpFormValueType, callback: Function) {
+    this.http.post<TokenResponseType>('/api/auth/register', signUp)
+      .subscribe(response => {
+        const token = response.token;
+        localStorage.setItem('jwtToken', token);
+        callback();
+      })
+  }
 }
