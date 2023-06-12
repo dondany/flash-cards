@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {SignInFormControlType} from "../types/sign-in-form-group.type";
 import {FormBuilder, Validators} from "@angular/forms";
-import {AuthenticationService} from "../services/authentication.service";
+import {AuthenticationService} from "../../../shared/services/authentication.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -22,7 +22,7 @@ export class SignInComponent {
 
   handleOnSubmit() {
     const value = this.singInFormGroup.value;
-    this.authenticationService.authenticate(value, () => {
+    this.authenticationService.signIn(value, () => {
       this.router.navigate(['projects']);
     });
   }

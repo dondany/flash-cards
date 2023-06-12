@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {SignInFormControlType} from "../types/sign-in-form-group.type";
 import {FormBuilder, Validators} from "@angular/forms";
-import {AuthenticationService} from "../services/authentication.service";
+import {AuthenticationService} from "../../../shared/services/authentication.service";
 import {Router} from "@angular/router";
 import {SignUpFormControlType} from "../types/sign-up-form-group.type";
 
