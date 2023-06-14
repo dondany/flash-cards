@@ -9,7 +9,19 @@
     </div>
     <div *ngIf="isUserAuthenticated()" class="">
       <p-menu #menu [model]="menuItems" [popup]="true" appendTo="body"></p-menu>
-      <button pButton type="button" (click)="menu.toggle($event)" icon="pi pi-bars" [label]="user!.username"></button>
+      <div class="user flex align-items-center gap-3">
+        <button class="user-button m-0 p-0" pBadge severity="danger">
+          <i class="pi pi-bell">
+          </i>
+        </button>
+        <div class="flex align-items-center gap-1">
+          <p-avatar image="https://i.pravatar.cc/30" shape="circle">
+          </p-avatar>
+          <button class="user-button m-0 p-0" (click)="menu.toggle($event)">
+            <i class="pi pi-angle-down"></i>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
