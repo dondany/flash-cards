@@ -11,3 +11,21 @@ nav {
     color: var(--surface-0);
   }
 }
+
+.user-button {
+  border: none;
+  background: none;
+
+  i {
+    color: white;
+    opacity: .7;
+    transition: all 150ms ease-in-out 0s;
+
+    &:hover{
+      cursor: pointer;
+      opacity: 1;
+    }
+  }
+}
+
+
