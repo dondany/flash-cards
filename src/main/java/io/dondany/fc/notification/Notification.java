@@ -1,6 +1,9 @@
 package io.dondany.fc.notification;
 
+import io.dondany.fc.notification.model.NotificationPayload;
+import io.dondany.fc.notification.model.NotificationPayloadConverter;
 import io.dondany.fc.user.User;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +26,11 @@ public class Notification {
     private String message;
 
     private boolean read;
+
+    private String type;
+
+    @Convert(converter = NotificationPayloadConverter.class)
+    private NotificationPayload payload;
 
     public Long getId() {
         return id;
@@ -54,5 +62,21 @@ public class Notification {
 
     public void setRead(boolean read) {
         this.read = read;
+    }
+
+    public NotificationPayload getPayload() {
+        return payload;
+    }
+
+    public void setPayload(NotificationPayload payload) {
+        this.payload = payload;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

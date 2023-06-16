@@ -20,6 +20,7 @@ public class Friend {
     @ManyToOne
     private User friendTwo;
 
+
     public Long getId() {
         return id;
     }
