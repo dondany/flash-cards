@@ -1,6 +1,7 @@
 package io.dondany.fc.project;
 
 import io.dondany.fc.notification.NotificationService;
+import io.dondany.fc.notification.model.NotificationTypes;
 import io.dondany.fc.project.model.CreateProjectShareDto;
 import io.dondany.fc.project.model.Visibility;
 import io.dondany.fc.project.share.ProjectShare;
@@ -95,6 +96,7 @@ public class ProjectService {
         String senderName = project.getOwner().getFirstname();
         notificationService.createNotification(
                 user,
+                NotificationTypes.STANDARD,
                 String.format("User %s shared the project %s with You!", senderName, project.getName())
         );
     }

@@ -1,6 +1,7 @@
 package io.dondany.fc.project.star;
 
 import io.dondany.fc.notification.NotificationService;
+import io.dondany.fc.notification.model.NotificationTypes;
 import io.dondany.fc.project.Project;
 import io.dondany.fc.project.ProjectRepository;
 import io.dondany.fc.project.model.ProjectDto;
@@ -55,6 +56,7 @@ public class ProjectStarService {
         String senderName = project.getOwner().getFirstname();
         notificationService.createNotification(
                 recipient,
+                NotificationTypes.STANDARD,
                 String.format("User %s starred your project %s!", senderName, project.getName())
         );
     }

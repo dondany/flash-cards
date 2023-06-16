@@ -5,6 +5,7 @@ import io.dondany.fc.friend.model.FriendInfoDto;
 import io.dondany.fc.friend.model.FriendInfoMapper;
 import io.dondany.fc.notification.Notification;
 import io.dondany.fc.notification.NotificationService;
+import io.dondany.fc.notification.model.FriendNotificationPayload;
 import io.dondany.fc.project.Project;
 import io.dondany.fc.user.User;
 import io.dondany.fc.user.UserRepository;
@@ -43,14 +44,18 @@ public class FriendService {
         friend.setFriendOne(userOne);
         friend.setFriendTwo(userTwo);
 
-        createFriendNotification(userOne, userTwo);
-        return FriendInfoMapper.INSTANCE.map(friendRepository.save(friend));
+
+        FriendInfoDto friendInfoDto = FriendInfoMapper.INSTANCE.map(friendRepository.save(friend));
+        createFriendNotification(friend);
+        return friendInfoDto;
     }
 
-    private void createFriendNotification(User friendOne, User friendTwo) {
+    private void createFriendNotification(Friend friend) {
         notificationService.createNotification(
-                friendTwo,
-                String.format("User %s added You as a friend!", friendOne.getUsername())
+                friend.getFriendTwo(),
+                String.format("User %s added You as a friend!", friend.getFriendOne().getUsername()),
+                "friend-request",
+                new FriendNotificationPayload(friend.getId())
         );
     }
 }
