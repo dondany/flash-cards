@@ -3,12 +3,11 @@ package io.dondany.fc.friend;
 import io.dondany.fc.friend.model.AddFriendDto;
 import io.dondany.fc.friend.model.FriendInfoDto;
 import io.dondany.fc.friend.model.FriendInfoMapper;
-import io.dondany.fc.notification.Notification;
 import io.dondany.fc.notification.NotificationService;
 import io.dondany.fc.notification.model.FriendNotificationPayload;
-import io.dondany.fc.project.Project;
 import io.dondany.fc.user.User;
 import io.dondany.fc.user.UserRepository;
+import io.dondany.fc.user.model.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -26,10 +25,16 @@ public class FriendService {
 
     private final NotificationService notificationService;
 
+    /**
+     * Get all friends of a user
+     *
+     * @param user user
+     * @return friends
+     */
     public List<FriendInfoDto> getFriends(User user) {
-        return friendRepository.findAllByFriendOne(user)
+        return friendRepository.findAllByFriendOneOrFriendTwo(user, user)
                 .stream()
-                .map(FriendInfoMapper.INSTANCE::map)
+                .map(friend -> mapFriendToFriendDto(user, friend))
                 .toList();
     }
 
@@ -57,5 +62,16 @@ public class FriendService {
                 "friend-request",
                 new FriendNotificationPayload(friend.getId())
         );
+    }
+
+    private FriendInfoDto mapFriendToFriendDto(User user, Friend friend) {
+        FriendInfoDto dto = new FriendInfoDto();
+        dto.setId(friend.getId());
+        if (user.equals(friend.getFriendOne())) {
+            dto.setFriend(UserMapper.INSTANCE.map(friend.getFriendTwo()));
+        } else {
+            dto.setFriend(UserMapper.INSTANCE.map(friend.getFriendOne()));
+        }
+        return dto;
     }
 }

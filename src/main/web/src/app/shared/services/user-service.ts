@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {UserType} from "./user-type";
 
@@ -15,5 +15,12 @@ export class UserService {
     const token = localStorage.getItem("jwtToken");
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
     return this.http.get<UserType>('/api/users', {headers});
+  }
+
+  getUsersByFirstname(firstname: string): Observable<UserType[]> {
+    const token = localStorage.getItem("jwtToken");
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    const params = new HttpParams().set("firstname", firstname);
+    return this.http.get<UserType[]>('/api/users', { params, headers});
   }
 }
