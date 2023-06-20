@@ -14,7 +14,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public List<UserDto> getUsersByFirstname(String name){
-        return userRepository.findAllByFirstname(name)
+        return userRepository.findByFirstnameContainingIgnoreCase(name)
                 .stream()
                 .map(UserMapper.INSTANCE::map)
                 .toList();
