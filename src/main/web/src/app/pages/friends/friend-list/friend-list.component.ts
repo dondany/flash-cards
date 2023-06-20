@@ -14,6 +14,8 @@ export class FriendListComponent implements OnInit {
   breadCrumbItems?: MenuItem[];
   homeItem?: MenuItem;
   friends?: FriendType[];
+  friendsRequests?: FriendType[];
+
   showNewFriendModal: boolean = false;
   searchUserInput: string = '';
 
@@ -47,7 +49,29 @@ export class FriendListComponent implements OnInit {
   init() {
     this.friendsService.getFriends()
       .subscribe((friends) => {
-        this.friends = friends;
+        this.friends = friends.filter(friend => friend.status === 'ACCEPTED');
+        this.friendsRequests = friends.filter(friend => friend.status === 'PENDING');
+      });
+  }
+
+  acceptFriend(id: number) {
+    this.friendsService.acceptFriend(id)
+      .subscribe((friend) => {
+        this.init();
+      });
+  }
+
+  rejectFriend(id: number) {
+    this.friendsService.rejectFriend(id)
+      .subscribe((friend) => {
+        this.init();
+      });
+  }
+
+  deleteFriend(id: number) {
+    this.friendsService.deleteFriend(id)
+      .subscribe(() => {
+        this.init();
       });
   }
 
