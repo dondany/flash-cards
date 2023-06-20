@@ -3,10 +3,28 @@
 --harry.potter@hgwrts.com/pass
 INSERT INTO "_user"
 (id, email, firstname, lastname, "password", "role")
-VALUES(1, 'harry', 'harry', 'potter', '$2a$10$P6G7ztCfBQ.zN0f4SQuSLexql1DicStxH2gb/MeyX7dEVmtmbTEaO', 'USER');
--- VALUES(1, 'harry.potter@hgwrts.com', 'harry', 'potter', '$2a$10$P6G7ztCfBQ.zN0f4SQuSLexql1DicStxH2gb/MeyX7dEVmtmbTEaO', 'USER');
+VALUES(1, 'harry', 'Harry', 'Potter', '$2a$10$P6G7ztCfBQ.zN0f4SQuSLexql1DicStxH2gb/MeyX7dEVmtmbTEaO', 'USER');
+INSERT INTO "_user"
+(id, email, firstname, lastname, "password", "role")
+VALUES(2, 'ron', 'Ron', 'Weasley', '$2a$10$P6G7ztCfBQ.zN0f4SQuSLexql1DicStxH2gb/MeyX7dEVmtmbTEaO', 'USER');
+INSERT INTO "_user"
+(id, email, firstname, lastname, "password", "role")
+VALUES(3, 'hermione', 'Hermione', 'Granger', '$2a$10$P6G7ztCfBQ.zN0f4SQuSLexql1DicStxH2gb/MeyX7dEVmtmbTEaO', 'USER');
 
 SELECT setval('_user_seq', (SELECT max(id) FROM _user));
+
+---------- Friends ------------
+INSERT INTO "friend"
+(id, friend_one_id, friend_two_id, status)
+VALUES(1, 1, 2, 'ACCEPTED');
+INSERT INTO "friend"
+(id, friend_one_id, friend_two_id, status)
+VALUES(2, 1, 3, 'ACCEPTED');
+INSERT INTO "friend"
+(id, friend_one_id, friend_two_id, status)
+VALUES(3, 2, 3, 'PENDING');
+
+SELECT setval('friend_id_seq', (SELECT max(id) FROM _user));
 
 ---------- PROJECTS ------------
 INSERT INTO public.project (id,description,"name",owner_id,visibility) VALUES

@@ -54,7 +54,7 @@ export class CollectionComponent implements OnInit, OnDestroy {
             {label: collection.projectName, routerLink: `/projects/${projectId}`},
             {label: collection.name, routerLink: `/projects/${projectId}/collections/${collectionId}`}
           ];
-          this.homeItem = {icon: 'pi pi-home', routerLink: '/../'};
+          this.homeItem = {icon: 'pi pi-home', routerLink: '/home'};
         }),
         switchMap(() => this.projectService.getFlashCards(projectId, collectionId)),
         tap((flashCards) => {

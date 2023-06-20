@@ -1,7 +1,10 @@
 package io.dondany.fc.friend;
 
+import io.dondany.fc.friend.model.FriendStatus;
 import io.dondany.fc.user.User;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,6 +22,9 @@ public class Friend {
 
     @ManyToOne
     private User friendTwo;
+
+    @Enumerated(EnumType.STRING)
+    private FriendStatus status;
 
 
     public Long getId() {
@@ -43,5 +49,13 @@ public class Friend {
 
     public void setFriendTwo(User friendTwo) {
         this.friendTwo = friendTwo;
+    }
+
+    public FriendStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(FriendStatus status) {
+        this.status = status;
     }
 }

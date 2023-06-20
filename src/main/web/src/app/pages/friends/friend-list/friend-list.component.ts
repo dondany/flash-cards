@@ -14,7 +14,9 @@ export class FriendListComponent implements OnInit {
   breadCrumbItems?: MenuItem[];
   homeItem?: MenuItem;
   friends?: FriendType[];
-  showNewFriendModal: boolean = true;
+  friendsRequests?: FriendType[];
+
+  showNewFriendModal: boolean = false;
   searchUserInput: string = '';
 
   users?: UserType[];
@@ -23,20 +25,54 @@ export class FriendListComponent implements OnInit {
               private userService: UserService) {}
 
   ngOnInit(): void {
-    this.friendsService.getFriends()
-      .subscribe((friends) => {
-        this.friends = friends;
-      });
+    this.init();
 
     this.breadCrumbItems = [{ label: 'Friends', routerLink: '/friends'}];
-    this.homeItem = { icon: 'pi pi-home', routerLink: '/../'}
+    this.homeItem = { icon: 'pi pi-home', routerLink: '/home'}
   }
 
   handleOnSubmit() {
     this.userService.getUsersByFirstname(this.searchUserInput)
       .subscribe((users => {
         this.users = users;
-        console.log(users);
-      }))
+      }));
   }
+
+  addFriend(id: number) {
+    this.friendsService.addFriend(id)
+      .subscribe((friend) => {
+        this.init();
+        this.showNewFriendModal = false;
+      });
+  }
+
+  init() {
+    this.friendsService.getFriends()
+      .subscribe((friends) => {
+        this.friends = friends.filter(friend => friend.status === 'ACCEPTED');
+        this.friendsRequests = friends.filter(friend => friend.status === 'PENDING');
+      });
+  }
+
+  acceptFriend(id: number) {
+    this.friendsService.acceptFriend(id)
+      .subscribe((friend) => {
+        this.init();
+      });
+  }
+
+  rejectFriend(id: number) {
+    this.friendsService.rejectFriend(id)
+      .subscribe((friend) => {
+        this.init();
+      });
+  }
+
+  deleteFriend(id: number) {
+    this.friendsService.deleteFriend(id)
+      .subscribe(() => {
+        this.init();
+      });
+  }
+
 }

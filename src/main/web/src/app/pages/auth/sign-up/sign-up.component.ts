@@ -26,7 +26,7 @@ export class SignUpComponent {
   handleOnSubmit() {
     const value = this.singUpFormGroup.value;
     this.authenticationService.register(value, () => {
-      this.router.navigate(['../projects']);
+      this.router.navigate(['home']);
     });
   }
 

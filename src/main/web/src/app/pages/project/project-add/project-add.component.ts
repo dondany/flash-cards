@@ -31,7 +31,7 @@ export class ProjectAddComponent implements OnInit{
       {label: 'Projects', routerLink: '/projects'},
       {label:  'Add New', routerLink: `/projects/add`}
     ];
-    this.homeItem = {icon: 'pi pi-home', routerLink: '/../'};
+    this.homeItem = {icon: 'pi pi-home', routerLink: '/home'};
   }
 
   handleOnSubmit() {

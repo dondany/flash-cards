@@ -31,7 +31,7 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
             {label: 'Projects', routerLink: '/projects'},
             {label: this.project?.name, routerLink: `/projects/${projectId}`}
           ];
-          this.homeItem = {icon: 'pi pi-home', routerLink: '/../'};
+          this.homeItem = {icon: 'pi pi-home', routerLink: '/home'};
         }),
         switchMap(() => this.projectService.getCollections(projectId)),
         tap((collections) => {

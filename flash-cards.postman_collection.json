@@ -1065,6 +1065,38 @@
 					"response": []
 				},
 				{
+					"name": "Delete a Friend",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/friends/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"friends",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Add a Friend",
 					"request": {
 						"auth": {
@@ -1081,7 +1113,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\": 2\r\n}",
+							"raw": "{\r\n    \"userId\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1099,6 +1131,72 @@
 								"api",
 								"v1",
 								"friends"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accept a Friend",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/friends/4/accept",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"friends",
+								"4",
+								"accept"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reject a Friend",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/friends/4/reject",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"friends",
+								"4",
+								"reject"
 							]
 						}
 					},
@@ -1195,7 +1293,7 @@
 			"response": []
 		},
 		{
-			"name": "Authenticate Ron",
+			"name": "Authenticate Dumbledore",
 			"event": [
 				{
 					"listen": "test",
@@ -1216,7 +1314,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"ron.weasly@ghwrts.com\",\r\n    \"password\": \"pass\"\r\n}",
+					"raw": "{\r\n    \"email\": \"albus\",\r\n    \"password\": \"pass\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1241,7 +1339,7 @@
 			"response": []
 		},
 		{
-			"name": "Register Ron",
+			"name": "Register Dumbledore",
 			"event": [
 				{
 					"listen": "test",
@@ -1259,7 +1357,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"firstname\": \"ron\",\r\n    \"lastname\": \"weasley\",\r\n    \"email\": \"ron.weasly@ghwrts.com\",\r\n    \"password\": \"pass\"\r\n\r\n}",
+					"raw": "{\r\n    \"firstname\": \"Albus\",\r\n    \"lastname\": \"Dumbledor\",\r\n    \"email\": \"albus\",\r\n    \"password\": \"pass\"\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
