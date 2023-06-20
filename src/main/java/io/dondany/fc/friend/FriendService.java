@@ -95,11 +95,27 @@ public class FriendService {
         dto.setId(friend.getId());
         if (user.equals(friend.getFriendOne())) {
             dto.setFriend(UserMapper.INSTANCE.map(friend.getFriendTwo()));
+            dto.setInitiator(true);
         } else {
+            dto.setInitiator(false);
             dto.setFriend(UserMapper.INSTANCE.map(friend.getFriendOne()));
         }
         dto.setStatus(friend.getStatus());
         return dto;
+    }
+
+    public void deleteFriend(User user, long id) {
+        Friend friend = friendRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if (!friend.getFriendOne().equals(user) && !friend.getFriendTwo().equals(user)) {
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    String.format("User %s is not allowed to delete a friend if he's not part of the relationship", user.getUsername())
+            );
+        }
+
+        friendRepository.delete(friend);
     }
 
     private void createFriendRequestNotification(Friend friend) {
@@ -124,5 +140,4 @@ public class FriendService {
                 String.format("User %s rejected your friend request!", friend.getFriendTwo().getUsername()),
                 "standard");
     }
-
 }
