@@ -14,4 +14,10 @@ export class FriendsService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
     return this.http.get<FriendType[]>('/api/friends', { headers });
   }
+
+  addFriend(userId: number): Observable<FriendType> {
+    const token = localStorage.getItem("jwtToken");
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    return this.http.post<FriendType>('/api/friends', { "userId": userId } ,{ headers });
+  }
 }

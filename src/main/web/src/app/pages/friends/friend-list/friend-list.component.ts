@@ -23,10 +23,7 @@ export class FriendListComponent implements OnInit {
               private userService: UserService) {}
 
   ngOnInit(): void {
-    this.friendsService.getFriends()
-      .subscribe((friends) => {
-        this.friends = friends;
-      });
+    this.init();
 
     this.breadCrumbItems = [{ label: 'Friends', routerLink: '/friends'}];
     this.homeItem = { icon: 'pi pi-home', routerLink: '/../'}
@@ -36,7 +33,22 @@ export class FriendListComponent implements OnInit {
     this.userService.getUsersByFirstname(this.searchUserInput)
       .subscribe((users => {
         this.users = users;
-        console.log(users);
-      }))
+      }));
   }
+
+  addFriend(id: number) {
+    this.friendsService.addFriend(id)
+      .subscribe((friend) => {
+        this.init();
+        this.showNewFriendModal = false;
+      });
+  }
+
+  init() {
+    this.friendsService.getFriends()
+      .subscribe((friends) => {
+        this.friends = friends;
+      });
+  }
+
 }

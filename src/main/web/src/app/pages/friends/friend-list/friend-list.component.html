@@ -27,11 +27,17 @@
         <input type="text" pInputText name="userSearch" [(ngModel)]="searchUserInput" class="col-12" placeholder="Search users..."/>
       </span>
       </form>
-      <ul>
-        <li *ngFor="let user of users">
-          {{ user.username }}
-        </li>
-      </ul>
+      <p-dataView #dv [value]="users">
+        <ng-template let-user pTemplate="listItem">
+          <div class="col-12 p-3 flex align-items-center justify-content-between">
+            <div class="">
+              <p-avatar icon="pi pi-user" styleClass="mr-2" shape="circle"></p-avatar>
+              <span>{{ user.username }}</span>
+            </div>
+            <p-button icon="pi pi-plus" styleClass="p-button-sm" label="Add Friend" (click)="addFriend(user.id)"></p-button>
+          </div>
+        </ng-template>
+      </p-dataView>
 
     </section>
   </p-dialog>

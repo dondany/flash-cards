@@ -8,6 +8,9 @@ import {ButtonModule} from "primeng/button";
 import {DialogModule} from "primeng/dialog";
 import {InputTextModule} from "primeng/inputtext";
 import {FormsModule} from "@angular/forms";
+import {DataViewModule} from "primeng/dataview";
+import {CardModule} from "primeng/card";
+import {AvatarModule} from "primeng/avatar";
 
 
 @NgModule({
@@ -21,7 +24,10 @@ import {FormsModule} from "@angular/forms";
     ButtonModule,
     DialogModule,
     InputTextModule,
-    FormsModule
+    FormsModule,
+    DataViewModule,
+    CardModule,
+    AvatarModule
   ]
 })
 export class FriendListModule { }
