@@ -14,7 +14,7 @@ export class FriendListComponent implements OnInit {
   breadCrumbItems?: MenuItem[];
   homeItem?: MenuItem;
   friends?: FriendType[];
-  showNewFriendModal: boolean = true;
+  showNewFriendModal: boolean = false;
   searchUserInput: string = '';
 
   users?: UserType[];
@@ -26,7 +26,7 @@ export class FriendListComponent implements OnInit {
     this.init();
 
     this.breadCrumbItems = [{ label: 'Friends', routerLink: '/friends'}];
-    this.homeItem = { icon: 'pi pi-home', routerLink: '/../'}
+    this.homeItem = { icon: 'pi pi-home', routerLink: '/home'}
   }
 
   handleOnSubmit() {

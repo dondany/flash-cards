@@ -49,7 +49,7 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
             {label: project.name, routerLink: `/projects/${project.id}`},
             {label: 'Settings', routerLink: `/projects/settings`}
           ];
-          this.homeItem = {icon: 'pi pi-home', routerLink: '/../'};
+          this.homeItem = {icon: 'pi pi-home', routerLink: '/home'};
         })).subscribe();
   }
 

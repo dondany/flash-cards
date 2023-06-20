@@ -1,11 +1,15 @@
-.container {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-y: hidden;
+:host {
+  width: 100%;
 }
 
-.title {
-  font-size: 3rem;
+:host ::ng-deep .p-dataview-content {
+  background: transparent;
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+
+

@@ -50,7 +50,7 @@ export class CollectionSettingsComponent implements OnInit, OnDestroy  {
             {label: collection.name, routerLink: `/projects/${this.projectId}/collections/${this.collectionId}`},
             {label: 'Settings', routerLink: `/collections/${collection.id}/settings`}
           ];
-          this.homeItem = {icon: 'pi pi-home', routerLink: '/../'};
+          this.homeItem = {icon: 'pi pi-home', routerLink: '/home'};
         })).subscribe();
   }
 

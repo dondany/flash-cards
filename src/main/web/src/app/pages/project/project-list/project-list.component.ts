@@ -24,6 +24,6 @@ export class ProjectListComponent implements OnInit {
       });
 
     this.breadCrumbItems = [{ label: 'Projects', routerLink: '/projects'}];
-    this.homeItem = { icon: 'pi pi-home', routerLink: '/../'}
+    this.homeItem = { icon: 'pi pi-home', routerLink: '/home'}
   }
 }

@@ -38,7 +38,7 @@ export class CollectionAddComponent {
           {label: this.project.name, routerLink: '../..'},
           {label: 'Add New Collection', routerLink: `/collections/add`}
         ];
-        this.homeItem = {icon: 'pi pi-home', routerLink: '/../'};
+        this.homeItem = {icon: 'pi pi-home', routerLink: '/home'};
       })
 
   }
