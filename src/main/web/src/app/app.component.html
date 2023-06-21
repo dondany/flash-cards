@@ -7,10 +7,25 @@
       <p-button label="Sign In" routerLink="/auth/sign-in" styleClass="p-button-secondary p-button-sm"></p-button>
       <p-button label="Sign Up" routerLink="/auth/sign-up" styleClass="p-button-secondary p-button-sm"></p-button>
     </div>
-    <div *ngIf="isUserAuthenticated()" class="">
+    <div *ngIf="isUserAuthenticated()">
+      <p-overlayPanel #op appendTo="body">
+        <ng-template pTemplate="content">
+          <div class="notification-panel ">
+            <h2 class="pt-0 mt-0 mb-1">Notifications</h2>
+            <ul class="list-none p-0">
+              <p-divider></p-divider>
+              <li *ngFor="let notification of notifications" class="notification p-3 border-round flex justify-content-between font-medium align-items-center" (click)="readNotification(notification)">
+                <span [ngClass]="notification.read ? 'text-color-secondary col-9' : 'col-9'">{{ notification.message }}</span>
+                <p-button icon="pi pi-times" styleClass="p-button-rounded p-button-danger p-button-text" (click)="deleteNotification(notification.id)"></p-button>
+                <i *ngIf="!notification.read" class="pi pi-circle-fill text-primary"></i>
+              </li>
+            </ul>
+          </div>
+        </ng-template>
+      </p-overlayPanel>
       <p-menu #menu [model]="menuItems" [popup]="true" appendTo="body"></p-menu>
       <div class="user flex align-items-center gap-3">
-        <button class="user-button m-0 p-0" pBadge severity="danger">
+        <button class="user-button m-0 p-0" pBadge severity="danger" (click)="op.toggle($event); openNotifications()">
           <i class="pi pi-bell">
           </i>
         </button>
