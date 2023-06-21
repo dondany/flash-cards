@@ -12,6 +12,9 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import {MenuModule} from "primeng/menu";
 import {AvatarModule} from "primeng/avatar";
 import {BadgeModule} from "primeng/badge";
+import {OverlayPanelModule} from "primeng/overlaypanel";
+import {TableModule} from "primeng/table";
+import {DividerModule} from "primeng/divider";
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import {BadgeModule} from "primeng/badge";
     ToastModule,
     MenuModule,
     AvatarModule,
-    BadgeModule
+    BadgeModule,
+    OverlayPanelModule,
+    TableModule,
+    DividerModule
   ],
   providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent]

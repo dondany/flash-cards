@@ -28,4 +28,15 @@ nav {
   }
 }
 
+.notification-panel {
+  min-width: 360px;
+
+  .notification {
+
+    &:hover {
+      background: var(--surface-hover);
+      cursor: pointer;
+    }
+  }
+}
 
