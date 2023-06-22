@@ -7,6 +7,7 @@ import io.dondany.fc.project.model.ProjectMapper;
 import io.dondany.fc.project.model.SharedProjectDto;
 import io.dondany.fc.project.model.UpdateProjectDto;
 import io.dondany.fc.user.User;
+import io.dondany.fc.user.model.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -48,7 +49,7 @@ public class ProjectController {
     @PreAuthorize("@projectAuthorizationHelper.isProjectOwner(#id, authentication) " +
             "|| @projectAuthorizationHelper.hasAccessToSharedProject(#id, authentication)")
     public ProjectDto getProject(@PathVariable Long id) {
-        return ProjectMapper.INSTANCE.mapProjectToProjectDto(projectService.getProject(id));
+        return projectService.getProject(id);
     }
 
     @PostMapping()
@@ -93,6 +94,11 @@ public class ProjectController {
                 .stream()
                 .map(ProjectMapper.INSTANCE::mapProjectToSharedProjectDto)
                 .toList();
+    }
+
+    @GetMapping("/{id}/members")
+    public List<UserDto> getProjectMembers(@PathVariable long id) {
+        return projectService.getProjectMembers(id);
     }
 
 }

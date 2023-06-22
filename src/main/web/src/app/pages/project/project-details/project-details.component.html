@@ -6,7 +6,11 @@
       <ng-template pTemplate="title">
         <div class="flex justify-content-between">
           <span>{{ project.name }}</span>
-          <fc-visibility [visibility]="project.visibility"></fc-visibility>
+          <div class="flex gap-1 align-items-center text-sm">
+            <p-avatar icon="pi pi-user" styleClass="mr-2" shape="circle" [pTooltip]="project.owner" tooltipPosition="bottom"></p-avatar>
+            <fc-visibility [visibility]="project.visibility"></fc-visibility>
+          </div>
+
         </div>
       </ng-template>
       <ng-template pTemplate="subtitle">
@@ -14,9 +18,12 @@
       </ng-template>
       <ng-template pTemplate="footer">
         <div class="flex justify-content-between">
-          <div>
-            <p-avatar icon="pi pi-user" styleClass="mr-2" shape="circle"></p-avatar>
-            <span>{{ project.owner }}</span>
+          <div class="flex flex-column gap-2">
+
+            <p-avatarGroup>
+              <p-avatar *ngFor="let member of projectMembers" icon="pi pi-user" shape="circle"></p-avatar>
+              <p-avatar *ngIf="project.members.length > 4" [label]="'+' + (project.members.length - 4)" shape="circle" [style]="{ 'background-color': '#9c27b0', color: '#ffffff' }"></p-avatar>
+            </p-avatarGroup>
           </div>
           <div>
             <p-button icon="pi pi-cog" label="Settings"

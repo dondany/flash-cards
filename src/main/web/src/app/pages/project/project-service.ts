@@ -27,6 +27,13 @@ export class ProjectService {
     return this.http.get<ProjectType[]>('/api/projects', {headers});
   }
 
+  getSharedProjects(): Observable<ProjectType[]> {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    const params = new HttpParams().set('shared', true);
+    return this.http.get<ProjectType[]>('/api/projects', { params, headers});
+  }
+
   getProject(id: number): Observable<ProjectType> {
     const token = this.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)

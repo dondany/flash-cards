@@ -10,6 +10,7 @@ import {BreadcrumbModule} from "primeng/breadcrumb";
 import {CardModule} from "primeng/card";
 import {ToolbarModule} from "primeng/toolbar";
 import {VisibilityModule} from "@fc/components/visibility"
+import {AvatarGroupModule} from "primeng/avatargroup";
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {VisibilityModule} from "@fc/components/visibility"
     BreadcrumbModule,
     CardModule,
     ToolbarModule,
-    VisibilityModule
+    VisibilityModule,
+    AvatarGroupModule
   ],
   providers: []
 })

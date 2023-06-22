@@ -3,11 +3,15 @@ package io.dondany.fc.project;
 import io.dondany.fc.notification.NotificationService;
 import io.dondany.fc.notification.model.NotificationTypes;
 import io.dondany.fc.project.model.CreateProjectShareDto;
+import io.dondany.fc.project.model.ProjectDto;
+import io.dondany.fc.project.model.ProjectMapper;
 import io.dondany.fc.project.model.Visibility;
 import io.dondany.fc.project.share.ProjectShare;
 import io.dondany.fc.project.share.ProjectShareRepository;
 import io.dondany.fc.user.User;
 import io.dondany.fc.user.UserRepository;
+import io.dondany.fc.user.model.UserDto;
+import io.dondany.fc.user.model.UserMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -33,9 +37,16 @@ public class ProjectService {
         return projectRepository.findAllByVisibility(Visibility.PUBLIC);
     }
 
-    public Project getProject(Long id) {
-        return projectRepository.findById(id)
+    public ProjectDto getProject(Long id) {
+        Project project = projectRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        ProjectDto projectDto = ProjectMapper.INSTANCE.mapProjectToProjectDto(project);
+        List<UserDto> members = projectShareRepository.findByProject(project).stream()
+                .map(ProjectShare::getUser)
+                .map(UserMapper.INSTANCE::map)
+                .toList();
+        projectDto.setMembers(members);
+        return projectDto;
     }
 
     public Project addProject(Project project, User user) {
@@ -90,6 +101,10 @@ public class ProjectService {
         return projectShareRepository.findByUserId(user.getId()).stream()
                 .map(ProjectShare::getProject)
                 .toList();
+    }
+
+    public List<UserDto> getProjectMembers(long id) {
+        return null;
     }
 
     private void createShareNotification(Project project, User user) {
