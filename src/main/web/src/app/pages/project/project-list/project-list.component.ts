@@ -11,6 +11,7 @@ import {MenuItem} from "primeng/api";
 })
 export class ProjectListComponent implements OnInit {
   projects?: ProjectType[];
+  sharedProjects!: ProjectType[];
   breadCrumbItems?: MenuItem[];
   homeItem?: MenuItem;
 
@@ -21,6 +22,10 @@ export class ProjectListComponent implements OnInit {
     this.projectService.getProjects()
       .subscribe(projects => {
         this.projects = projects;
+      });
+    this.projectService.getSharedProjects()
+      .subscribe(projects => {
+        this.sharedProjects = projects;
       });
 
     this.breadCrumbItems = [{ label: 'Projects', routerLink: '/projects'}];

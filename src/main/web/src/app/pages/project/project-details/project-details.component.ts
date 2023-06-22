@@ -5,6 +5,7 @@ import {ActivatedRoute} from "@angular/router";
 import {MenuItem} from "primeng/api";
 import {CollectionType} from "../types/collection-type";
 import {Subject, switchMap, takeUntil, tap} from "rxjs";
+import {UserType} from "../../../shared/services/user-type";
 
 @Component({
   selector: 'fc-project-details',
@@ -14,6 +15,7 @@ import {Subject, switchMap, takeUntil, tap} from "rxjs";
 export class ProjectDetailsComponent implements OnInit, OnDestroy {
   private destroy = new Subject<void>();
   project!: ProjectType;
+  projectMembers!: UserType[];
   breadCrumbItems!: MenuItem[];
   homeItem!: MenuItem;
   collections!: CollectionType[];
@@ -27,6 +29,7 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy),
         tap((project) => {
           this.project = project;
+          this.projectMembers = project.members.slice(0,4);
           this.breadCrumbItems = [
             {label: 'Projects', routerLink: '/projects'},
             {label: this.project?.name, routerLink: `/projects/${projectId}`}

@@ -9,6 +9,7 @@ import {AvatarModule} from "primeng/avatar";
 import {ButtonModule} from "primeng/button";
 import {DataViewModule} from "primeng/dataview";
 import {VisibilityModule} from "@fc/components/visibility";
+import {AvatarGroupModule} from "primeng/avatargroup";
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {VisibilityModule} from "@fc/components/visibility";
         AvatarModule,
         ButtonModule,
         DataViewModule,
-        VisibilityModule
+        VisibilityModule,
+        AvatarGroupModule
     ]
 })
 export class ProjectDetailsModule { }
