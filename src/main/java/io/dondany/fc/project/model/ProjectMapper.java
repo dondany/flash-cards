@@ -22,5 +22,6 @@ public interface ProjectMapper {
     UpdateProjectDto mapProjectToUpdateProjectDto(Project source);
     Project mapUpdateProjectDtoToProject(UpdateProjectDto source);
 
+    @Mapping(target="owner", source="owner.username")
     SharedProjectDto mapProjectToSharedProjectDto(Project source);
 }

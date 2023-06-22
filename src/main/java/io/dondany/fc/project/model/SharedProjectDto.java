@@ -15,4 +15,5 @@ public class SharedProjectDto {
     private Long id;
     private String name;
     private String description;
+    private String owner;
 }
