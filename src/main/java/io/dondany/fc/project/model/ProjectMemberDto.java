@@ -1,5 +1,7 @@
 package io.dondany.fc.project.model;
 
+import io.dondany.fc.auth.Permission;
+import io.dondany.fc.user.model.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,9 +13,8 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SharedProjectDto {
+public class ProjectMemberDto {
     private Long id;
-    private String name;
-    private String description;
-    private String owner;
+    private UserDto user;
+    private Permission permission;
 }

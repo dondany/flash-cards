@@ -1,13 +1,11 @@
 package io.dondany.fc.project;
 
 import io.dondany.fc.project.model.CreateProjectDto;
-import io.dondany.fc.project.model.CreateProjectShareDto;
+import io.dondany.fc.project.model.CreateProjectMemberDto;
 import io.dondany.fc.project.model.ProjectDto;
 import io.dondany.fc.project.model.ProjectMapper;
-import io.dondany.fc.project.model.SharedProjectDto;
 import io.dondany.fc.project.model.UpdateProjectDto;
 import io.dondany.fc.user.User;
-import io.dondany.fc.user.model.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -31,10 +29,7 @@ public class ProjectController {
 
     @GetMapping
     public List<ProjectDto> getProjects(@AuthenticationPrincipal User user) {
-        return projectService.getAllProjectsByOwner(user)
-                .stream()
-                .map(ProjectMapper.INSTANCE::mapProjectToProjectDto)
-                .toList();
+        return projectService.getAllProjectsByOwner(user);
     }
 
     @GetMapping(params = { "isPublic=true" })
@@ -73,32 +68,26 @@ public class ProjectController {
         projectService.deleteProject(id);
     }
 
-    @PostMapping("/{id}/share")
+    @PostMapping("/{id}/members")
     @PreAuthorize("@projectAuthorizationHelper.isProjectOwner(#id, authentication)")
-    public void shareProject(@PathVariable Long id,
-                             @RequestBody CreateProjectShareDto createProjectShareDto) {
-        projectService.shareProject(id, createProjectShareDto);
+    public void addProjectMember(@PathVariable Long id,
+                             @RequestBody CreateProjectMemberDto createProjectMemberDto) {
+        projectService.addProjectMember(id, createProjectMemberDto);
     }
 
-    @DeleteMapping("/{projectId}/share/{id}")
+    @DeleteMapping("/{projectId}/members/{id}")
     @PreAuthorize("@projectAuthorizationHelper.isProjectOwner(#projectId, authentication)")
     public void deleteProject(@PathVariable Long projectId,
                               @PathVariable Long id) {
-        projectService.deleteShare(projectId, id);
+        projectService.deleteProjectMember(projectId, id);
     }
 
     @GetMapping(params = { "shared" })
-    public List<SharedProjectDto> getSharedProjects(@RequestParam("shared") boolean shared,
+    public List<ProjectDto> getSharedProjects(@RequestParam("shared") boolean shared,
             @AuthenticationPrincipal User user) {
         return projectService.getSharedProjects(user)
                 .stream()
-                .map(ProjectMapper.INSTANCE::mapProjectToSharedProjectDto)
+                .map(ProjectMapper.INSTANCE::mapProjectToProjectDto)
                 .toList();
     }
-
-    @GetMapping("/{id}/members")
-    public List<UserDto> getProjectMembers(@PathVariable long id) {
-        return projectService.getProjectMembers(id);
-    }
-
 }

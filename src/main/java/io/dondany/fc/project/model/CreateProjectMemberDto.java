@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateProjectShareDto {
+public class CreateProjectMemberDto {
     private Long userId;
     private Permission permission;
 }

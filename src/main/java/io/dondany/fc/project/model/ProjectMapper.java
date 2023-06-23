@@ -1,6 +1,7 @@
 package io.dondany.fc.project.model;
 
 import io.dondany.fc.project.Project;
+import io.dondany.fc.project.member.ProjectMember;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -22,6 +23,5 @@ public interface ProjectMapper {
     UpdateProjectDto mapProjectToUpdateProjectDto(Project source);
     Project mapUpdateProjectDtoToProject(UpdateProjectDto source);
 
-    @Mapping(target="owner", source="owner.username")
-    SharedProjectDto mapProjectToSharedProjectDto(Project source);
+    ProjectMemberDto mapProjectMemberToProjectMemberDto(ProjectMember source);
 }
