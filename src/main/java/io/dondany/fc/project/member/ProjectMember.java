@@ -1,4 +1,4 @@
-package io.dondany.fc.project.share;
+package io.dondany.fc.project.member;
 
 import io.dondany.fc.auth.Permission;
 import io.dondany.fc.project.Project;
@@ -12,7 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class ProjectShare {
+public class ProjectMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

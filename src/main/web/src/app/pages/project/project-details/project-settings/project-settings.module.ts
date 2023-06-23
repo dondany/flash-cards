@@ -11,6 +11,10 @@ import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
 import {DividerModule} from "primeng/divider";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {TabViewModule} from "primeng/tabview";
+import {AvatarModule} from "primeng/avatar";
+import {DataViewModule} from "primeng/dataview";
+import {DialogModule} from "primeng/dialog";
 
 
 @NgModule({
@@ -27,7 +31,11 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     InputTextModule,
     ButtonModule,
     DividerModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    TabViewModule,
+    AvatarModule,
+    DataViewModule,
+    DialogModule
   ]
 })
 export class ProjectSettingsModule { }

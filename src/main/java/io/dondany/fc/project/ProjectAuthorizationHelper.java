@@ -1,7 +1,7 @@
 package io.dondany.fc.project;
 
 import io.dondany.fc.project.model.Visibility;
-import io.dondany.fc.project.share.ProjectShareRepository;
+import io.dondany.fc.project.member.ProjectMemberRepository;
 import io.dondany.fc.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class ProjectAuthorizationHelper {
 
     private final ProjectRepository projectRepository;
-    private final ProjectShareRepository projectShareRepository;
+    private final ProjectMemberRepository projectMemberRepository;
 
     public boolean isProjectOwner(Long projectId, Authentication authentication) {
         Project project = projectRepository.findById(projectId)
@@ -24,7 +24,7 @@ public class ProjectAuthorizationHelper {
 
     public boolean hasAccessToSharedProject(Long projectId, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
-        return projectShareRepository.findByUserIdAndProjectId(user.getId(), projectId)
+        return projectMemberRepository.findByUserIdAndProjectId(user.getId(), projectId)
                 .isPresent();
     }
 

@@ -1,6 +1,6 @@
 package io.dondany.fc.project.model;
 
-import io.dondany.fc.user.model.UserDto;
+import io.dondany.fc.project.member.ProjectMember;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,5 +20,5 @@ public class ProjectDto {
     private String description;
     private String owner;
     private Visibility visibility;
-    private List<UserDto> members;
+    private List<ProjectMemberDto> members;
 }

@@ -2,16 +2,15 @@ package io.dondany.fc.project;
 
 import io.dondany.fc.notification.NotificationService;
 import io.dondany.fc.notification.model.NotificationTypes;
-import io.dondany.fc.project.model.CreateProjectShareDto;
+import io.dondany.fc.project.model.CreateProjectMemberDto;
 import io.dondany.fc.project.model.ProjectDto;
 import io.dondany.fc.project.model.ProjectMapper;
+import io.dondany.fc.project.model.ProjectMemberDto;
 import io.dondany.fc.project.model.Visibility;
-import io.dondany.fc.project.share.ProjectShare;
-import io.dondany.fc.project.share.ProjectShareRepository;
+import io.dondany.fc.project.member.ProjectMember;
+import io.dondany.fc.project.member.ProjectMemberRepository;
 import io.dondany.fc.user.User;
 import io.dondany.fc.user.UserRepository;
-import io.dondany.fc.user.model.UserDto;
-import io.dondany.fc.user.model.UserMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -24,13 +23,16 @@ import java.util.List;
 @AllArgsConstructor
 public class ProjectService {
     private final ProjectRepository projectRepository;
-    private final ProjectShareRepository projectShareRepository;
+    private final ProjectMemberRepository projectMemberRepository;
     private final UserRepository userRepository;
 
     private final NotificationService notificationService;
 
-    public List<Project> getAllProjectsByOwner(User user) {
-        return projectRepository.findAllByOwner(user);
+    public List<ProjectDto> getAllProjectsByOwner(User user) {
+        return projectRepository.findAllByOwner(user)
+                .stream()
+                .map(ProjectMapper.INSTANCE::mapProjectToProjectDto)
+                .toList();
     }
 
     public List<Project> getAllPublicProjects() {
@@ -41,11 +43,6 @@ public class ProjectService {
         Project project = projectRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         ProjectDto projectDto = ProjectMapper.INSTANCE.mapProjectToProjectDto(project);
-        List<UserDto> members = projectShareRepository.findByProject(project).stream()
-                .map(ProjectShare::getUser)
-                .map(UserMapper.INSTANCE::map)
-                .toList();
-        projectDto.setMembers(members);
         return projectDto;
     }
 
@@ -72,47 +69,43 @@ public class ProjectService {
     }
 
     @Transactional
-    public void shareProject(Long projectId, CreateProjectShareDto createProjectShareDto) {
+    public void addProjectMember(Long projectId, CreateProjectMemberDto createProjectMemberDto) {
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        User user = userRepository.findById(createProjectShareDto.getUserId())
+        User user = userRepository.findById(createProjectMemberDto.getUserId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        ProjectShare projectShare = new ProjectShare();
-        projectShare.setProject(project);
-        projectShare.setUser(user);
-        projectShare.setPermission(createProjectShareDto.getPermission());
+        ProjectMember projectMember = new ProjectMember();
+        projectMember.setProject(project);
+        projectMember.setUser(user);
+        projectMember.setPermission(createProjectMemberDto.getPermission());
 
-        projectShareRepository.save(projectShare);
-        createShareNotification(project, user);
+        projectMemberRepository.save(projectMember);
+        createMemberNotification(project, user);
     }
 
-    public void deleteShare(Long projectId, Long id) {
+    public void deleteProjectMember(Long projectId, Long id) {
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        ProjectShare projectShare = projectShareRepository.findById(id)
+        ProjectMember projectMember = projectMemberRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        project.removeShare(projectShare);
+        project.removeMember(projectMember);
         projectRepository.save(project);
     }
 
     public List<Project> getSharedProjects(User user) {
-        return projectShareRepository.findByUserId(user.getId()).stream()
-                .map(ProjectShare::getProject)
+        return projectMemberRepository.findByUserId(user.getId()).stream()
+                .map(ProjectMember::getProject)
                 .toList();
     }
 
-    public List<UserDto> getProjectMembers(long id) {
-        return null;
-    }
-
-    private void createShareNotification(Project project, User user) {
+    private void createMemberNotification(Project project, User user) {
         String senderName = project.getOwner().getFirstname();
         notificationService.createNotification(
                 user,
-                NotificationTypes.STANDARD,
-                String.format("User %s shared the project %s with You!", senderName, project.getName())
+                String.format("User %s added You as a member to the project %s!", senderName, project.getName()),
+                NotificationTypes.STANDARD
         );
     }
 }

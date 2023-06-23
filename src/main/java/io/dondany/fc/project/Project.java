@@ -3,7 +3,7 @@ package io.dondany.fc.project;
 import io.dondany.fc.collection.Collection;
 
 import io.dondany.fc.project.model.Visibility;
-import io.dondany.fc.project.share.ProjectShare;
+import io.dondany.fc.project.member.ProjectMember;
 import io.dondany.fc.user.User;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -40,7 +40,7 @@ public class Project {
     private User owner;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProjectShare> shares;
+    private List<ProjectMember> members;
 
 
     public void addCollection(Collection collection) {
@@ -53,14 +53,14 @@ public class Project {
         collection.setProject(null);
     }
 
-    public void addShare(ProjectShare share) {
-        shares.add(share);
-        share.setProject(this);
+    public void addMember(ProjectMember member) {
+        members.add(member);
+        member.setProject(this);
     }
 
-    public void removeShare(ProjectShare share) {
-        shares.remove(share);
-        share.setProject(null);
+    public void removeMember(ProjectMember member) {
+        members.remove(member);
+        member.setProject(null);
     }
 
     public Long getId() {
@@ -111,11 +111,11 @@ public class Project {
         this.owner = user;
     }
 
-    public List<ProjectShare> getShares() {
-        return shares;
+    public List<ProjectMember> getMembers() {
+        return members;
     }
 
-    public void setShares(List<ProjectShare> shares) {
-        this.shares = shares;
+    public void setMembers(List<ProjectMember> shares) {
+        this.members = shares;
     }
 }
