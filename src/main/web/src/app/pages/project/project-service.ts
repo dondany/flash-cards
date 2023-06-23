@@ -58,6 +58,22 @@ export class ProjectService {
     return this.http.delete(`/api/projects/${id}`, {headers});
   }
 
+  addProjectMember(projectId: number, userId: number): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    return this.http.post(
+      `/api/projects/${projectId}/members`,
+      { userId: userId, permission: 'READ_WRITE' },
+      {headers}
+    );
+  }
+
+  deleteProjectMember(projectId: number, id: number): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    return this.http.delete(`/api/projects/${projectId}/members/${id}`, {headers});
+  }
+
   getCollections(id: number): Observable<CollectionType[]> {
     const token = this.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)

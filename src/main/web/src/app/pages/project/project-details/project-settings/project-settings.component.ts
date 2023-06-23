@@ -7,6 +7,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {Subject, takeUntil, tap} from "rxjs";
 import {ProjectType} from "../../types/project-type";
 import {ProjectSettingsFormControlType} from "./types/project-settings-form-group-type";
+import {FriendType} from "../../../friends/types/friend-type";
+import {FriendsService} from "../../../friends/friends-service";
 
 @Component({
   selector: 'fc-project-settings',
@@ -26,8 +28,12 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
   breadCrumbItems!: MenuItem[];
   homeItem!: MenuItem;
 
+  friends!: FriendType[];
+  showNewMemberDialog: boolean = false;
+
   constructor(private formBuilder: FormBuilder,
               private projectService: ProjectService,
+              private friendService: FriendsService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
               private messageService: MessageService,
@@ -35,8 +41,11 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const projectId = this.activatedRoute.snapshot.params['id'];
+    this.init();
+  }
 
+  init() {
+    const projectId = this.activatedRoute.snapshot.params['id'];
     this.projectService.getProject(projectId)
       .pipe(takeUntil(this.destroy),
         tap((project) => {
@@ -71,7 +80,7 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
     this.destroy.complete();
   }
 
-  handleOnDelete() {
+  onDelete() {
     this.confirmationService.confirm({
       message: 'Are You sure You want to delete this Project?',
       header: 'Delete Confirmation',
@@ -90,6 +99,29 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
     });
   }
 
+  removeMember(memberId: number) {
+    console.log(memberId);
+    this.projectService.deleteProjectMember(this.project.id, memberId)
+      .subscribe(() => {
+        this.init();
+      })
+  }
+
+  addMember(userId: number) {
+    this.projectService.addProjectMember(this.project.id, userId)
+      .subscribe(() => {
+        this.showNewMemberDialog = false;
+        this.init();
+      })
+  }
+
+  onShowNewMemberDialog() {
+    this.friendService.getFriends()
+      .subscribe((friends) => {
+        this.friends = friends;
+      })
+  }
+
   get name() {
     return this.formGroup.controls.name;
   }
@@ -97,4 +129,7 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
   get description() {
     return this.formGroup.controls.description;
   }
+
+
+
 }

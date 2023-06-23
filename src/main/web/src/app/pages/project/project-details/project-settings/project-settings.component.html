@@ -1,24 +1,40 @@
 <div class="container">
   <p-breadcrumb [model]="breadCrumbItems" [home]="homeItem"
                 styleClass="border-none p-0 m-0 text-sm surface-200"></p-breadcrumb>
-  <section class="mt-3">
-    <div class="font-semibold text-lg mb-2">Project Settings</div>
-    <p-card styleClass="col-12 md:col-6 lg:col-6 xl:col-4">
-      <ng-template pTemplate="title">
-        Settings
-      </ng-template>
-      <ng-template pTemplate="content">
+  <div class="font-semibold text-lg mb-2 mt-3">Project Settings</div>
+  <p-dialog [(visible)]="showNewMemberDialog" [modal]="true" [style]="{ width: '600px' }" [draggable]="false"
+            [resizable]="true" (onShow)="onShowNewMemberDialog()">
+    <ng-template pTemplate="header">
+      <span class="text-xl font-bold">Add Project Member</span>
+    </ng-template>
+    <div>
+      <p-dataView #dv [value]="friends">
+        <ng-template let-friend pTemplate="listItem">
+          <div class="col-12 p-3 flex align-items-center justify-content-between">
+            <div class="">
+              <p-avatar icon="pi pi-user" styleClass="mr-2" shape="circle"></p-avatar>
+              <span>{{ friend.friend.username }}</span>
+            </div>
+            <p-button icon="pi pi-plus" styleClass="p-button-sm" label="Add Member" (click)="addMember(friend.friend.id)"></p-button>
+          </div>
+        </ng-template>
+      </p-dataView>
+    </div>
+  </p-dialog>
+  <p-card styleClass="col-6">
+    <p-tabView styleClass="m-0 p-0 border-round">
+      <p-tabPanel header="General Settings">
         <form [formGroup]="formGroup" (ngSubmit)="handleOnSubmit()" autocomplete="off"
               class="flex flex-column gap-3">
 
           <span class="p-float-label">
-            <input pInputText formControlName="name" class="col-12  p-inputtext-lg">
+            <input pInputText formControlName="name" class="col-12">
             <label htmlFor="name">Name</label>
           </span>
           <small *ngIf="name.errors?.['required'] && !name.pristine" class="p-error">Name is required.</small>
 
           <span class="p-float-label">
-              <input pInputText formControlName="description" class="col-12  p-inputtext-lg">
+              <input pInputText formControlName="description" class="col-12">
              <label htmlFor="description">Description</label>
           </span>
           <small *ngIf="description.errors?.['required'] && !description.pristine" class="p-error">Description is
@@ -41,9 +57,24 @@
         </form>
         <p-divider></p-divider>
         <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
-        <p-button (click)="handleOnDelete()" label="Delete Project" styleClass="p-button-danger p-button-outlined"
+        <p-button (click)="onDelete()" label="Delete Project" styleClass="p-button-danger p-button-outlined"
                   icon="pi pi-trash"></p-button>
-      </ng-template>
-    </p-card>
-  </section>
+      </p-tabPanel>
+      <p-tabPanel header="Members">
+        <div class="flex flex-column gap-3">
+          <p *ngIf="project.members.length === 0">There are no members in this project yet.</p>
+          <p-button label="Add Member" icon="pi pi-user" (click)="showNewMemberDialog = true"></p-button>
+          <ul *ngIf="project.members.length > 0" class="p-0 m-0">
+            <li *ngFor="let member of project.members" class="flex align-items-center justify-content-between col-6 pt-3">
+              <div>
+                <p-avatar icon="pi pi-user" styleClass="mr-2" shape="circle"></p-avatar>
+                {{ member.user.username }}
+              </div>
+              <p-button icon="pi pi-times" label="Remove" styleClass="p-button-sm p-button-danger p-button-outlined" (click)="removeMember(member.id)"></p-button>
+            </li>
+          </ul>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </p-card>
 </div>

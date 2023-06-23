@@ -1,4 +1,4 @@
-import {UserType} from "../../../shared/services/user-type";
+import {ProjectMemberType} from "./project-member-type";
 
 export type ProjectType = {
   id: number,
@@ -6,5 +6,5 @@ export type ProjectType = {
   description: string,
   owner: string,
   visibility: 'PRIVATE' | 'PUBLIC',
-  members: UserType[]
+  members: ProjectMemberType[]
 }

@@ -6,6 +6,7 @@ import {MenuItem} from "primeng/api";
 import {CollectionType} from "../types/collection-type";
 import {Subject, switchMap, takeUntil, tap} from "rxjs";
 import {UserType} from "../../../shared/services/user-type";
+import {ProjectMemberType} from "../types/project-member-type";
 
 @Component({
   selector: 'fc-project-details',
@@ -15,7 +16,7 @@ import {UserType} from "../../../shared/services/user-type";
 export class ProjectDetailsComponent implements OnInit, OnDestroy {
   private destroy = new Subject<void>();
   project!: ProjectType;
-  projectMembers!: UserType[];
+  projectMembers!: ProjectMemberType[];
   breadCrumbItems!: MenuItem[];
   homeItem!: MenuItem;
   collections!: CollectionType[];
