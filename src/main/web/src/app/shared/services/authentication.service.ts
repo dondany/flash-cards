@@ -5,12 +5,13 @@ import {SignInFormValueType} from "../../pages/auth/types/sign-in-form-group.typ
 import {SignUpFormValueType} from "../../pages/auth/types/sign-up-form-group.type";
 import {UserService} from "./user-service";
 import {UserType} from "./user-type";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private _user: UserType | null = null;
+  private user: BehaviorSubject<UserType | null> = new BehaviorSubject<UserType | null>(null);
 
   constructor(private http: HttpClient,
               private userService: UserService) {
@@ -23,9 +24,9 @@ export class AuthenticationService {
         localStorage.setItem('jwtToken', token);
         this.userService.getAuthenticatedUser()
           .subscribe((user) => {
-            this._user = user;
+            this.user.next(user);
+            callback();
           })
-        callback();
       })
   }
 
@@ -34,21 +35,22 @@ export class AuthenticationService {
       .subscribe(response => {
         const token = response.token;
         localStorage.setItem('jwtToken', token);
+        this.userService.getAuthenticatedUser()
+          .subscribe((user) => {
+            this.user.next(user);
+          })
         callback();
       })
   }
 
   signOut() {
-    this._user = null;
+    console.log('sign-out')
     localStorage.removeItem('jwtToken');
+    this.user.next(null);
   }
 
-  get user(): UserType | null {
-    return this._user;
-  }
-
-  isAuthenticated(): boolean {
-    return this._user != null;
+  get authenticatedUser() {
+    return this.user.asObservable();
   }
 
 }

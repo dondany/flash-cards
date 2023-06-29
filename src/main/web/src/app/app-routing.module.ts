@@ -1,28 +1,31 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {authenticationGuard} from "./shared/services/authentication.guard";
+import {HomeLayoutComponent} from "./layouts/home-layout/home-layout.component";
+import {LandingLayoutComponent} from "./layouts/landing-layout/landing-layout.component";
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'auth',
-    pathMatch: 'full'
+    component: HomeLayoutComponent,
+    canActivate: [authenticationGuard],
+    children: [
+      {
+        path: 'home',
+        loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule)
+      }
+    ]
   },
   {
-    path: 'auth',
-    loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthModule)
+    path: '',
+    component: LandingLayoutComponent,
+    children: [
+      {
+        path: 'auth',
+        loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthModule)
+      }
+    ]
   },
-  {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule)
-  },
-  {
-    path: 'projects',
-    loadChildren: () => import('./pages/project/project.module').then((m) => m.ProjectModule)
-  },
-  {
-    path: 'friends',
-    loadChildren: () => import('./pages/friends/friends.module').then((m) => m.FriendsModule)
-  }
 ];
 
 @NgModule({

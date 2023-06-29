@@ -15,10 +15,15 @@ import {BadgeModule} from "primeng/badge";
 import {OverlayPanelModule} from "primeng/overlaypanel";
 import {TableModule} from "primeng/table";
 import {DividerModule} from "primeng/divider";
+import {HomeLayoutComponent} from "./layouts/home-layout/home-layout.component";
+import {LandingLayoutComponent} from "./layouts/landing-layout/landing-layout.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeLayoutComponent,
+    LandingLayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,7 @@ import {DividerModule} from "primeng/divider";
     BadgeModule,
     OverlayPanelModule,
     TableModule,
-    DividerModule
+    DividerModule,
   ],
   providers: [MessageService, ConfirmationService],
   bootstrap: [AppComponent]
