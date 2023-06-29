@@ -6,6 +6,14 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'projects',
+    loadChildren: () => import('../project/project.module').then((m) => m.ProjectModule)
+  },
+  {
+    path: 'friends',
+    loadChildren: () => import('../friends/friends.module').then((m) => m.FriendsModule)
   }
 ];
 

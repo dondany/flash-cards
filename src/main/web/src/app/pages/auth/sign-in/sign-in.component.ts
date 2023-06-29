@@ -23,7 +23,8 @@ export class SignInComponent {
   handleOnSubmit() {
     const value = this.singInFormGroup.value;
     this.authenticationService.signIn(value, () => {
-      this.router.navigate(['home']);
+      console.log('signin')
+      this.router.navigate(['/home']);
     });
   }
 

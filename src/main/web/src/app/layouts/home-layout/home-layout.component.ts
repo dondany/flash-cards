@@ -1,20 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService} from "./shared/services/authentication.service";
-import {UserType} from "./shared/services/user-type";
+import {NotificationType} from "../../shared/types/notification-type";
 import {MenuItem} from "primeng/api";
+import {AuthenticationService} from "../../shared/services/authentication.service";
+import {NotificationService} from "../../shared/services/notification-service";
 import {Router} from "@angular/router";
-import {NotificationType} from "./shared/types/notification-type";
-import {NotificationService} from "./shared/services/notification-service";
+import {Observable} from "rxjs";
+import {UserType} from "../../shared/services/user-type";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'fc-home-layout',
+  templateUrl: './home-layout.component.html',
+  styleUrls: ['./home-layout.component.scss']
 })
-export class AppComponent implements OnInit {
-  title = 'web';
+export class HomeLayoutComponent implements OnInit {
   menuItems!: MenuItem[];
-
   notifications!: NotificationType[];
 
   constructor(private authenticationService: AuthenticationService,
@@ -29,7 +28,7 @@ export class AppComponent implements OnInit {
         icon: 'pi pi-power-off',
         command: () => {
           this.authenticationService.signOut();
-          this.router.navigate(['/'])
+          this.router.navigate(['/auth'])
         }
       }
     ];
@@ -58,4 +57,5 @@ export class AppComponent implements OnInit {
         this.openNotifications();
       })
   }
+
 }
