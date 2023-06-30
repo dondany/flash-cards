@@ -45,10 +45,10 @@ export class CollectionSettingsComponent implements OnInit, OnDestroy  {
           this.formGroup.controls.name.setValue(collection.name);
           this.formGroup.controls.description.setValue(collection.description);
           this.breadCrumbItems = [
-            {label: 'Projects', routerLink: '/projects'},
-            {label: collection.projectName, routerLink: `/projects/${this.projectId}`},
-            {label: collection.name, routerLink: `/projects/${this.projectId}/collections/${this.collectionId}`},
-            {label: 'Settings', routerLink: `/collections/${collection.id}/settings`}
+            {label: 'Projects', routerLink: '../../../..'},
+            {label: collection.projectName, routerLink: `../../..`},
+            {label: collection.name, routerLink: `..`},
+            {label: 'Settings', routerLink: `.`}
           ];
           this.homeItem = {icon: 'pi pi-home', routerLink: '/home'};
         })).subscribe();

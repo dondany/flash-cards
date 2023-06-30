@@ -28,7 +28,7 @@ export class ProjectListComponent implements OnInit {
         this.sharedProjects = projects;
       });
 
-    this.breadCrumbItems = [{ label: 'Projects', routerLink: '/projects'}];
+    this.breadCrumbItems = [{ label: 'Projects', routerLink: '.'}];
     this.homeItem = { icon: 'pi pi-home', routerLink: '/home'}
   }
 }

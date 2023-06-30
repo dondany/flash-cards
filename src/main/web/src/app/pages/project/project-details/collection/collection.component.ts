@@ -50,9 +50,9 @@ export class CollectionComponent implements OnInit, OnDestroy {
         tap((collection) => {
           this.collection = collection;
           this.breadCrumbItems = [
-            {label: 'Projects', routerLink: '/projects'},
-            {label: collection.projectName, routerLink: `/projects/${projectId}`},
-            {label: collection.name, routerLink: `/projects/${projectId}/collections/${collectionId}`}
+            {label: 'Projects', routerLink: '../../..'},
+            {label: collection.projectName, routerLink: `../..`},
+            {label: collection.name, routerLink: `.`}
           ];
           this.homeItem = {icon: 'pi pi-home', routerLink: '/home'};
         }),

@@ -28,8 +28,8 @@ export class ProjectAddComponent implements OnInit{
 
   ngOnInit(): void {
     this.breadCrumbItems = [
-      {label: 'Projects', routerLink: '/projects'},
-      {label:  'Add New', routerLink: `/projects/add`}
+      {label: 'Projects', routerLink: '..'},
+      {label:  'Add New', routerLink: `.`}
     ];
     this.homeItem = {icon: 'pi pi-home', routerLink: '/home'};
   }

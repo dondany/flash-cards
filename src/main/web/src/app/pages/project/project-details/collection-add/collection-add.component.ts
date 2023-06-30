@@ -34,9 +34,9 @@ export class CollectionAddComponent {
       .subscribe((project) => {
         this.project = project;
         this.breadCrumbItems = [
-          {label: 'Projects', routerLink: '/projects'},
+          {label: 'Projects', routerLink: '../../..'},
           {label: this.project.name, routerLink: '../..'},
-          {label: 'Add New Collection', routerLink: `/collections/add`}
+          {label: 'Add New Collection', routerLink: `.`}
         ];
         this.homeItem = {icon: 'pi pi-home', routerLink: '/home'};
       })

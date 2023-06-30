@@ -129,8 +129,8 @@ public class FriendService {
 
     private void createFriendAcceptedNotification(Friend friend) {
         notificationService.createNotification(
-                friend.getFriendTwo(),
-                String.format("User %s accepted your friend request!", friend.getFriendOne().getUsername()),
+                friend.getFriendOne(),
+                String.format("User %s accepted your friend request!", friend.getFriendTwo().getUsername()),
                 "standard");
     }
 
