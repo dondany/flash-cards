@@ -27,7 +27,7 @@ export class FriendListComponent implements OnInit {
   ngOnInit(): void {
     this.init();
 
-    this.breadCrumbItems = [{ label: 'Friends', routerLink: '/friends'}];
+    this.breadCrumbItems = [{ label: 'Friends', routerLink: '.'}];
     this.homeItem = { icon: 'pi pi-home', routerLink: '/home'}
   }
 

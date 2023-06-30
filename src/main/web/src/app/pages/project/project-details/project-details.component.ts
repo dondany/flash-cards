@@ -32,8 +32,8 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
           this.project = project;
           this.projectMembers = project.members.slice(0,4);
           this.breadCrumbItems = [
-            {label: 'Projects', routerLink: '/projects'},
-            {label: this.project?.name, routerLink: `/projects/${projectId}`}
+            {label: 'Projects', routerLink: '..'},
+            {label: this.project?.name, routerLink: `.`}
           ];
           this.homeItem = {icon: 'pi pi-home', routerLink: '/home'};
         }),

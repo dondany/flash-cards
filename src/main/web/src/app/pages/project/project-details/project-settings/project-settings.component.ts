@@ -54,9 +54,9 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
           this.formGroup.controls.description.setValue(project.description);
           this.formGroup.controls.visibility.setValue(project.visibility);
           this.breadCrumbItems = [
-            {label: 'Projects', routerLink: '/projects'},
-            {label: project.name, routerLink: `/projects/${project.id}`},
-            {label: 'Settings', routerLink: `/projects/settings`}
+            {label: 'Projects', routerLink: '../..'},
+            {label: project.name, routerLink: `..`},
+            {label: 'Settings', routerLink: `.`}
           ];
           this.homeItem = {icon: 'pi pi-home', routerLink: '/home'};
         })).subscribe();
