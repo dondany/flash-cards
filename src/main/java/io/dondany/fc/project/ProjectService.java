@@ -6,6 +6,7 @@ import io.dondany.fc.project.model.CreateProjectMemberDto;
 import io.dondany.fc.project.model.ProjectDto;
 import io.dondany.fc.project.model.ProjectMapper;
 import io.dondany.fc.project.model.ProjectMemberDto;
+import io.dondany.fc.project.model.ProjectSimpleDto;
 import io.dondany.fc.project.model.Visibility;
 import io.dondany.fc.project.member.ProjectMember;
 import io.dondany.fc.project.member.ProjectMemberRepository;
@@ -32,6 +33,13 @@ public class ProjectService {
         return projectRepository.findAllByOwner(user)
                 .stream()
                 .map(ProjectMapper.INSTANCE::mapProjectToProjectDto)
+                .toList();
+    }
+
+    public List<ProjectSimpleDto> getAllSimplifiedProjectsByOwner(User user) {
+        return projectRepository.findAllSimplifiedByOwner(user)
+                .stream()
+                .map(ProjectMapper.INSTANCE::mapProjectToProjectSimpleDto)
                 .toList();
     }
 

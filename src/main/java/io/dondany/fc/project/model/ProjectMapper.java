@@ -24,4 +24,6 @@ public interface ProjectMapper {
     Project mapUpdateProjectDtoToProject(UpdateProjectDto source);
 
     ProjectMemberDto mapProjectMemberToProjectMemberDto(ProjectMember source);
+
+    ProjectSimpleDto mapProjectToProjectSimpleDto(Project project);
 }
