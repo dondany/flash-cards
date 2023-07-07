@@ -1,0 +1,15 @@
+:host {
+  width: 100%;
+}
+
+:host ::ng-deep .p-dataview-content {
+  background: transparent;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+
+
