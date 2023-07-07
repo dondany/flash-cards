@@ -33,4 +33,6 @@ public interface CollectionRepository extends JpaRepository<Collection, Long> {
 
     Optional<Collection> findByIdAndProjectId(Long id, Long projectId);
 
+    List<Collection> findAllByIdIn(List<Long> ids);
+
 }
