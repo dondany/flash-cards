@@ -51,7 +51,7 @@
 					"response": []
 				},
 				{
-					"name": "Share Project",
+					"name": "Add Project Member",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -75,7 +75,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/projects/1/share",
+							"raw": "http://localhost:8080/api/v1/projects/1/members",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -86,14 +86,14 @@
 								"v1",
 								"projects",
 								"1",
-								"share"
+								"members"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Unshare Project",
+					"name": "Delete Project Member",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -127,7 +127,44 @@
 					"response": []
 				},
 				{
-					"name": "Get Projects For Authenticated User",
+					"name": "Get Simplified Projects For Authenticated User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/projects?simple=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"projects"
+							],
+							"query": [
+								{
+									"key": "simple",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Projects For Authenticated User Copy",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1239,6 +1276,115 @@
 									"key": "firstname",
 									"value": "ron"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Practice",
+			"item": [
+				{
+					"name": "Add Practice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"My Second Practice\",\r\n    \"description\": \"Practice to practice\",\r\n    \"projectId\": 1,\r\n    \"collectionIds\": [\r\n        1, 2, 3\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/practices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"practices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Practice For Authenticated User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/practices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"practices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Flash Cards Of Practice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/practices/1/flash-cards",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"practices",
+								"1",
+								"flash-cards"
 							]
 						}
 					},

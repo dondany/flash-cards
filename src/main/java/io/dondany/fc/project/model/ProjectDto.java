@@ -1,6 +1,5 @@
 package io.dondany.fc.project.model;
 
-import io.dondany.fc.project.member.ProjectMember;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

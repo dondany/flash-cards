@@ -1,0 +1,11 @@
+<div class="container flex justify-content-center align-items-center h-full">
+
+  <div class="flex gap-3 align-items-center">
+    <p-card (click)="flip()" styleClass="card">
+      <span *ngIf="isFlipped">{{ currentFlashCard.back }}</span>
+      <span *ngIf="!isFlipped">{{ currentFlashCard.front }}</span>
+
+    </p-card>
+    <button pButton (click)="next()" icon="pi pi-angle-right" class="p-button-rounded p-button-outlined"></button>
+  </div>
+</div>

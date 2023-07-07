@@ -1,0 +1,39 @@
+<div class="container">
+  <p-breadcrumb [model]="breadCrumbItems" [home]="homeItem"
+                styleClass="border-none p-0 m-0 text-sm surface-200"></p-breadcrumb>
+  <section class="mt-3">
+    <div class="flex justify-content-between align-items-end mr-2">
+      <div class="font-semibold text-lg">Practices</div>
+      <p-button icon="pi pi-plus" label="New Practice" styleClass="p-button-sm" [routerLink]="['add']"></p-button>
+    </div>
+    <p-dataView #dv [value]="practices" layout="grid">
+      <ng-template let-practice pTemplate="gridItem">
+        <div class="col-12 md:col-6 lg:col-3 xl:col-3">
+          <p-card styleClass="mb-2 mr-2">
+            <ng-template pTemplate="title">
+              <div class="flex justify-content-between">
+                <span>{{ practice.name }}</span>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="subtitle">
+              {{ practice.description }}
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <div class="flex justify-content-between">
+                <div>
+                  <p-avatar icon="pi pi-user" styleClass="mr-2" shape="circle"></p-avatar>
+                  <span>{{ practice.owner.username }}</span>
+                </div>
+                <div>
+                  <p-button icon="pi pi-arrow-right" styleClass="p-button-rounded p-button-secondary"
+                            [routerLink]="['playground', practice.id]"></p-button>
+                </div>
+              </div>
+            </ng-template>
+          </p-card>
+        </div>
+      </ng-template>
+    </p-dataView>
+  </section>
+</div>
+

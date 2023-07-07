@@ -5,11 +5,11 @@ import org.springframework.stereotype.Component;
 import java.util.function.Function;
 
 @Component
-public class FlashCardMapper implements Function<FlashCard, FlashCardModel> {
+public class FlashCardMapper implements Function<FlashCard, FlashCardDto> {
 
     @Override
-    public FlashCardModel apply(FlashCard flashCard) {
-        return FlashCardModel.builder()
+    public FlashCardDto apply(FlashCard flashCard) {
+        return FlashCardDto.builder()
                 .id(flashCard.getId())
                 .front(flashCard.getFront())
                 .back(flashCard.getBack())

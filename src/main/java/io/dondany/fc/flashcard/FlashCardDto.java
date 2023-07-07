@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FlashCardModel{
+public class FlashCardDto {
     private Long id;
     private String front;
     private String back;

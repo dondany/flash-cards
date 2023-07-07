@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 import {ProjectType} from "./types/project-type";
 import {CollectionType} from "./types/collection-type";
 import {FlashCardType} from "./types/flash-card-type";
-import {AddProjectType} from "./project-add/types/add-project-type";
 import {AddProjectFormValueType} from "./project-add/types/add-project-form-group-type";
 import {ProjectSettingsValueType} from "./project-details/project-settings/types/project-settings-form-group-type";
 import {FlashCardNewValueType} from "./project-details/collection/types/flash-card-new-form-group-type";
@@ -13,6 +12,7 @@ import {CollectionAddFormValueType} from "./project-details/collection-add/types
 import {
   CollectionSettingsValueType
 } from "./project-details/collection/collection-settings/types/collection-settings-form-group-type";
+import {ProjectSimpleType} from "../../shared/types/project-simple-type";
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +31,14 @@ export class ProjectService {
     const token = this.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
     const params = new HttpParams().set('shared', true);
-    return this.http.get<ProjectType[]>('/api/projects', { params, headers});
+    return this.http.get<ProjectType[]>('/api/projects', {params, headers});
+  }
+
+  getSimplifiedProjects(): Observable<ProjectSimpleType[]> {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    const params = new HttpParams().set('simple', true);
+    return this.http.get<ProjectSimpleType[]>('/api/projects', {params, headers});
   }
 
   getProject(id: number): Observable<ProjectType> {
@@ -63,7 +70,7 @@ export class ProjectService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
     return this.http.post(
       `/api/projects/${projectId}/members`,
-      { userId: userId, permission: 'READ_WRITE' },
+      {userId: userId, permission: 'READ_WRITE'},
       {headers}
     );
   }
@@ -89,13 +96,13 @@ export class ProjectService {
   createCollection(projectId: number, collection: CollectionAddFormValueType): Observable<CollectionType> {
     const token = this.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
-    return this.http.post<CollectionType>(`/api/projects/${projectId}/collections`, collection,{headers});
+    return this.http.post<CollectionType>(`/api/projects/${projectId}/collections`, collection, {headers});
   }
 
-  updateCollection(projectId: any, collectionId: any, collection: CollectionSettingsValueType) : Observable<CollectionType> {
+  updateCollection(projectId: any, collectionId: any, collection: CollectionSettingsValueType): Observable<CollectionType> {
     const token = this.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
-    return this.http.patch<CollectionType>(`/api/projects/${projectId}/collections/${collectionId}`, collection,{headers});
+    return this.http.patch<CollectionType>(`/api/projects/${projectId}/collections/${collectionId}`, collection, {headers});
   }
 
   deleteCollection(projectId: number, collectionId: number) {

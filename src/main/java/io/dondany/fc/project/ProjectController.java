@@ -4,6 +4,7 @@ import io.dondany.fc.project.model.CreateProjectDto;
 import io.dondany.fc.project.model.CreateProjectMemberDto;
 import io.dondany.fc.project.model.ProjectDto;
 import io.dondany.fc.project.model.ProjectMapper;
+import io.dondany.fc.project.model.ProjectSimpleDto;
 import io.dondany.fc.project.model.UpdateProjectDto;
 import io.dondany.fc.user.User;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,11 @@ public class ProjectController {
     @GetMapping
     public List<ProjectDto> getProjects(@AuthenticationPrincipal User user) {
         return projectService.getAllProjectsByOwner(user);
+    }
+
+    @GetMapping(params = { "simple=true" })
+    public List<ProjectSimpleDto> getSimplifiedProjects(@AuthenticationPrincipal User user) {
+        return projectService.getAllSimplifiedProjectsByOwner(user);
     }
 
     @GetMapping(params = { "isPublic=true" })
