@@ -33,13 +33,13 @@ public class FlashCardController {
     @GetMapping(params = {"page", "size"})
     @PreAuthorize("@projectAuthorizationHelper.isProjectOwner(#projectId, authentication) " +
             "|| @projectAuthorizationHelper.hasAccessToSharedProject(#projectId, authentication)")
-    public PagedResponseEntity<FlashCardModel> getFlashCardsByCollection(@PathVariable Long projectId,
-                                                                         @PathVariable Long collectionId,
-                                                                         @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
-                                                                         @RequestParam(value = "size", defaultValue = "10", required = false) Integer size,
-                                                                         @AuthenticationPrincipal User user) {
+    public PagedResponseEntity<FlashCardDto> getFlashCardsByCollection(@PathVariable Long projectId,
+                                                                       @PathVariable Long collectionId,
+                                                                       @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
+                                                                       @RequestParam(value = "size", defaultValue = "10", required = false) Integer size,
+                                                                       @AuthenticationPrincipal User user) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<FlashCardModel> pagedFlashCards = flashCardService.getAllFlashCards(collectionId, pageable)
+        Page<FlashCardDto> pagedFlashCards = flashCardService.getAllFlashCards(collectionId, pageable)
                 .map(flashCardMapper);
 
         return PagedResponseEntity.from(pagedFlashCards, String.format("%s/projects/%s/collections/%s/flash-cards", baseUri(), projectId, collectionId));
@@ -47,8 +47,8 @@ public class FlashCardController {
 
     @GetMapping()
     @PreAuthorize("@projectAuthorizationHelper.isProjectOwner(#projectId, authentication)")
-    public List<FlashCardModel> getAllByCollection(@PathVariable Long projectId,
-                                                   @PathVariable Long collectionId) {
+    public List<FlashCardDto> getAllByCollection(@PathVariable Long projectId,
+                                                 @PathVariable Long collectionId) {
         return flashCardService.getAllByCollectionId(collectionId)
                 .stream()
                 .map(flashCardMapper)
@@ -58,20 +58,20 @@ public class FlashCardController {
     @GetMapping("/{id}")
     @PreAuthorize("@projectAuthorizationHelper.isProjectOwner(#projectId, authentication) " +
             "|| @projectAuthorizationHelper.hasAccessToSharedProject(#projectId, authentication)")
-    public ResponseEntity<FlashCardModel> getFlashCard(@PathVariable Long projectId,
-                                                  @PathVariable Long collectionId,
-                                                  @PathVariable Long id,
-                                                  @AuthenticationPrincipal User user) {
+    public ResponseEntity<FlashCardDto> getFlashCard(@PathVariable Long projectId,
+                                                     @PathVariable Long collectionId,
+                                                     @PathVariable Long id,
+                                                     @AuthenticationPrincipal User user) {
         return ResponseEntity.ok(flashCardMapper.apply(flashCardService.getFlashCard(collectionId, id)));
     }
 
     @PostMapping()
     @PreAuthorize("@projectAuthorizationHelper.isProjectOwner(#projectId, authentication) " +
             "|| @projectAuthorizationHelper.hasAccessToSharedProject(#projectId, authentication)")
-    public ResponseEntity<FlashCardModel> addFlashCard(@PathVariable Long projectId,
-                                                       @PathVariable Long collectionId,
-                                                       @RequestBody FlashCard flashCard,
-                                                       @AuthenticationPrincipal User user) {
+    public ResponseEntity<FlashCardDto> addFlashCard(@PathVariable Long projectId,
+                                                     @PathVariable Long collectionId,
+                                                     @RequestBody FlashCard flashCard,
+                                                     @AuthenticationPrincipal User user) {
         FlashCard created = flashCardService.addFlashCard(projectId, collectionId, flashCard);
         return ResponseEntity.ok(flashCardMapper.apply(created));
     }
@@ -79,11 +79,11 @@ public class FlashCardController {
     @PutMapping("/{id}")
     @PreAuthorize("@projectAuthorizationHelper.isProjectOwner(#projectId, authentication) " +
             "|| @projectAuthorizationHelper.hasAccessToSharedProject(#projectId, authentication)")
-    public ResponseEntity<FlashCardModel> updateFlashCard(@PathVariable Long projectId,
-                                                          @PathVariable Long collectionId,
-                                                          @PathVariable Long id,
-                                                          @RequestBody FlashCard flashCard,
-                                                          @AuthenticationPrincipal User user) {
+    public ResponseEntity<FlashCardDto> updateFlashCard(@PathVariable Long projectId,
+                                                        @PathVariable Long collectionId,
+                                                        @PathVariable Long id,
+                                                        @RequestBody FlashCard flashCard,
+                                                        @AuthenticationPrincipal User user) {
         FlashCard updated = flashCardService.updateFlashCard(id, flashCard);
         return ResponseEntity.ok(flashCardMapper.apply(updated));
     }
