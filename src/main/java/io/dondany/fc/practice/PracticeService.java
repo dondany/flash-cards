@@ -50,6 +50,7 @@ public class PracticeService {
         Practice practice = new Practice();
         practice.setName(createPracticeDto.getName());
         practice.setDescription(createPracticeDto.getDescription());
+        practice.setType(createPracticeDto.getType());
         practice.setOwner(user);
         practice.setProject(project);
         practice.setCollections(collections);

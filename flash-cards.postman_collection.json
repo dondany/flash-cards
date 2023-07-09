@@ -1303,7 +1303,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"My Second Practice\",\r\n    \"description\": \"Practice to practice\",\r\n    \"projectId\": 1,\r\n    \"collectionIds\": [\r\n        1, 2, 3\r\n    ]\r\n}",
+							"raw": "{\r\n    \"name\": \"My Quiz Practice\",\r\n    \"description\": \"Practice to practice\",\r\n    \"type\": \"QUIZ\",\r\n    \"projectId\": 1,\r\n    \"collectionIds\": [\r\n        1, 2, 3\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
