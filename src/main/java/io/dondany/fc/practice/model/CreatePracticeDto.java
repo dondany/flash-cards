@@ -14,6 +14,7 @@ import java.util.List;
 public class CreatePracticeDto {
     private String name;
     private String description;
+    private PracticeType type;
     private long projectId;
     private List<Long> collectionIds;
 }

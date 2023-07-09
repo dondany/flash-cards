@@ -1,9 +1,12 @@
 package io.dondany.fc.practice;
 
 import io.dondany.fc.collection.Collection;
+import io.dondany.fc.practice.model.PracticeType;
 import io.dondany.fc.project.Project;
 import io.dondany.fc.user.User;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,7 +14,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 
 import java.util.List;
 
@@ -23,6 +25,9 @@ public class Practice {
     private Long id;
     private String name;
     private String description;
+
+    @Enumerated(EnumType.STRING)
+    private PracticeType type;
 
     @ManyToOne
     @JoinColumn(name="owner_id")
@@ -84,5 +89,13 @@ public class Practice {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public PracticeType getType() {
+        return type;
+    }
+
+    public void setType(PracticeType type) {
+        this.type = type;
     }
 }

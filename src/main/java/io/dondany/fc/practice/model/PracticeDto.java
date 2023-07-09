@@ -18,6 +18,7 @@ public class PracticeDto {
     private Long id;
     private String name;
     private String description;
+    private PracticeType type;
     private UserDto owner;
     private ProjectSimpleDto project;
     private List<CollectionSimpleDto> collections;
