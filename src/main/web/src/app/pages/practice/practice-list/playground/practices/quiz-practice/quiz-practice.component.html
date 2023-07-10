@@ -1,0 +1,33 @@
+<div class="flex gap-3 align-items-center">
+
+  <div class="flex flex-column gap-3 wrap align-items-center wrap">
+    <div class="card col-12">
+      <p-card styleClass="h-full flex align-items-center justify-content-center">
+        <div class="text-4xl flip-card-inner">
+          {{ currentFlashCard.front }}
+        </div>
+      </p-card>
+    </div>
+
+    <div class="grid col-12">
+      <div class="col-6">
+        <button pButton (click)="pick(0)" [label]="answer1" class="p-button-outlined p-button-info col-12"
+                [ngClass]="{'p-button-danger': wrongAnswers[0], 'p-button-success': correctAnswers[0]}"></button>
+      </div>
+      <div class="col-6">
+        <button pButton (click)="pick(1)" [label]="answer2" class="p-button-outlined p-button-info col-12"
+                [ngClass]="{'p-button-danger': wrongAnswers[1], 'p-button-success': correctAnswers[1]}"></button>
+      </div>
+      <div class="col-6">
+        <button pButton (click)="pick(2)" [label]="answer3" class="p-button-outlined p-button-info col-12"
+                [ngClass]="{'p-button-danger': wrongAnswers[2], 'p-button-success': correctAnswers[2]}"></button>
+      </div>
+      <div class="col-6">
+        <button pButton (click)="pick(3)" [label]="answer4" class="p-button-outlined p-button-info col-12"
+                [ngClass]="{'p-button-danger': wrongAnswers[3], 'p-button-success': correctAnswers[3]}"></button>
+      </div>
+    </div>
+  </div>
+  <button pButton (click)="next()" icon="pi pi-angle-right"
+          class="p-button-rounded p-button-outlined p-button-secondary" [disabled]="isLast"></button>
+</div>
