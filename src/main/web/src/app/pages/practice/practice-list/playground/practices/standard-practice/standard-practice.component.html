@@ -1,0 +1,14 @@
+<div class="flex gap-3 align-items-center">
+  <button pButton (click)="prev()" icon="pi pi-angle-left"
+          class="p-button-rounded p-button-outlined p-button-secondary" [disabled]="isFirst"></button>
+  <div class="card-wrap">
+    <p-card (click)="flip()" styleClass="h-full flex align-items-center justify-content-center">
+      <div class="text-4xl flip-card-inner">
+        <span *ngIf="isFlipped">{{ currentFlashCard.back }}</span>
+        <span *ngIf="!isFlipped">{{ currentFlashCard.front }}</span>
+      </div>
+    </p-card>
+  </div>
+  <button pButton (click)="next()" icon="pi pi-angle-right"
+          class="p-button-rounded p-button-outlined p-button-secondary" [disabled]="isLast"></button>
+</div>
