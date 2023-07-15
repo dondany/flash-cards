@@ -1,11 +1,9 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ProjectService} from "../project-service";
 import {ProjectType} from "../types/project-type";
-import {ActivatedRoute} from "@angular/router";
 import {MenuItem} from "primeng/api";
 import {CollectionType} from "../types/collection-type";
 import {Subject, switchMap, takeUntil, tap} from "rxjs";
-import {UserType} from "../../../shared/services/user-type";
 import {ProjectMemberType} from "../types/project-member-type";
 
 @Component({
@@ -14,6 +12,8 @@ import {ProjectMemberType} from "../types/project-member-type";
   styleUrls: ['./project-details.component.scss']
 })
 export class ProjectDetailsComponent implements OnInit, OnDestroy {
+  @Input('id') projectId!: number;
+
   private destroy = new Subject<void>();
   project!: ProjectType;
   projectMembers!: ProjectMemberType[];
@@ -21,12 +21,11 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
   homeItem!: MenuItem;
   collections!: CollectionType[];
 
-  constructor(private projectService: ProjectService, private activatedRoute: ActivatedRoute) {
+  constructor(private projectService: ProjectService) {
   }
 
   ngOnInit(): void {
-    const projectId = this.activatedRoute.snapshot.params['id'];
-    this.projectService.getProject(projectId)
+    this.projectService.getProject(this.projectId)
       .pipe(takeUntil(this.destroy),
         tap((project) => {
           this.project = project;
@@ -37,7 +36,7 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
           ];
           this.homeItem = {icon: 'pi pi-home', routerLink: '/home'};
         }),
-        switchMap(() => this.projectService.getCollections(projectId)),
+        switchMap(() => this.projectService.getCollections(this.projectId)),
         tap((collections) => {
           this.collections = collections;
         })

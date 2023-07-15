@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {PracticeService} from "../../../../shared/services/practice-service";
-import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'fc-playground',
@@ -9,12 +8,13 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class PlaygroundComponent implements OnInit {
 
-  constructor(private practiceService: PracticeService,
-              private activatedRoute: ActivatedRoute) {
+  @Input() id!: number;
+
+  constructor(private practiceService: PracticeService) {
   }
 
   get practiceId() {
-    return this.activatedRoute.snapshot.params['id'];
+    return this.id;
   }
 
   ngOnInit(): void {

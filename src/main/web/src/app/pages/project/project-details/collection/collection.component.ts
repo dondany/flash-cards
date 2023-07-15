@@ -1,7 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subject, switchMap, takeUntil, tap} from "rxjs";
 import {ProjectService} from "../../project-service";
-import {ActivatedRoute, Router} from "@angular/router";
 import {MenuItem} from "primeng/api";
 import {CollectionType} from "../../types/collection-type";
 import {FlashCardType} from "../../types/flash-card-type";
@@ -15,6 +14,9 @@ import {FlashCardUpdateFormControlType} from "./types/flash-card-update-form-gro
   styleUrls: ['./collection.component.scss']
 })
 export class CollectionComponent implements OnInit, OnDestroy {
+  @Input('id') projectId!: number;
+  @Input() collectionId!: number;
+
   private destroy = new Subject<void>();
   collection!: CollectionType;
   flashCards!: FlashCardType[];
@@ -22,7 +24,6 @@ export class CollectionComponent implements OnInit, OnDestroy {
   homeItem!: MenuItem;
 
   showNewFcModal: boolean = false;
-  flashCard?: FlashCardType;
   protected addFormGroup = this.formBuilder.group<FlashCardNewFormControlType>({
     front: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
     back: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
@@ -37,15 +38,11 @@ export class CollectionComponent implements OnInit, OnDestroy {
   });
 
   constructor(private projectService: ProjectService,
-              private activatedRoute: ActivatedRoute,
-              private formBuilder: FormBuilder,
-              private router: Router) {
+              private formBuilder: FormBuilder,) {
   }
 
   ngOnInit(): void {
-    const projectId = this.activatedRoute.snapshot.params['id'];
-    const collectionId = this.activatedRoute.snapshot.params['collectionId'];
-    this.projectService.getCollection(projectId, collectionId)
+    this.projectService.getCollection(this.projectId, this.collectionId)
       .pipe(takeUntil(this.destroy),
         tap((collection) => {
           this.collection = collection;
@@ -56,7 +53,7 @@ export class CollectionComponent implements OnInit, OnDestroy {
           ];
           this.homeItem = {icon: 'pi pi-home', routerLink: '/home'};
         }),
-        switchMap(() => this.projectService.getFlashCards(projectId, collectionId)),
+        switchMap(() => this.projectService.getFlashCards(this.projectId, this.collectionId)),
         tap((flashCards) => {
           this.flashCards = flashCards;
         })
@@ -91,14 +88,12 @@ export class CollectionComponent implements OnInit, OnDestroy {
   }
 
   handleAddOnSubmit() {
-    const projectId = this.activatedRoute.snapshot.params['id'];
-    const collectionId = this.activatedRoute.snapshot.params['collectionId'];
     const value = this.addFormGroup.value;
-    this.projectService.createFlashCard(projectId, collectionId, value)
+    this.projectService.createFlashCard(this.projectId, this.collectionId, value)
       .subscribe((fc) => {
         this.showNewFcModal = false;
         this.addFormGroup.reset();
-        this.projectService.getFlashCards(projectId, this.collection.id)
+        this.projectService.getFlashCards(this.projectId, this.collection.id)
           .subscribe((flashCards) => {
             this.flashCards = flashCards;
           })
@@ -106,14 +101,12 @@ export class CollectionComponent implements OnInit, OnDestroy {
   }
 
   handleUpdateOnSubmit() {
-    const projectId = this.activatedRoute.snapshot.params['id'];
-    const collectionId = this.activatedRoute.snapshot.params['collectionId'];
     const value = this.updateFormGroup.value;
-    this.projectService.updateFlashCard(projectId, collectionId, this.flashCardInFocus!.id, value)
+    this.projectService.updateFlashCard(this.projectId, this.collectionId, this.flashCardInFocus!.id, value)
       .subscribe((fc) => {
         this.showUpdateFcModal = false;
         this.updateFormGroup.reset();
-        this.projectService.getFlashCards(projectId, this.collection.id)
+        this.projectService.getFlashCards(this.projectId, this.collection.id)
           .subscribe((flashCards) => {
             this.flashCards = flashCards;
           })
@@ -131,11 +124,9 @@ export class CollectionComponent implements OnInit, OnDestroy {
   }
 
   deleteFc() {
-    const projectId = this.activatedRoute.snapshot.params['id'];
-    const collectionId = this.activatedRoute.snapshot.params['collectionId'];
-    this.projectService.deleteFlashCard(projectId, collectionId, this.flashCardInFocus!.id)
+    this.projectService.deleteFlashCard(this.projectId, this.collectionId, this.flashCardInFocus!.id)
       .subscribe(() => {
-        this.projectService.getFlashCards(projectId, this.collection.id)
+        this.projectService.getFlashCards(this.projectId, this.collection.id)
           .subscribe((flashCards) => {
             this.flashCards = flashCards;
           })

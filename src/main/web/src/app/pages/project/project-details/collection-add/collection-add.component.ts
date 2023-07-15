@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {MenuItem, MessageService} from "primeng/api";
 import {ProjectService} from "../../project-service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {CollectionAddFormControlType} from "./types/collection-add-form-group-type";
 import {ProjectType} from "../../types/project-type";
 
@@ -12,6 +12,9 @@ import {ProjectType} from "../../types/project-type";
   styleUrls: ['./collection-add.component.scss']
 })
 export class CollectionAddComponent {
+  @Input('id') projectId!: number;
+
+
   protected formGroup = this.formBuilder.group<CollectionAddFormControlType>({
     name: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
     description: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
@@ -24,13 +27,11 @@ export class CollectionAddComponent {
   constructor(private formBuilder: FormBuilder,
               private projectService: ProjectService,
               private router: Router,
-              private messageService: MessageService,
-              private activatedRoute: ActivatedRoute) {
+              private messageService: MessageService) {
   }
 
   ngOnInit(): void {
-    const projectId = this.activatedRoute.snapshot.params['id'];
-    this.projectService.getProject(projectId)
+    this.projectService.getProject(this.projectId)
       .subscribe((project) => {
         this.project = project;
         this.breadCrumbItems = [
