@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subject, takeUntil, tap} from "rxjs";
 import {FormBuilder, Validators} from "@angular/forms";
 import {ProjectService} from "../../../project-service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {ConfirmationService, MenuItem, MessageService} from "primeng/api";
 import {CollectionSettingsFormControlType} from "./types/collection-settings-form-group-type";
 import {CollectionType} from "../../../types/collection-type";
@@ -13,6 +13,9 @@ import {CollectionType} from "../../../types/collection-type";
   styleUrls: ['./collection-settings.component.scss']
 })
 export class CollectionSettingsComponent implements OnInit, OnDestroy  {
+  @Input('id') projectId!: number;
+  @Input() collectionId!: number;
+
   private destroy = new Subject<void>();
 
   protected formGroup = this.formBuilder.group<CollectionSettingsFormControlType>({
@@ -23,21 +26,15 @@ export class CollectionSettingsComponent implements OnInit, OnDestroy  {
   collection!: CollectionType;
   breadCrumbItems!: MenuItem[];
   homeItem!: MenuItem;
-  projectId!: number;
-  collectionId!: number;
 
   constructor(private formBuilder: FormBuilder,
               private projectService: ProjectService,
-              private activatedRoute: ActivatedRoute,
               private router: Router,
               private messageService: MessageService,
               private confirmationService: ConfirmationService) {
   }
 
   ngOnInit() {
-    this.projectId = this.activatedRoute.snapshot.params['id'];
-    this.collectionId = this.activatedRoute.snapshot.params['collectionId']
-
     this.projectService.getCollection(this.projectId, this.collectionId)
       .pipe(takeUntil(this.destroy),
         tap((collection) => {

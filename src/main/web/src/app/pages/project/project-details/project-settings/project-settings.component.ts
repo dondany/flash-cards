@@ -1,9 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AddProjectFormControlType} from "../../project-add/types/add-project-form-group-type";
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {ConfirmationService, MenuItem, MessageService} from "primeng/api";
 import {ProjectService} from "../../project-service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {Subject, takeUntil, tap} from "rxjs";
 import {ProjectType} from "../../types/project-type";
 import {ProjectSettingsFormControlType} from "./types/project-settings-form-group-type";
@@ -16,6 +15,8 @@ import {FriendsService} from "../../../friends/friends-service";
   styleUrls: ['./project-settings.component.scss']
 })
 export class ProjectSettingsComponent implements OnInit, OnDestroy {
+  @Input('id') projectId!: number;
+
   private destroy = new Subject<void>();
 
   protected formGroup = this.formBuilder.group<ProjectSettingsFormControlType>({
@@ -34,7 +35,6 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder,
               private projectService: ProjectService,
               private friendService: FriendsService,
-              private activatedRoute: ActivatedRoute,
               private router: Router,
               private messageService: MessageService,
               private confirmationService: ConfirmationService) {
@@ -45,8 +45,7 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
   }
 
   init() {
-    const projectId = this.activatedRoute.snapshot.params['id'];
-    this.projectService.getProject(projectId)
+    this.projectService.getProject(this.projectId)
       .pipe(takeUntil(this.destroy),
         tap((project) => {
           this.project = project;
