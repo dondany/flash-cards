@@ -4,6 +4,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {ProjectService} from "../project-service";
 import {AddProjectFormControlType} from "./types/add-project-form-group-type";
 import {Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'fc-project-add',
@@ -23,7 +24,8 @@ export class ProjectAddComponent implements OnInit{
   constructor(private formBuilder: FormBuilder,
               private projectService: ProjectService,
               private router: Router,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private location: Location) {
   }
 
   ngOnInit(): void {
@@ -43,7 +45,8 @@ export class ProjectAddComponent implements OnInit{
           summary: 'Confirmed',
           detail: `Project ${project.name} has been created!`,
         });
-        this.router.navigate(['projects']);
+        console.log(this.router.getCurrentNavigation());
+        this.location.back();
       });
   }
 

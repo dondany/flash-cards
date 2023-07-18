@@ -1,1 +1,52 @@
-<p>practice-add works!</p>
+<div class="container">
+  <p-breadcrumb [model]="breadCrumbItems" [home]="homeItem"
+                styleClass="border-none p-0 m-0 text-sm surface-200"></p-breadcrumb>
+  <section class="mt-3">
+    <div class="font-semibold text-lg mb-2">Add New Practice</div>
+    <p-card styleClass="col-12 md:col-6 lg:col-6 xl:col-4">
+      <ng-template pTemplate="title">
+        Practice
+      </ng-template>
+      <ng-template pTemplate="content">
+        <form [formGroup]="formGroup" (ngSubmit)="handleOnSubmit()" autocomplete="off"
+              class="grid">
+
+          <span class="field p-float-label col-12">
+          <input pInputText formControlName="name" class="col-12">
+            <label htmlFor="name">Name</label>
+          </span>
+          <small *ngIf="name.errors?.['required'] && !name.pristine" class="p-error">Name is required.</small>
+          <span class="field p-float-label col-12">
+          <input pInputText formControlName="description" class="col-12">
+           <label htmlFor="description">Description</label>
+          </span>
+          <small *ngIf="description.errors?.['required'] && !description.pristine" class="p-error">Description is
+            required.</small>
+
+          <div class="field col-12 grid">
+            <span class="p-float-label col-6">
+              <p-dropdown [options]="types" formControlName="type" optionLabel="name" optionValue="value" inputId="type" styleClass="col-12" placeholder="Select Type"></p-dropdown>
+            <label for="type">Type</label>
+          </span>
+          </div>
+
+          <div class="col-12 grid">
+            <span class="field p-float-label col-6">
+              <p-dropdown [options]="projects" formControlName="projectId" optionLabel="name" optionValue="id"
+                          inputId="project" (onChange)="onProjectDropdownChange($event)" styleClass="col-12" placeholder="Select Project"></p-dropdown>
+            <label for="project">Project</label>
+          </span>
+            <span class="field p-float-label col-6">
+              <p-multiSelect [options]="collections" formControlName="collectionIds" optionLabel="name" optionValue="id"
+                             inputId="collections" styleClass="col-12" placeholder="Select Collections"></p-multiSelect>
+            <label for="collections">Collections</label>
+          </span>
+          </div>
+
+          <button pButton type="button" label="Add New Practice" type="submit" class="ml-auto"
+                  icon="pi pi-plus" [disabled]="!formGroup.valid"></button>
+        </form>
+      </ng-template>
+    </p-card>
+  </section>
+</div>

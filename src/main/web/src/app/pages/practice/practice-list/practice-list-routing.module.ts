@@ -10,7 +10,11 @@ const routes: Routes = [
   {
     path: 'playground',
     loadChildren: () => import('./playground/playground.module').then((m) => m.PlaygroundModule)
-  }
+  },
+  {
+    path: 'add',
+    loadChildren: () => import('./practice-add/practice-add.module').then((m) => m.PracticeAddModule)
+  },
 ];
 
 @NgModule({
