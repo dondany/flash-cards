@@ -26,6 +26,12 @@ public class PracticeController {
         return practiceService.getAllPractices(user);
     }
 
+    @GetMapping("/{id}")
+    public PracticeDto getPractice(@AuthenticationPrincipal User user,
+                                   @PathVariable Long id){
+        return practiceService.getPractice(id, user);
+    }
+
     @PostMapping
     public PracticeDto addPractice(@AuthenticationPrincipal User user,
                                    @RequestBody CreatePracticeDto createPracticeDto) {
