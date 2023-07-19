@@ -6,6 +6,7 @@ export type PracticeType = {
   id: number,
   name: string,
   description: string,
+  type: 'STANDARD' | 'QUIZ',
   owner: UserType,
   project: ProjectSimpleType,
   collections: CollectionSimpleType[]

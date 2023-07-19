@@ -42,6 +42,15 @@ public class PracticeService {
                 .toList();
     }
 
+    public PracticeDto getPractice(Long id, User user) {
+        Practice practice = practiceRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        if (!user.equals(practice.getOwner())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+        return PracticeMapper.INSTANCE.map(practice);
+    }
+
     public PracticeDto addPractice(CreatePracticeDto createPracticeDto, User user) {
         Project project = projectRepository.findById(createPracticeDto.getProjectId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
