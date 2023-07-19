@@ -1,4 +1,4 @@
 <div class="container flex justify-content-center align-items-center h-full">
-<!--  <fc-standard-practice  [practiceId]="practiceId"></fc-standard-practice>-->
-  <fc-quiz-practice [practiceId]="practiceId"></fc-quiz-practice>
+  <fc-standard-practice *ngIf="practiceType === 'STANDARD'" [practiceId]="practiceId"></fc-standard-practice>
+  <fc-quiz-practice *ngIf="practiceType === 'QUIZ'" [practiceId]="practiceId"></fc-quiz-practice>
 </div>

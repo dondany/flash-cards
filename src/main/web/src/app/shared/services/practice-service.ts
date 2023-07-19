@@ -20,6 +20,12 @@ export class PracticeService {
     return this.http.get<PracticeType[]>('/api/practices', {headers});
   }
 
+  getPractice(id: number): Observable<PracticeType> {
+    const token = localStorage.getItem("jwtToken");
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
+    return this.http.get<PracticeType>(`/api/practices/${id}`, {headers});
+  }
+
   getFlashCards(id: number): Observable<FlashCardType[]> {
     const token = localStorage.getItem("jwtToken");
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
