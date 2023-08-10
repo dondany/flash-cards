@@ -1,21 +1,29 @@
 <div class="container">
-  <div class="form-wrap">
-    <form [formGroup]="singInFormGroup" (ngSubmit)="handleOnSubmit()" autocomplete="off" novalidate>
-      <div class="p-inputgroup">
+  <div class="flex flex-column align-items-center px-5 py-6 bg-white border-round">
+    <div class="logo text-4xl text-primary">Flash Cards</div>
+    <h3>Sign In</h3>
+    <div class="form-wrap">
+      <form [formGroup]="singInFormGroup" (ngSubmit)="handleOnSubmit()" autocomplete="off" novalidate class="flex flex-column gap-3">
+        <div class="p-inputgroup">
         <span class="p-inputgroup-addon">
           <i class="pi pi-user"></i>
         </span>
-        <input pInputText [formControl]="email" placeholder="email">
-      </div>
-      <div class="p-inputgroup">
+          <input pInputText [formControl]="email" placeholder="email">
+        </div>
+        <div class="p-inputgroup">
         <span class="p-inputgroup-addon">
           <i class="pi pi-lock"></i>
         </span>
-        <input pInputText id="pass" [formControl]="password" placeholder="password" type="password">
-      </div>
-      <button pButton type="button" label="Sing In" type="submit">
-      </button>
-    </form>
+          <input pInputText id="pass" [formControl]="password" placeholder="password" type="password">
+        </div>
+        <button pButton type="button" label="Sing In" type="submit">
+        </button>
+      </form>
+    </div>
+    <div class="text-sm flex align-items-center" >
+      <span>Don't have an account?</span>
+      <p-button styleClass="p-button-link" label="Sign Up" routerLink="../sign-up"></p-button>
+    </div>
   </div>
 </div>
 
