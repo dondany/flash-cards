@@ -40,3 +40,26 @@ nav {
   }
 }
 
+.sidebar-link {
+  a {
+    width: 100%;
+    padding: 1rem 0 1rem 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    text-decoration: none;
+    color: #fff;
+    border-radius: var(--border-radius);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+    }
+  }
+
+  .active {
+    background: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+  }
+}

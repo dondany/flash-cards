@@ -1,6 +1,6 @@
 <nav>
   <div class="nav-start">
-    <a routerLink="home">flash-cards</a>
+    <a class="logo text-2xl" routerLink="home">Flash Cards</a>
   </div>
   <div class="nav-end">
     <div>
@@ -10,9 +10,13 @@
             <h2 class="pt-0 mt-0 mb-1">Notifications</h2>
             <ul class="list-none p-0">
               <p-divider></p-divider>
-              <li *ngFor="let notification of notifications" class="notification p-3 border-round flex justify-content-between font-medium align-items-center" (click)="readNotification(notification)">
-                <span [ngClass]="notification.read ? 'text-color-secondary col-9' : 'col-9'">{{ notification.message }}</span>
-                <p-button icon="pi pi-times" styleClass="p-button-rounded p-button-danger p-button-text" (click)="deleteNotification(notification.id)"></p-button>
+              <li *ngFor="let notification of notifications"
+                  class="notification p-3 border-round flex justify-content-between font-medium align-items-center"
+                  (click)="readNotification(notification)">
+                  <span
+                    [ngClass]="notification.read ? 'text-color-secondary col-9' : 'col-9'">{{ notification.message }}</span>
+                <p-button icon="pi pi-times" styleClass="p-button-rounded p-button-danger p-button-text"
+                          (click)="deleteNotification(notification.id)"></p-button>
                 <i *ngIf="!notification.read" class="pi pi-circle-fill text-primary"></i>
               </li>
             </ul>
@@ -36,4 +40,38 @@
     </div>
   </div>
 </nav>
-<router-outlet></router-outlet>
+
+<div class="flex">
+  <div class="w-16rem h-screen bg-primary flex flex-column align-items-center">
+    <ul class="list-none p-1 text-lg w-full">
+      <li class="sidebar-link">
+        <a [routerLink]="['/home']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <i class="pi pi-home"></i>
+          <span>Home</span>
+        </a>
+      </li>
+      <li class="sidebar-link">
+        <a [routerLink]="['/home/projects']" routerLinkActive="active">
+          <i class="pi pi-folder"></i>
+          <span>Projects</span>
+        </a>
+      </li>
+      <li class="sidebar-link">
+        <a [routerLink]="['/home/friends']" routerLinkActive="active">
+          <i class="pi pi-users"></i>
+          <span>Friends</span>
+        </a>
+      </li>
+      <li class="sidebar-link">
+        <a [routerLink]="['/home/practice']" routerLinkActive="active">
+          <i class="pi pi-pencil"></i>
+          <span>Practice</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="w-full">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
