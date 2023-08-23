@@ -20,7 +20,7 @@ export class PlaygroundComponent implements OnInit {
   }
 
   get practiceType() {
-    return this.practice.type;
+    return this.practice?.type;
   }
 
   ngOnInit(): void {
