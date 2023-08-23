@@ -2,6 +2,13 @@ import {Component, Input} from '@angular/core';
 import {FlashCardType} from "../../../../../project/types/flash-card-type";
 import {PracticeService} from "../../../../../../shared/services/practice-service";
 
+type Question = {
+  flashCard: FlashCardType,
+  options: string[],
+  correctOption: number,
+  userAnswer: number | null
+}
+
 @Component({
   selector: 'fc-quiz-practice',
   templateUrl: './quiz-practice.component.html',
@@ -13,9 +20,11 @@ export class QuizPracticeComponent {
   flashCards!: FlashCardType[];
   currentIndex: number = 0;
 
-  answers: string[] = ['', '', '', ''];
   wrongAnswers: boolean[] = [false, false, false, false];
   correctAnswers: boolean[] = [false, false, false, false];
+
+  questions: Question[] = [];
+  showScore: boolean = false;
 
   constructor(private practiceService: PracticeService) {
   }
@@ -25,8 +34,10 @@ export class QuizPracticeComponent {
       .subscribe((flashCards) => {
         this.flashCards = this.shuffle(flashCards);
         this.currentIndex = 0;
+        this.initQuiz();
         this.initQuizItem();
-      })
+        console.log(this.questions);
+      });
   }
 
   get isFirst() {
@@ -37,24 +48,28 @@ export class QuizPracticeComponent {
     return this.currentIndex + 1 === this.flashCards.length;
   }
 
+  get isNotAnswered() {
+    return this.questions[this.currentIndex].userAnswer === null;
+  }
+
   get currentFlashCard() {
     return this.flashCards[this.currentIndex];
   }
 
-  get answer1() {
-    return this.answers[0];
+  get option1() {
+    return this.questions[this.currentIndex].options[0];
   }
 
-  get answer2() {
-    return this.answers[1];
+  get option2() {
+    return this.questions[this.currentIndex].options[1];
   }
 
-  get answer3() {
-    return this.answers[2];
+  get option3() {
+    return this.questions[this.currentIndex].options[2];
   }
 
-  get answer4() {
-    return this.answers[3];
+  get option4() {
+    return this.questions[this.currentIndex].options[3];
   }
 
   next() {
@@ -64,27 +79,67 @@ export class QuizPracticeComponent {
     }
   }
 
+  previous() {
+    if (!this.isFirst) {
+      this.currentIndex--;
+      this.initQuizItem();
+    }
+  }
+
   pick(index: number) {
-    if (this.answers[index] === this.currentFlashCard.back) {
+    if (this.questions[this.currentIndex].userAnswer !== null) {
+      return;
+    }
+
+    this.questions[this.currentIndex].userAnswer = index;
+
+    if (this.questions[this.currentIndex].options[index] === this.currentFlashCard.back) {
       this.correctAnswers[index] = true;
     } else {
       this.wrongAnswers[index] = true;
+    }
+
+    if (this.currentIndex === this.questions.length-1) {
+      this.showScore = true;
+    }
+  }
+
+  initQuiz() {
+    for (let i = 0; i < this.flashCards.length; i++) {
+      let options = [this.flashCards[i].back];
+      let fcs = [...this.flashCards];
+      fcs.splice(i, 1);
+      for (let i = 0; i < 3; i++) {
+        let random = Math.floor(Math.random() * fcs.length);
+        options.push(fcs[random].back);
+        fcs.splice(random, 1);
+      }
+      this.shuffle(options);
+
+      const question: Question = {
+        flashCard: this.flashCards[i],
+        options: options,
+        correctOption: options.indexOf(this.flashCards[i].back),
+        userAnswer: null
+      };
+
+      this.questions.push(question);
+      this.showScore = false;
     }
   }
 
   initQuizItem() {
     this.wrongAnswers = [false, false, false, false];
     this.correctAnswers = [false, false, false, false];
-    this.answers = [];
-    this.answers.push(this.flashCards[this.currentIndex].back);
-    let fcs = [...this.flashCards];
-    fcs.splice(0, 1);
-    for(let i = 0; i < 3; i++) {
-      let random = Math.floor(Math.random() * fcs.length);
-      this.answers.push(fcs[random].back);
-      fcs.splice(random, 1);
+
+    if (this.questions[this.currentIndex].userAnswer) {
+      const index = this.questions[this.currentIndex].userAnswer;
+      if (this.questions[this.currentIndex].options[index!] === this.currentFlashCard.back) {
+        this.correctAnswers[index!] = true;
+      } else {
+        this.wrongAnswers[index!] = true;
+      }
     }
-    this.shuffle(this.answers);
   }
 
   shuffle(array: any[]) {
@@ -93,5 +148,9 @@ export class QuizPracticeComponent {
       [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
+  }
+
+  score(): string {
+    return `${this.questions.filter(q => q.options[q.userAnswer!] === q.flashCard.back).length}/${this.questions.length}`;
   }
 }

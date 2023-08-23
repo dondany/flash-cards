@@ -7,6 +7,7 @@ import {CardModule} from "primeng/card";
 import {ButtonModule} from "primeng/button";
 import { StandardPracticeComponent } from './practices/standard-practice/standard-practice.component';
 import { QuizPracticeComponent } from './practices/quiz-practice/quiz-practice.component';
+import {TableModule} from "primeng/table";
 
 
 @NgModule({
@@ -15,11 +16,12 @@ import { QuizPracticeComponent } from './practices/quiz-practice/quiz-practice.c
     StandardPracticeComponent,
     QuizPracticeComponent
   ],
-  imports: [
-    CommonModule,
-    PlaygroundRoutingModule,
-    CardModule,
-    ButtonModule
-  ]
+    imports: [
+        CommonModule,
+        PlaygroundRoutingModule,
+        CardModule,
+        ButtonModule,
+        TableModule
+    ]
 })
 export class PlaygroundModule { }
