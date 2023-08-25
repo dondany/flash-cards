@@ -1,6 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {FlashCardType} from "../../../../../project/types/flash-card-type";
 import {PracticeService} from "../../../../../../shared/services/practice-service";
+import {ConfirmationService} from "primeng/api";
+import {Router} from "@angular/router";
 
 type Question = {
   flashCard: FlashCardType,
@@ -25,18 +27,26 @@ export class QuizPracticeComponent {
 
   questions: Question[] = [];
   showScore: boolean = false;
+  canBePlayed: boolean = false;
 
-  constructor(private practiceService: PracticeService) {
+  constructor(private practiceService: PracticeService,
+              private confirmationService: ConfirmationService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
     this.practiceService.getFlashCards(this.practiceId)
       .subscribe((flashCards) => {
+        if (flashCards.length < 4) {
+          this.canBePlayed = false;
+          this.notEnoughFlashCards();
+          return;
+        }
         this.flashCards = this.shuffle(flashCards);
         this.currentIndex = 0;
         this.initQuiz();
         this.initQuizItem();
-        console.log(this.questions);
+        this.canBePlayed = true;
       });
   }
 
@@ -152,5 +162,18 @@ export class QuizPracticeComponent {
 
   score(): string {
     return `${this.questions.filter(q => q.options[q.userAnswer!] === q.flashCard.back).length}/${this.questions.length}`;
+  }
+
+  notEnoughFlashCards() {
+    this.confirmationService.confirm({
+      message: 'You need at least 4 flash cards to play this Quiz',
+      header: 'Warning',
+      acceptLabel: 'Ok',
+      rejectVisible: false,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.router.navigate(['/home/practice'])
+      }
+    })
   }
 }

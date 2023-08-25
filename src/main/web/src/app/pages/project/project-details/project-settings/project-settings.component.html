@@ -57,7 +57,7 @@
         </form>
         <p-divider></p-divider>
         <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
-        <p-button (click)="onDelete()" label="Delete Project" styleClass="p-button-danger p-button-outlined"
+        <p-button *ngIf="isOwner()" (click)="onDelete()" label="Delete Project" styleClass="p-button-danger p-button-outlined"
                   icon="pi pi-trash"></p-button>
       </p-tabPanel>
       <p-tabPanel header="Members">

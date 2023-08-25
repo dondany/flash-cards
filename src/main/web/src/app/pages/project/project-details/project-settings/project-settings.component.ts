@@ -3,11 +3,14 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {ConfirmationService, MenuItem, MessageService} from "primeng/api";
 import {ProjectService} from "../../project-service";
 import {Router} from "@angular/router";
-import {Subject, takeUntil, tap} from "rxjs";
+import {map, Subject, take, takeUntil, tap} from "rxjs";
 import {ProjectType} from "../../types/project-type";
 import {ProjectSettingsFormControlType} from "./types/project-settings-form-group-type";
 import {FriendType} from "../../../friends/types/friend-type";
 import {FriendsService} from "../../../friends/friends-service";
+import {UserService} from "../../../../shared/services/user-service";
+import {AuthenticationService} from "../../../../shared/services/authentication.service";
+import {UserType} from "../../../../shared/services/user-type";
 
 @Component({
   selector: 'fc-project-settings',
@@ -35,6 +38,7 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder,
               private projectService: ProjectService,
               private friendService: FriendsService,
+              private authService: AuthenticationService,
               private router: Router,
               private messageService: MessageService,
               private confirmationService: ConfirmationService) {
@@ -121,6 +125,10 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
       })
   }
 
+  isOwner() {
+    return this.project.owner === this.authService.username;
+  }
+
   get name() {
     return this.formGroup.controls.name;
   }
@@ -128,7 +136,5 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
   get description() {
     return this.formGroup.controls.description;
   }
-
-
 
 }

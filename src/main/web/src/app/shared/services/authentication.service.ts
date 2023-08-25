@@ -22,9 +22,11 @@ export class AuthenticationService {
       .subscribe(response => {
         const token = response.token;
         localStorage.setItem('jwtToken', token);
+
         this.userService.getAuthenticatedUser()
           .subscribe((user) => {
             this.user.next(user);
+            localStorage.setItem("username", user.username);
             callback();
           })
       })
@@ -38,19 +40,28 @@ export class AuthenticationService {
         this.userService.getAuthenticatedUser()
           .subscribe((user) => {
             this.user.next(user);
+            localStorage.setItem("username", user.username);
           })
         callback();
       })
   }
 
   signOut() {
-    console.log('sign-out')
     localStorage.removeItem('jwtToken');
+    localStorage.removeItem('username');
     this.user.next(null);
+  }
+
+  isSignedIn() {
+    return !!localStorage.getItem('jwtToken');
   }
 
   get authenticatedUser() {
     return this.user.asObservable();
+  }
+
+  get username() {
+    return localStorage.getItem('username');
   }
 
 }
