@@ -53,7 +53,7 @@ export class CollectionAddComponent {
           summary: 'Confirmed',
           detail: `Collection ${collection.name} has been created!`,
         });
-        this.router.navigate(['projects', this.project.id]);
+        this.router.navigate(['/home/projects', this.project.id]);
       });
   }
 

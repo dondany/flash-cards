@@ -8,6 +8,7 @@ import {ButtonModule} from "primeng/button";
 import { StandardPracticeComponent } from './practices/standard-practice/standard-practice.component';
 import { QuizPracticeComponent } from './practices/quiz-practice/quiz-practice.component';
 import {TableModule} from "primeng/table";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {TableModule} from "primeng/table";
         PlaygroundRoutingModule,
         CardModule,
         ButtonModule,
-        TableModule
+        TableModule,
+        ConfirmDialogModule
     ]
 })
 export class PlaygroundModule { }
