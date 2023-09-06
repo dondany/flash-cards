@@ -32,7 +32,7 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
   breadCrumbItems!: MenuItem[];
   homeItem!: MenuItem;
 
-  friends!: FriendType[];
+  availableFriends!: FriendType[];
   showNewMemberDialog: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
@@ -103,7 +103,6 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
   }
 
   removeMember(memberId: number) {
-    console.log(memberId);
     this.projectService.deleteProjectMember(this.project.id, memberId)
       .subscribe(() => {
         this.init();
@@ -121,7 +120,8 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
   onShowNewMemberDialog() {
     this.friendService.getFriends()
       .subscribe((friends) => {
-        this.friends = friends;
+        this.availableFriends = friends.filter(f1 => !this.project.members.some(f2 => f1.friend.id === f2.user.id));
+        this.showNewMemberDialog = true;
       })
   }
 
