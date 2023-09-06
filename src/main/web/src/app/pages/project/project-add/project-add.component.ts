@@ -45,7 +45,6 @@ export class ProjectAddComponent implements OnInit{
           summary: 'Confirmed',
           detail: `Project ${project.name} has been created!`,
         });
-        console.log(this.router.getCurrentNavigation());
         this.location.back();
       });
   }

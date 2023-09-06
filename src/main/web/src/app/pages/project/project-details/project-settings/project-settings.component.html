@@ -8,7 +8,7 @@
       <span class="text-xl font-bold">Add Project Member</span>
     </ng-template>
     <div>
-      <p-dataView #dv [value]="friends">
+      <p-dataView #dv [value]="availableFriends">
         <ng-template let-friend pTemplate="listItem">
           <div class="col-12 p-3 flex align-items-center justify-content-between">
             <div class="">
@@ -63,7 +63,7 @@
       <p-tabPanel header="Members">
         <div class="flex flex-column gap-3">
           <p *ngIf="project.members.length === 0">There are no members in this project yet.</p>
-          <p-button label="Add Member" icon="pi pi-user" (click)="showNewMemberDialog = true"></p-button>
+          <p-button label="Add Member" icon="pi pi-user" (click)="onShowNewMemberDialog()"></p-button>
           <ul *ngIf="project.members.length > 0" class="p-0 m-0">
             <li *ngFor="let member of project.members" class="flex align-items-center justify-content-between col-6 pt-3">
               <div>
