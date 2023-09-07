@@ -75,4 +75,8 @@ export class FriendListComponent implements OnInit {
       });
   }
 
+  isAlreadyFriend(user: UserType): boolean | undefined {
+    return this.friends?.some(f => f.friend.id === user.id) || this.friendsRequests?.some(f => f.friend.id === user.id);
+  }
+
 }

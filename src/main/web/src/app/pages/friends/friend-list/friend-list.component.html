@@ -65,7 +65,8 @@
               <p-avatar icon="pi pi-user" styleClass="mr-2" shape="circle"></p-avatar>
               <span>{{ user.username }}</span>
             </div>
-            <p-button icon="pi pi-plus" styleClass="p-button-sm" label="Add Friend" (click)="addFriend(user.id)"></p-button>
+            <p-button *ngIf="isAlreadyFriend(user)" styleClass="p-button-sm" label="Already a friend" [disabled]="true"></p-button>
+            <p-button *ngIf="!isAlreadyFriend(user)" icon="pi pi-plus" styleClass="p-button-sm" label="Add Friend" (click)="addFriend(user.id)"></p-button>
           </div>
         </ng-template>
       </p-dataView>
