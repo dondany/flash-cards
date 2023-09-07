@@ -10,6 +10,7 @@
             <h2 class="pt-0 mt-0 mb-1">Notifications</h2>
             <ul class="list-none p-0">
               <p-divider></p-divider>
+              <span *ngIf="!notifications || notifications.length === 0">There are no notifications...</span>
               <li *ngFor="let notification of notifications"
                   class="notification p-3 border-round flex justify-content-between font-medium align-items-center"
                   (click)="readNotification(notification)">
