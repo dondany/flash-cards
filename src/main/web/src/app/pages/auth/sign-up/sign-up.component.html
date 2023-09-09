@@ -18,10 +18,10 @@
         <label htmlFor="email">E-mail</label>
       </span>
         <span class="p-float-label">
-        <input pInputText formControlName="password" class="col-12">
+        <input pInputText formControlName="password" class="col-12" type="password">
         <label htmlFor="password">Password</label>
       </span>
-        <button pButton label="Sign Up" type="submit">
+        <button pButton label="Sign Up" type="submit" [disabled]="!singUpFormGroup.valid">
         </button>
       </form>
     </div>

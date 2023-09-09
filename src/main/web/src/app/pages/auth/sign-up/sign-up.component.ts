@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import {SignInFormControlType} from "../types/sign-in-form-group.type";
+import {Component} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../../shared/services/authentication.service";
 import {Router} from "@angular/router";
@@ -14,7 +13,10 @@ export class SignUpComponent {
   protected singUpFormGroup = this.formBuilder.group<SignUpFormControlType>({
     firstname: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
     lastname: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
-    email: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
+    email: this.formBuilder.control('', {
+      validators: [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")],
+      nonNullable: true
+    }),
     password: this.formBuilder.control('', {validators: [Validators.required], nonNullable: true}),
   })
 
