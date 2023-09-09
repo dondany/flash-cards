@@ -63,8 +63,4 @@ export class AuthenticationService {
     this._user.next(null);
   }
 
-  get username() {
-    return localStorage.getItem('username');
-  }
-
 }
