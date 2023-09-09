@@ -11,10 +11,21 @@ import {BehaviorSubject} from "rxjs";
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private user: BehaviorSubject<UserType | null> = new BehaviorSubject<UserType | null>(null);
+  private _user: BehaviorSubject<UserType | null> = new BehaviorSubject<UserType | null>(null);
+
+  readonly user$ = this._user.asObservable();
 
   constructor(private http: HttpClient,
               private userService: UserService) {
+    const storedToken = localStorage.getItem('jwtToken');
+    if (storedToken) {
+      console.log("check jwt")
+      this.userService.getAuthenticatedUser()
+        .subscribe((user) => {
+          this._user.next(user);
+          localStorage.setItem('user', JSON.stringify(user));
+        })
+    }
   }
 
   signIn(signIn: SignInFormValueType, callback: Function) {
@@ -25,8 +36,8 @@ export class AuthenticationService {
 
         this.userService.getAuthenticatedUser()
           .subscribe((user) => {
-            this.user.next(user);
-            localStorage.setItem("username", user.username);
+            this._user.next(user);
+            localStorage.setItem('user', JSON.stringify(user));
             callback();
           })
       })
@@ -39,8 +50,8 @@ export class AuthenticationService {
         localStorage.setItem('jwtToken', token);
         this.userService.getAuthenticatedUser()
           .subscribe((user) => {
-            this.user.next(user);
-            localStorage.setItem("username", user.username);
+            this._user.next(user);
+            localStorage.setItem('user', JSON.stringify(user));
           })
         callback();
       })
@@ -48,16 +59,8 @@ export class AuthenticationService {
 
   signOut() {
     localStorage.removeItem('jwtToken');
-    localStorage.removeItem('username');
-    this.user.next(null);
-  }
-
-  isSignedIn() {
-    return !!localStorage.getItem('jwtToken');
-  }
-
-  get authenticatedUser() {
-    return this.user.asObservable();
+    localStorage.removeItem('user');
+    this._user.next(null);
   }
 
   get username() {
