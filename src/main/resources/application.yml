@@ -1,8 +1,13 @@
+fc-db:
+  host: ${FC_DB_HOST:localhost}
+  user: ${FC_DB_USER:postgres}
+  pass: ${FC_DB_PASS:admin}
+
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/fc
-    username: postgres
-    password: admin
+    url: jdbc:postgresql://${fc-db.host}:5432/fc
+    username: ${fc-db.user}
+    password: ${fc-db.pass}
     driver-class-name: org.postgresql.Driver
 
   jpa:

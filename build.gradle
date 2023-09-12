@@ -15,6 +15,11 @@ configurations {
 	}
 }
 
+jar{
+	enabled = false
+	archivesBaseName = 'flash-cards-app'
+}
+
 repositories {
 	mavenCentral()
 }
@@ -35,8 +40,8 @@ dependencies {
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
 	runtimeOnly 'org.postgresql:postgresql'
 }
 
@@ -45,3 +50,36 @@ apply plugin: 'idea'
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+task cleanJar(type: Delete) {
+	delete 'docker/backend/files'
+}
+
+task cleanWeb(type: Delete) {
+	delete 'docker/frontend/files/web'
+}
+
+task copyJar(type: Copy) {
+	from 'build/libs' // The directory where the JAR is located after building
+	into 'docker/backend/files' // backend docker files
+	include '*.jar' // Include only JAR files
+}
+
+task copyWeb(type: Copy) {
+	from 'src/main/web/dist/web' // The directory where the built frontend app resides
+	into 'docker/frontend/files/web'  // frontend docker files
+	include '*'
+}
+
+task ngBuild(type: Exec) {
+	workingDir 'src/main/web' // Set the working directory to the project root
+	commandLine 'npm.cmd', 'run', "build" // Use 'ng build'
+}
+
+
+copyJar.dependsOn cleanJar
+copyWeb.dependsOn cleanWeb
+bootJar.dependsOn copyJar, ngBuild, copyWeb
+
+
+
