@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Dist folders for spring and angular apps ###
+docker/backend/files
+docker/frontend/files/web

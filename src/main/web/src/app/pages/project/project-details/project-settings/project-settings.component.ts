@@ -35,6 +35,8 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
   availableFriends!: FriendType[];
   showNewMemberDialog: boolean = false;
 
+  isUserOwner: boolean = false;
+
   constructor(private formBuilder: FormBuilder,
               private projectService: ProjectService,
               private friendService: FriendsService,
@@ -62,6 +64,14 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
             {label: 'Settings', routerLink: `.`}
           ];
           this.homeItem = {icon: 'pi pi-home', routerLink: '/home'};
+
+          this.authService.user$.subscribe((user) => {
+            if (user != null && this.project.owner === user.username) {
+              this.isUserOwner = true;
+            } else {
+              this.isUserOwner = false;
+            }
+          })
         })).subscribe();
   }
 
@@ -123,10 +133,6 @@ export class ProjectSettingsComponent implements OnInit, OnDestroy {
         this.availableFriends = friends.filter(f1 => !this.project.members.some(f2 => f1.friend.id === f2.user.id));
         this.showNewMemberDialog = true;
       })
-  }
-
-  isOwner() {
-    return this.project.owner === this.authService.username;
   }
 
   get name() {

@@ -1,0 +1,30 @@
+version: '3'
+services:
+  fc-db:
+    build: ./db
+    networks:
+      - fc-network
+    environment:
+      POSTGRES_DB: fc
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+  fc-backend:
+    build: ./backend
+    depends_on:
+      - fc-db
+    networks:
+      - fc-network
+    environment:
+      FC_DB_HOST: fc-db
+      FC_DB_USER: postgres
+      FC_DB_PASS: admin
+  fc-frontend:
+    build: ./frontend
+    ports:
+      - "4200:80"
+    networks:
+      - fc-network
+
+networks:
+  fc-network:
+    driver: bridge
